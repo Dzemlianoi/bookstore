@@ -16,6 +16,7 @@ gem 'devise', '~> 4.2.0'
 gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'cancancan'
+gem 'figaro'
 
 
 gem 'jquery-rails'
