@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :rememberable,
          :trackable,
          :validatable,
+         :confirmable,
          :omniauthable, :omniauth_providers => [:facebook]
 
   def self.from_omniauth(auth)
