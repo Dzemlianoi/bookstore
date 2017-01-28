@@ -19,7 +19,7 @@
           %span{'aria-hidden': 'true'} &times;
         %ul.nav.navbar-nav
           %li
-            =link_to('Home', root_path)
+            = link_to('Home', root_path)
           %li
             %a{type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu'} Shop
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': 'false'}
@@ -29,11 +29,11 @@
                 %a.collapse-link{href: '#'} Photo
               %li
                 %a.collapse-link{href: '#'} Web design
-          = render 'layouts/header_part_signed_or_unsigned'
+          = render 'layouts/header_part'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{href: '#'} Home
+            = link_to('Home', root_path)
           %li.dropdown
             %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'} Shop
             %ul.dropdown-menu
@@ -43,4 +43,4 @@
                 %a{href: '#'} Photo
               %li
                 %a{href: '#'} Web design
-          = render 'layouts/header_part_signed_or_unsigned'
+          = render 'layouts/header_part'
