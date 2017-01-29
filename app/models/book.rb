@@ -1,5 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :category
+  belongs_to :author
+
   validates :name, :price, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :publication_year, length:  { is: 4 }
