@@ -10,16 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129185549) do
+ActiveRecord::Schema.define(version: 20170129191808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "books", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "quantity",                                 default: "0"
+    t.integer  "publication_year"
+    t.decimal  "price",            precision: 5, scale: 2, default: "0.0"
+    t.decimal  "height",           precision: 2, scale: 2
+    t.decimal  "width",            precision: 2, scale: 2
+    t.decimal  "depth",            precision: 2, scale: 2
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_books_on_category_id", using: :btree
+  end
+
   create_table "categories", force: :cascade do |t|
-    t.string   "name",                    null: false
+    t.string   "name"
     t.integer  "count_books", default: 0
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +62,5 @@ ActiveRecord::Schema.define(version: 20170129185549) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "books", "categories"
 end
