@@ -22,9 +22,8 @@
           %span.badge.general-badge= all_books
       - @categories.each do |category|
         %li.mr-35
-          %a.filter-link{href: '#'}
-            =category.name
-            %span.badge.general-badge= category.count_books
+          = link_to "#{category.name}", category_books_path(category), class: 'filter-link'
+          %span.badge.general-badge= category.count_books
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
