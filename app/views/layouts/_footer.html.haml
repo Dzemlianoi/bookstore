@@ -6,11 +6,11 @@
           %li
             = link_to 'Home', root_path, class: 'nav-link'
           %li
-            %a.nav-link{href: '#'} Shop
+            = link_to 'Shop', books_path, class: 'nav-link'
           %li
             %a.nav-link{href: '#'} Orders
           %li
-            %a.nav-link{href: '#'} Settings
+            = link_to 'Settings', edit_user_registration_path, class: 'nav-link'
       .col-sm-3
         %p.general-nav-mail support@bookstore.com
         %p.general-nav-number (555)-555-5555
