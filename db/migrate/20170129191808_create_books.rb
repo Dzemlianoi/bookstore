@@ -7,9 +7,9 @@ class CreateBooks < ActiveRecord::Migration[5.0]
       t.string :quantity, default: 0
       t.integer :publication_year, min: 1000
       t.decimal :price, precision: 5, scale: 2, default: 0.00
-      t.decimal :height, precision: 2, scale: 2 , default: 0.00
-      t.decimal :width, precision: 2, scale: 2, default: 0.00
-      t.decimal :depth, precision: 2, scale: 2, default: 0.00
+      t.decimal :height, precision: 4, scale: 2 , default: 0.00
+      t.decimal :width, precision: 4, scale: 2, default: 0.00
+      t.decimal :depth, precision: 4, scale: 2, default: 0.00
       t.timestamps
     end
     add_reference :books, :category, index: true, foreign_key: true

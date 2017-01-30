@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20170129191808) do
     t.string   "quantity",                                 default: "0"
     t.integer  "publication_year"
     t.decimal  "price",            precision: 5, scale: 2, default: "0.0"
-    t.decimal  "height",           precision: 2, scale: 2, default: "0.0"
-    t.decimal  "width",            precision: 2, scale: 2, default: "0.0"
-    t.decimal  "depth",            precision: 2, scale: 2, default: "0.0"
+    t.decimal  "height",           precision: 4, scale: 2, default: "0.0"
+    t.decimal  "width",            precision: 4, scale: 2, default: "0.0"
+    t.decimal  "depth",            precision: 4, scale: 2, default: "0.0"
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
     t.integer  "category_id"
