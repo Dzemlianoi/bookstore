@@ -1,7 +1,7 @@
 class CreateBooks < ActiveRecord::Migration[5.0]
   def change
     create_table :books do |t|
-      # Four book’s photos, Author(s), Materials
+      # Four book’s photos, Materials
       t.string :name
       t.text :description
       t.string :quantity, default: 0
