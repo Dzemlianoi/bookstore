@@ -7,7 +7,6 @@ def generateUsers
         email:                  FFaker::Internet.email,
         password:               password,
         password_confirmation:  password,
-        is_admin:               false
     )
     user.skip_confirmation!
     user.save!
@@ -17,7 +16,7 @@ def generateUsers
       email:                  'admin@test.com',
       password:               'adminpassword',
       password_confirmation:  'adminpassword',
-      is_admin:               true
+      role_name:              'admin'
   )
 
   admin.skip_confirmation!
@@ -53,7 +52,7 @@ def generateBooks
   end
 end
 
-# generateUsers
-# generateCategories
-# generateAuthors
-# generateBooks
+generateUsers
+generateCategories
+generateAuthors
+generateBooks

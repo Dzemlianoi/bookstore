@@ -10,14 +10,15 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-
+gem 'ffaker', '~> 2.4.0'
 
 gem 'devise', '~> 4.2.0'
 gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'cancancan'
 gem 'figaro'
-
+gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
+gem 'draper'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'

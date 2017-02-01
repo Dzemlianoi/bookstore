@@ -1,4 +1,12 @@
 class Book < ApplicationRecord
+
+  ORDERING = {
+    priceA: 'price ASC',
+    priceD: 'price DESC',
+    new: 'created_at DESC',
+    title: 'title ASC'
+  }
+
   belongs_to :category
   belongs_to :author
 
@@ -19,5 +27,9 @@ class Book < ApplicationRecord
 
   def decrement_books_count
     self.category.decrement!(:count_books)
+  end
+
+  def self.default_sort
+    ORDERING[:new]
   end
 end
