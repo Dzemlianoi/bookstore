@@ -36,7 +36,6 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'ffaker', '~> 2.4.0'
 end
 
 group :development do
