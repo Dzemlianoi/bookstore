@@ -12,4 +12,8 @@ module BooksHelper
   def sort_present?
     (params.key? :order) && Book::ORDERING[params[:order].to_sym].present?
   end
+
+  def next_page
+    current_limit + 1
+  end
 end

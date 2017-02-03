@@ -7,6 +7,8 @@ class Book < ApplicationRecord
     title: 'title ASC'
   }
 
+  PER_PAGE = 8
+
   belongs_to :category
   belongs_to :author
 

@@ -1,10 +1,10 @@
 %main.container
   %h1.general-title-margin Сatalog
   .hidden-xs.clearfix
-    = render 'books/sorting'
+    = render 'books/catalog/sorting'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        %a.filter-link{href: '#'}
+        = link_to(books_path, class: 'filter-link') do
           All
           %span.badge.general-badge= all_books
       - @categories.each do |category|
@@ -43,26 +43,9 @@
         %li
           %a{href: '#'} Price: Low to hight
   .mb-120
-    - @books.each_with_index  do |book, key |
-      - if (key % 4).zero?
-        .row
-      .col-xs-6.col-sm-3
-        .general-thumb-wrap
-          .thumbnail.general-thumbnail
-            %img.img-shadow.general-thumbnail-img{src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book'}
-            .thumb-hover
-              .general-thumb-link-wrap
-                %a.thumb-hover-link{href: '#'}
-                  %i.fa.fa-eye.thumb-icon{'aria-hidden': 'true'}
-                %a.thumb-hover-link{href: '#'}
-                  %i.fa.fa-shopping-cart.thumb-icon
-        .general-thumb-info
-          %p.title
-            = book.name
-          %p.font-16.in-gold-500
-            €#{book.price}
-          %span.divider-sm
-          %p.lead.small
-            = book.author.surname
+    - @books.in_groups_of(4, false).each_with_index  do |group, _|
+      .row
+        - group.each do |book|
+          = render 'books/catalog/book_tile', book: book
     .text-center
-      %button.btn.btn-primary View More
+      = link_to 'View More', permitted_params.merge(per: next_per), class: 'btn btn-primary'
