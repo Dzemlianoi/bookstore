@@ -19,22 +19,24 @@
           %span{'aria-hidden': 'true'} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to 'Home', root_path
-          %li
-            %a{type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu'} Shop
+            %a{type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu'} Home
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': 'false'}
               - categories.each do |category|
                 %li
                   = link_to "#{category.name}", category_path(category), class: 'collapse-link'
+          %li
+            = link_to 'Shop', root_path
+
           = render 'layouts/headers/header_part'
       .hidden-xs
         %ul.nav.navbar-nav
-          %li
-            = link_to('Home', root_path)
           %li.dropdown
-            %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'} Shop
+            %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'} Home
             %ul.dropdown-menu
               - categories.each do |category|
                 %li
                   = link_to "#{category.name}", category_path(category)
-          = render 'layouts/headers/header_part'
+            %li
+              = link_to('Shop', books_path)
+            = render 'layouts/headers/header_part'
+
