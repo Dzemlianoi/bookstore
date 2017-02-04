@@ -1,12 +1,11 @@
 module BooksHelper
-
   def all_books
     Category.sum(:count_books)
   end
 
   def current_sort
     return params[:order] if sort_present?
-    default_sort
+    Book::DEFAULT_SORT_KEY
   end
 
   def sort_present?
@@ -23,9 +22,5 @@ module BooksHelper
 
   def dimensions
     "H: #{@book.height}\" x W:#{@book.width}\" x D: #{@book.depth}\""
-  end
-
-  def default_sort
-    Book::ORDERING[:titleA]
   end
 end

@@ -1,5 +1,7 @@
 class Book < ApplicationRecord
 
+  PER_PAGE = 12
+  DEFAULT_SORT_KEY = :titleA
   ORDERING = {
     priceA: 'price ASC',
     priceD: 'price DESC',
@@ -7,8 +9,6 @@ class Book < ApplicationRecord
     titleA: 'name ASC',
     titleD: 'name DESC'
   }
-
-  PER_PAGE = 12
 
   belongs_to :category
   belongs_to :author
@@ -30,5 +30,9 @@ class Book < ApplicationRecord
 
   def decrement_books_count
     self.category.decrement!(:count_books)
+  end
+
+  def self.default_sort
+    ORDERING[DEFAULT_SORT_KEY]
   end
 end

@@ -7,7 +7,6 @@ class BooksController < ApplicationController
   load_and_authorize_resource only: :index, unless:  -> { !@category.nil? }
 
   def index
-    @categories = Category.where('count_books > 0').order('count_books DESC')
     @books = @books.order(ordering).limit(limiting)
   end
 

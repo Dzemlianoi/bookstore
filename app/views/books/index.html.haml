@@ -7,7 +7,7 @@
         = link_to(books_path, class: 'filter-link') do
           All
           %span.badge.general-badge= all_books
-      - @categories.each do |category|
+      - categories.each do |category|
         %li.mr-35
           = link_to(category_books_path(category), class: 'filter-link') do
             = category.name
