@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email,
          subject: 'Credential information',
-         template_path: 'mailers',
+         template_path: 'users/mailers',
          template_name: 'facebook_registration')
   end
 end
