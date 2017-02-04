@@ -1,0 +1,10 @@
+.col-xs-6.col-sm-3
+  = render 'books/tile/buy_or_look', book: book
+  .general-thumb-info
+    %p.title
+      = book.name
+    %p.font-16.in-gold-500
+      €#{book.price}
+    %span.divider-sm
+    %p.lead.small
+      = book.author.surname

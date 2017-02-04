@@ -23,4 +23,8 @@ module BooksHelper
   def dimensions
     "H: #{@book.height}\" x W:#{@book.width}\" x D: #{@book.depth}\""
   end
+
+  def current_catalog_name
+    @category.nil? ? 'All' : @category.name
+  end
 end
