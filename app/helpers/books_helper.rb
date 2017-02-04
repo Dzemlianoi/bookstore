@@ -6,7 +6,7 @@ module BooksHelper
 
   def current_sort
     return params[:order] if sort_present?
-    Book.default_sort
+    default_sort
   end
 
   def sort_present?
@@ -15,5 +15,17 @@ module BooksHelper
 
   def next_page
     current_limit + 1
+  end
+
+  def author_name
+    "#{@book.author.name} #{@book.author.surname}"
+  end
+
+  def dimensions
+    "H: #{@book.height}\" x W:#{@book.width}\" x D: #{@book.depth}\""
+  end
+
+  def default_sort
+    Book::ORDERING[:titleA]
   end
 end

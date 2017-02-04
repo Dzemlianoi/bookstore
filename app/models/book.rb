@@ -4,10 +4,11 @@ class Book < ApplicationRecord
     priceA: 'price ASC',
     priceD: 'price DESC',
     new: 'created_at DESC',
-    title: 'title ASC'
+    titleA: 'name ASC',
+    titleD: 'name DESC'
   }
 
-  PER_PAGE = 8
+  PER_PAGE = 12
 
   belongs_to :category
   belongs_to :author
@@ -29,9 +30,5 @@ class Book < ApplicationRecord
 
   def decrement_books_count
     self.category.decrement!(:count_books)
-  end
-
-  def self.default_sort
-    ORDERING[:new]
   end
 end

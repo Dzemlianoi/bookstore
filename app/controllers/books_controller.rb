@@ -11,6 +11,10 @@ class BooksController < ApplicationController
     @books = @books.order(ordering).limit(limiting)
   end
 
+  def show
+    @book = Book.find_by_id(params[:id].to_s)
+  end
+
   private
 
   def ordering

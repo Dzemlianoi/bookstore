@@ -26,7 +26,7 @@
               - Category.all.where('count_books > 0').each do |category|
                 %li
                   = link_to "#{category.name}", category_books_path(category), class: 'collapse-link'
-          = render 'layouts/header_part'
+          = render 'layouts/headers/header_part'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -37,4 +37,4 @@
               - Category.all.where('count_books > 0').each do |category|
                 %li
                   = link_to "#{category.name}", category_books_path(category)
-          = render 'layouts/header_part'
+          = render 'layouts/headers/header_part'
