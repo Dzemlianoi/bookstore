@@ -21,6 +21,8 @@ gem 'figaro'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 gem 'haml'
 gem 'html2haml'
