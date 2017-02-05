@@ -1,8 +1,8 @@
 %a.dropdown-toggle.lead.small{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-  = current_sort
+  = t("books.sorting.#{current_sort}")
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
   %li
   - Book::ORDERING.each do |value, _|
     %li
-      = link_to value, permitted_params.merge(order: value)
+      = link_to t("books.sorting.#{value}"), permitted_params.merge(order: value)

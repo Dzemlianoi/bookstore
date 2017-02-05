@@ -1,15 +1,15 @@
 %main.container
-  %h1.general-title-margin Сatalog
+  %h1.general-title-margin= t('books.catalog.catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
         = render 'books/catalog/sorting'
     = render 'books/catalog/by_categories_desktop'
   .dropdowns.mb-25.visible-xs
-    %p.lead.small.mb-10 Sort by
+    %p.lead.small.mb-10= t('books.catalog.sort_by')
     .dropdown
       = render 'books/catalog/sorting'
-    %p.lead.small.mb-10 Filter by category
+    %p.lead.small.mb-10= t('books.catalog.filter')
     = render 'books/catalog/by_categories_mobile'
   .mb-120
     - @books.in_groups_of(4, false).each_with_index  do |group, _|
@@ -17,4 +17,4 @@
         - group.each do |book|
           = render 'books/tile/book_tile', book: book
     .text-center
-      = link_to 'View More', permitted_params.merge(per: next_per), class: 'btn btn-primary'
+      = link_to t('books.catalog.view_more'), permitted_params.merge(per: next_per), class: 'btn btn-primary'

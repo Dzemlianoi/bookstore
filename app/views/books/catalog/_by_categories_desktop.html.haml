@@ -1,7 +1,7 @@
 %ul.list-inline.pt-10.mb-25.mr-240
   %li.mr-35
     = link_to(books_path, class: 'filter-link') do
-      All
+      = t('books.catalog.all')
       %span.badge.general-badge= all_books
   - categories.each do |category|
     %li.mr-35

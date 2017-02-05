@@ -1,14 +1,15 @@
-%center Thank you for registration via Facebook!
+%center= t('users.mailers.facebook.thanks')
 %br/
-%p Next time you can log in via Facebook or via your email and password.
+%p= t('users.mailers.facebook.can_log')
 %p
   Email:
   %b= @user.email
 %p
   Password:
   %b= @password
-%p If you want to change your password immediately go #{link_to 'here', edit_user_registration_url}.
+%p
+  #{t('users.mailers.facebook.want_changes')} #{link_to t('users.mailers.facebook.here'), edit_user_registration_url}.
 %br/
-%center Have a nice day!
+%center= t('users.mailers.facebook.bye')
 
 

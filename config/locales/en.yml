@@ -1,2 +1,58 @@
 en:
-  hello: "Hello world"
+  general:
+    project_name: 'Bookstore'
+    buy_now: 'Buy now'
+    password: ''
+  layout:
+    links:
+      home: 'Home'
+      shop: 'Shop'
+      orders: 'Orders'
+      settings: 'Settings'
+      login: 'Log in'
+      signup: 'Sign up'
+      logout: 'Logout'
+      profile: 'My account'
+  categories:
+    previous: 'Previous'
+    next: 'Next'
+    greetings: 'Welcome to our amazing Bookstore!'
+    our_work: 'We pore through hundreds of new books each month and select the five best we can find to share with our members.'
+    get_started: 'Get Started'
+    best: 'Best Sellers'
+  users:
+    mailers:
+      facebook:
+        thanks: 'Thank you for registration via Facebook!'
+        can_log: 'Next time you can log in via Facebook or via your email and password.'
+        want_changes: 'If you want to change your password immediately go'
+        here: 'here'
+        bye: 'Have a nice day!'
+  books:
+    catalog:
+      catalog: 'catalog'
+      all: 'All'
+      view_more: 'View More'
+      filter: 'Filter by category'
+      sort_by: 'Sort_by'
+    sorting:
+      priceA: 'Price: low to high'
+      priceD: 'Price: high to low'
+      new: 'Newest first'
+      titleA: 'Title: A - Z'
+      titleD: 'Title: Z - A'
+      popular: 'Popular first'
+    show:
+      back: 'Back to results'
+      cart_add: 'Add to Cart'
+      description: 'Description'
+      read_more: 'Read More'
+      publication_year: 'Year of publication'
+      dimensions: 'Dimensions'
+      materials: 'Materials'
+      reviews: 'Reviews'
+      verified: 'Verified Reviewer'
+
+
+
+

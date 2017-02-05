@@ -1,7 +1,7 @@
 %main.container
   = link_to(request.referer.present? ? request.referer : root_path, class: 'general-back-link') do
     %i.fa.fa-long-arrow-left.mr-15
-    Back to results
+    = t('books.show.back')
   .row
     .col-sm-6
       .product-gallery
@@ -29,26 +29,27 @@
             %a.input-link{href: "#"}
               %i.fa.fa-plus.line-height-40
         .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position Add to Cart
+          %button.btn.btn-default.pull-right.general-position= t('books.show.cart_add')
       .general-info-wrap.divider-lg
-        %p Description
+        %p= t('books.show.description')
         %p.lead.small.line-height-2
           = @book.description
-          %a.in-gold-500.ml-10{href: "#"} Read More
+          %a.in-gold-500.ml-10{href: "#"}= t('books.show.read_more')
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Year of publication
+          %p.pull-left= t('books.show.publication_year')
           %p.lead.small.pull-right= @book.publication_year
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Dimensions
+          %p.pull-left= t('books.show.dimensions')
           %p.lead.small.pull-right= dimensions
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Materials
+          %p.pull-left= t('books.show.materials')
           %p.lead.small.pull-right Hardcove, glossy paper
   .mb-80
-    %h3.in-gold-500.mb-25 Reviews (3)
+    %h3.in-gold-500.mb-25
+      #{t('books.show.reviews')} (3)
     .general-message-wrap.divider-lg
       .clearfix
         %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
@@ -56,7 +57,7 @@
           %div
             .general-message-date.hidden-xs 11/11/16
             .max-240
-              .general-message-verified Verified Reviewer
+              .general-message-verified= t('books.show.verified')
               .general-message-name Rita J. Lewis
           .mb-15
             %i.fa.fa-star.rate-star
@@ -72,7 +73,7 @@
           %div
             .general-message-date.hidden-xs 11/11/16
             .max-240
-              .general-message-verified.pull-right Verified Reviewer
+              .general-message-verified.pull-right= t('books.show.verified')
               .general-message-name May J. Novoa
           .mb-15
             %i.fa.fa-star.rate-star

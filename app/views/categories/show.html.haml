@@ -11,18 +11,18 @@
           = render 'home/slider_item', book: book
     %a.left.carousel-control{href: '#slider', role: 'button', 'data-slide': 'prev'}
       %span.icon-prev{'aria-hidden': 'true'}
-      %span.sr-only Previous
+      %span.sr-only= t('categories.previous')
     %a.right.carousel-control{href: '#slider', role: 'button', 'data-slide': 'next'}
       %span.icon-next{'aria-hidden': 'true'}
-      %span.sr-only Next
+      %span.sr-only= t('categories.next')
 .container
   .jumbotron.text-center.mb-0
-    %h2.h1 Welcome to our amazing Bookstore!
-    .mb-res-50
-      %p We pore through hundreds of new books each month and select the five best we can find to share with our members.
-    = link_to 'Get Started', category_books_path(@category), class: 'btn btn-default'
+    %h2.h1= t('categories.greetings')
+    .mb-res-501
+      %p= t('categories.our_work')
+    = link_to t('categories.get_started'), category_books_path(@category), class: 'btn btn-default'
   .mb-35
-    %h3 Best Sellers
+    %h3= t('categories.best')
     .row
       - bestsellers.each do |book|
         = render 'home/bestseller_item', book: book
