@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-  helper_method :permitted_params, :next_per
+  helper_method :permitted_params, :next_per, :limiting
 
   load_resource :category
   load_and_authorize_resource through: :category, only: :index, if: -> { !@category.nil? }
@@ -21,17 +21,17 @@ class BooksController < ApplicationController
     (Book::ORDERING.key? order) ? Book::ORDERING[order] : Book.default_sort
   end
 
-  def current_limit
+  def current_per
     limit = params[:per].to_i
     limit.positive? ? limit : 1
   end
 
   def limiting
-    current_limit * Book::PER_PAGE
+    current_per * Book::PER_PAGE
   end
 
   def next_per
-    current_limit + 1
+    current_per + 1
   end
 
   def permitted_params

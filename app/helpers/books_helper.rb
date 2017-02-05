@@ -12,19 +12,19 @@ module BooksHelper
     (params.key? :order) && Book::ORDERING[params[:order].to_sym].present?
   end
 
-  def next_page
-    current_limit + 1
-  end
-
-  def author_name
-    "#{@book.author.name} #{@book.author.surname}"
-  end
-
   def dimensions
     "H: #{@book.height}\" x W:#{@book.width}\" x D: #{@book.depth}\""
   end
 
+  def max_books_of_cat
+    @category.nil? ? all_books : @category.count_books
+  end
+
   def current_catalog_name
     @category.nil? ? 'All' : @category.name
+  end
+
+  def last_page?
+    (max_books_of_cat - limiting) <= 0
   end
 end
