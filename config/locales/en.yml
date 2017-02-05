@@ -2,7 +2,7 @@ en:
   general:
     project_name: 'Bookstore'
     buy_now: 'Buy now'
-    password: ''
+    password: 'password'
   layout:
     links:
       home: 'Home'
