@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImagesUploader
+
   PER_PAGE = 12
   DEFAULT_SORT_KEY = :titleA
   ORDERING = {

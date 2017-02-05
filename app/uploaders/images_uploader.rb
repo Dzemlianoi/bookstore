@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class ImagesUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
 

@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170205155817) do
     t.datetime "updated_at",                                               null: false
     t.integer  "category_id"
     t.integer  "author_id"
-    t.string   "image"
+    t.json     "images"
     t.index ["author_id"], name: "index_books_on_author_id", using: :btree
     t.index ["category_id"], name: "index_books_on_category_id", using: :btree
   end

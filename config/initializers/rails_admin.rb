@@ -1,5 +1,11 @@
 RailsAdmin.config do |config|
-
+    config.model 'Book' do
+      edit do
+        field :published do
+          multiple? true
+        end
+      end
+    end
   ### Popular gems integration
 
   ## == Devise ==
