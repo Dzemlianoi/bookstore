@@ -1,6 +1,5 @@
 class CartController < ApplicationController
   def update
-    byebug
     first_buy? ? initialize_cart : add_one_more_book
     flash.keep
     redirect_back(fallback_location: books_path)
