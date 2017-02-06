@@ -9,5 +9,4 @@
         %p.lead= book.description.split('.')[0]
         %p.lead.small= book.author.full_name
         .general-align
-          byebug
           = link_to t('general.buy_now'), book_path(book: book), class: 'btn btn-primary'
