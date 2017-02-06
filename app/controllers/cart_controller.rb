@@ -1,5 +1,6 @@
 class CartController < ApplicationController
   def update
+    byebug
     first_buy? ? initialize_cart : add_one_more_book
     flash.keep
     redirect_back(fallback_location: books_path)
@@ -14,7 +15,12 @@ class CartController < ApplicationController
   private
 
   def hash_params
-    {params[:id] => permitted_options[:quantity]}
+    {params[:id] => quantity}
+  end
+
+  def quantity
+    return 1 if permitted_options[:quantity].nil?
+    permitted_options[:quantity]
   end
 
   def initialize_cart
