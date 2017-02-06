@@ -21,15 +21,16 @@
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
             = "€#{@book.price}"
-        .col-xs-5.col-md-3
-          .input-group.general-position
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-height-40
-            %input.form-control.quantity-input{type: 'text', pattern: '[0-9]*', value: 1}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-height-40
-        .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position= t('books.show.cart_add')
+        = form_for @book, url: cart_path(@book), html: { method: :put} do |f|
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              %a.input-link{href: "#"}
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, class: 'form-control quantity-input', value: 1, pattern: '[0-9]*'
+              %a.input-link{href: "#"}
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.submit t('books.show.cart_add'), class: 'btn btn-default pull-right general-position'
       .general-info-wrap.divider-lg
         %p= t('books.show.description')
         %p.lead.small.line-height-2
