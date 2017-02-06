@@ -16,6 +16,6 @@
       .row
         - group.each do |book|
           = render 'books/tile/book_tile', book: book
-    - unless last_page?
-      .text-center
-        = link_to t('books.catalog.view_more'), permitted_params.merge(per: next_per), class: 'btn btn-primary'
+    .text-center
+      = link_to_previous_page(@books, t('books.catalog.prev'), params: permitted_params, class: 'btn btn-primary')
+      = link_to_next_page(@books, t('books.catalog.view_more'), params: permitted_params, class: 'btn btn-primary')

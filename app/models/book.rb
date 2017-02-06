@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
   mount_uploaders :images, ImagesUploader
+  paginates_per 12
 
   PER_PAGE = 12
   DEFAULT_SORT_KEY = :titleA

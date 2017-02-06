@@ -1,13 +1,13 @@
 class BooksController < ApplicationController
 
-  helper_method :permitted_params, :next_per, :limiting
+  helper_method :permitted_params
 
   load_resource :category
   load_and_authorize_resource through: :category, only: :index, if: -> { !@category.nil? }
   load_and_authorize_resource only: :index, unless:  -> { !@category.nil? }
 
   def index
-    @books = @books.order(ordering).limit(limiting)
+    @books = @books.order(ordering).page params[:page]
   end
 
   def show
@@ -21,20 +21,8 @@ class BooksController < ApplicationController
     (Book::ORDERING.key? order) ? Book::ORDERING[order] : Book.default_sort
   end
 
-  def current_per
-    limit = params[:per].to_i
-    limit.positive? ? limit : 1
-  end
-
-  def limiting
-    current_per * Book::PER_PAGE
-  end
-
-  def next_per
-    current_per + 1
-  end
 
   def permitted_params
-    params.permit(:per, :order)
+    params.permit(:page, :order)
   end
 end

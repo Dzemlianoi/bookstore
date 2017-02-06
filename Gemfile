@@ -17,6 +17,7 @@ gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'cancancan'
 gem 'figaro'
+gem 'kaminari'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'

@@ -30,9 +30,10 @@ en:
         bye: 'Have a nice day!'
   books:
     catalog:
-      catalog: 'catalog'
+      catalog: 'Catalog'
       all: 'All'
       view_more: 'View More'
+      prev:   'Previous page'
       filter: 'Filter by category'
       sort_by: 'Sort_by'
     sorting:

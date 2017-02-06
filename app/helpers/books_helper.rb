@@ -23,8 +23,4 @@ module BooksHelper
   def current_catalog_name
     @category.nil? ? 'All' : @category.name
   end
-
-  def last_page?
-    (max_books_of_cat - limiting) <= 0
-  end
 end
