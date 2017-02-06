@@ -19,7 +19,7 @@ class CartController < ApplicationController
   end
 
   def quantity
-    return 1 if permitted_options[:quantity].nil?
+    return 1 unless params.key? :quantity
     permitted_options[:quantity]
   end
 
