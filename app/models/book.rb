@@ -1,9 +1,10 @@
 class Book < ApplicationRecord
 
   belongs_to :category
-  belongs_to :author
   has_many :book_materials
+  has_many :book_authors
   has_many :materials, through: :book_materials
+  has_many :authors, through: :book_authors
 
   mount_uploaders :images, ImagesUploader
   paginates_per 12
