@@ -43,7 +43,7 @@ end
 
 def generate_books
   25.times do |_|
-     Book.new(
+    Book.new(
         name: FFaker::Book.title,
         description: FFaker::Book.description,
         price: rand(0.02...99.99),
@@ -53,7 +53,7 @@ def generate_books
         authors: Author.order("random()").first(2),
         materials: Material.order("random()").first(2),
         category: Category.order("random()").first
-     ).save!
+    ).save!
   end
 end
 
