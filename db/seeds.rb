@@ -67,6 +67,6 @@ end
 generate_users
 generate_categories
 generate_materials
-15.times{generate_author}
-100.times{generate_book}
+15.times{ generate_author }
+100.times{ generate_book }
 generate_dimensions_for_books

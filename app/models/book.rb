@@ -30,6 +30,10 @@ class Book < ApplicationRecord
   after_save :increment_books_count
   after_destroy :decrement_books_count
 
+  def all_authors
+    self.authors.map(&:full_name).join(', ')
+  end
+
   private
 
   def increment_books_count
