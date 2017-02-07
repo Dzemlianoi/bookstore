@@ -1,6 +1,6 @@
 require 'ffaker'
 
-def generateUsers
+def generate_users
   5.times do |_|
     password = FFaker::Internet.password
     user = User.new(
@@ -23,44 +23,54 @@ def generateUsers
   admin.save!
 end
 
-def generateCategories
+def generate_categories
   ['Mobile Development', 'Web design', 'Web Development', 'Photo'].map do |category|
     Category.new(name: category).save!
   end
 end
 
-def generateMaterials
+def generate_materials
   %w(Bones Leather Wood Iron Paper).each do |material|
     Material.new(name: material).save!
   end
 end
 
-def generateAuthors
+def generate_authors
   5.times do |_|
     Author.new(name: FFaker::Name.first_name, surname: FFaker::Name.last_name).save!
   end
 end
 
-def generateBooks
-  25.times do ||
-    Book.new(
+def generate_books
+  25.times do |_|
+     Book.new(
         name: FFaker::Book.title,
         description: FFaker::Book.description,
         price: rand(0.02...99.99),
         quantity: rand(1...6),
         publication_year: rand(1001...2017),
-        height: rand(0.50...20.00),
-        width: rand(0.50...20.00),
-        depth: rand(0.50...20.00),
+
         authors: Author.order("random()").first(2),
         materials: Material.order("random()").first(2),
         category: Category.order("random()").first
+     ).save!
+  end
+end
+
+def generate_dimensions_for_books
+  Book.all.each do |book|
+    BookDimension.new(
+        height: rand(0.50...20.00),
+        width: rand(0.50...20.00),
+        depth: rand(0.50...20.00),
+        book: book
     ).save!
   end
 end
 
-generateUsers
-generateCategories
-generateAuthors
-generateMaterials
-generateBooks
+generate_users
+generate_categories
+generate_authors
+generate_materials
+generate_books
+generate_dimensions_for_books
