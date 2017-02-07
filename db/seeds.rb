@@ -29,6 +29,12 @@ def generateCategories
   end
 end
 
+def generateMaterials
+  %w(Bones Leather Wood Iron Paper).each do |material|
+    Material.new(name: material).save!
+  end
+end
+
 def generateAuthors
   5.times do |_|
     Author.new(name: FFaker::Name.first_name, surname: FFaker::Name.last_name).save!
@@ -46,7 +52,8 @@ def generateBooks
         height: rand(0.50...20.00),
         width: rand(0.50...20.00),
         depth: rand(0.50...20.00),
-        author: Author.order("random()").first,
+        authors: Author.order("random()").first(2),
+        materials: Material.order("random()").first(2),
         category: Category.order("random()").first
     ).save!
   end
@@ -55,4 +62,5 @@ end
 generateUsers
 generateCategories
 generateAuthors
+generateMaterials
 generateBooks
