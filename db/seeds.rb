@@ -35,26 +35,22 @@ def generate_materials
   end
 end
 
-def generate_authors
-  5.times do |_|
-    Author.new(name: FFaker::Name.first_name, surname: FFaker::Name.last_name).save!
-  end
+def generate_author
+  Author.new(name: FFaker::Name.first_name, surname: FFaker::Name.last_name).save!
 end
 
-def generate_books
-  25.times do |_|
-    Book.new(
-        name: FFaker::Book.title,
-        description: FFaker::Book.description,
-        price: rand(0.02...99.99),
-        quantity: rand(1...6),
-        publication_year: rand(1001...2017),
+def generate_book
+  Book.new(
+      name: FFaker::Book.title,
+      description: FFaker::Book.description,
+      price: rand(0.02...99.99),
+      quantity: rand(1...6),
+      publication_year: rand(1001...2017),
 
-        authors: Author.order("random()").first(2),
-        materials: Material.order("random()").first(2),
-        category: Category.order("random()").first
-    ).save!
-  end
+      authors: Author.order("random()").first(2),
+      materials: Material.order("random()").first(2),
+      category: Category.order("random()").first
+  ).save!
 end
 
 def generate_dimensions_for_books
@@ -70,7 +66,7 @@ end
 
 generate_users
 generate_categories
-generate_authors
 generate_materials
-generate_books
+15.times{generate_author}
+100.times{generate_book}
 generate_dimensions_for_books
