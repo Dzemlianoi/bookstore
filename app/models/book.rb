@@ -17,6 +17,7 @@ class Book < ApplicationRecord
   belongs_to :author
   has_many :materials, through: :book_materials
   has_many :book_materials
+  accepts_nested_attributes_for :materials
 
   validates :name, :price, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
