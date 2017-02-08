@@ -83,3 +83,23 @@
             %i.fa.fa-star.rate-star
             %i.fa.fa-star.rate-star.rate-empty
           %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+
+    %h3.in-gold-500.mb-25 Write a review
+    .general-review-wrap.divider-lg
+    = form_for book_review_url, url: book_review_path(@book), html: { method: :put} do |f|
+      %h4.general-review-h Score
+      .mb-15
+        %i.fa.fa-star.rate-star
+        %i.fa.fa-star.rate-star
+        %i.fa.fa-star.rate-star
+        %i.fa.fa-star.rate-star
+        %i.fa.fa-star.rate-star.rate-empty
+      .form-group.general-w-50
+        = f.label :name, html: {:class => 'control-label input-label', 'data-bar' => 'Enter your name'}
+        = f.text_field :name, class: 'form-control', placeholder: 'John Doe'
+      .form-group.general-w-50
+        = f.label :comment_text, html: {:class => 'control-label input-label', 'data-bar' => 'Enter text of review'}
+        = f.text_area :comment_text, size: '30x10', class: 'form-control', placeholder: 'Everything is awesome'
+      .col-xs-8.col-md-3
+        = f.submit 'Post', class: 'btn btn-default pull-right general-position'
+

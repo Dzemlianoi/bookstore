@@ -223,6 +223,13 @@ img {
   color: $grey-600;
   float: right;
 }
+.general-review-wrap {
+  padding-bottom: 20px;
+}
+.general-w-50{
+  width:50%;
+  min-width:400px;
+}
 
 
 @media (min-width: $grid-float-breakpoint) {

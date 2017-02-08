@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   end
   resources :categories, only: :show
   resources :books, only: [:index, :show]
-  resources :cart
+  resources :cart, only: [:index, :update]
+  resources :book_reviews, only: :update
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 end

@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_one    :book_dimension
   has_many   :book_materials
   has_many   :book_authors
+  has_many   :book_reviews
   has_many   :materials, through: :book_materials
   has_many   :authors, through: :book_authors
   accepts_nested_attributes_for :book_dimension
@@ -32,6 +33,12 @@ class Book < ApplicationRecord
 
   def all_authors
     self.authors.map(&:full_name).join(', ')
+  end
+
+  def total_dimensions
+    "H: #{self.book_dimension.height}\" x
+     W: #{self.book_dimension.width}\" x
+     D: #{self.book_dimension.depth}\""
   end
 
   private
