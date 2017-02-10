@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :categories, only: :show
   resources :books, only: [:index, :show]
   resources :cart, only: [:index, :update]
-  resources :book_reviews, only: :update
+  resources :books do
+    resources :reviews, only: :create
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 end

@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   has_one    :book_dimension
   has_many   :book_materials
   has_many   :book_authors
-  has_many   :book_reviews
+  has_many   :reviews
   has_many   :materials, through: :book_materials
   has_many   :authors, through: :book_authors
   accepts_nested_attributes_for :book_dimension

@@ -6,14 +6,14 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          %img.img-responsive{src: 'https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg'}
         .images.clearfix
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+          %a.img-link{href: '#'}
+            %img{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
+          %a.img-link{href: '#'}
+            %img{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
+          %a.img-link{href: '#'}
+            %img{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
     .col-sm-6
       %h1.mt-res-0= @book.name
       %p.lead.small= @book.all_authors
@@ -24,10 +24,10 @@
         = form_for @book, url: cart_path(@book), html: { method: :put} do |f|
           .col-xs-5.col-md-3
             .input-group.general-position
-              %a.input-link{href: "#"}
+              %a.input-link{href: '#'}
                 %i.fa.fa-minus.line-height-40
               = f.text_field :quantity, class: 'form-control quantity-input', value: 1, pattern: '[0-9]*'
-              %a.input-link{href: "#"}
+              %a.input-link{href: '#'}
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
             = f.submit t('books.show.cart_add'), class: 'btn btn-default pull-right general-position'
@@ -35,7 +35,7 @@
         %p= t('books.show.description')
         %p.lead.small.line-height-2
           = @book.description
-          %a.in-gold-500.ml-10{href: "#"}= t('books.show.read_more')
+          %a.in-gold-500.ml-10{href: '#'}= t('books.show.read_more')
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.publication_year')
@@ -53,7 +53,7 @@
       #{t('books.show.reviews')} (3)
     .general-message-wrap.divider-lg
       .clearfix
-        %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+        %img.img-circle.logo-size.inlide-block.pull-left{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
         .ml-70
           %div
             .general-message-date.hidden-xs 11/11/16
@@ -86,14 +86,23 @@
 
     %h3.in-gold-500.mb-25 Write a review
     .general-review-wrap.divider-lg
-    = form_for book_review_url, url: book_review_path(@book), html: { method: :put} do |f|
+    = form_for :review, url: book_reviews_path(@book), html: { method: :post} do |f|
       %h4.general-review-h Score
       .mb-15
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star
-        %i.fa.fa-star.rate-star.rate-empty
+        %fieldset
+          %span.star-cb-group
+            = f.radio_button :rating, '5', id:'rating-5'
+            %label{:for => 'rating-5'}
+            = f.radio_button :rating, '4', id:'rating-4'
+            %label{:for => 'rating-4'}
+            = f.radio_button :rating, '3', id:'rating-3'
+            %label{:for => 'rating-3'}
+            = f.radio_button :rating, '2', id:'rating-2'
+            %label{:for => 'rating-2'}
+            = f.radio_button :rating, '1', id:'rating-1'
+            %label{:for => 'rating-1'}
+            = f.radio_button :rating, '0', id:'rating-0'
+            %label{:for => 'rating-0'}
       .form-group.general-w-50
         = f.label :name, html: {:class => 'control-label input-label', 'data-bar' => 'Enter your name'}
         = f.text_field :name, class: 'form-control', placeholder: 'John Doe'
@@ -102,4 +111,6 @@
         = f.text_area :comment_text, size: '30x10', class: 'form-control', placeholder: 'Everything is awesome'
       .col-xs-8.col-md-3
         = f.submit 'Post', class: 'btn btn-default pull-right general-position'
+
+
 

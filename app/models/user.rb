@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many   :book_reviews
+  has_many   :reviews
 
   devise :database_authenticatable,
          :registerable,
