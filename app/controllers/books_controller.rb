@@ -21,8 +21,7 @@ class BooksController < ApplicationController
     (Book::ORDERING.key? order) ? Book::ORDERING[order] : Book.default_sort
   end
 
-
   def permitted_params
-    params.permit(:page, :order)
+    params.permit(:order)
   end
 end

@@ -50,39 +50,25 @@
           %p.lead.small.pull-right Hardcove, glossy paper
   .mb-80
     %h3.in-gold-500.mb-25
-      #{t('books.show.reviews')} (3)
-    .general-message-wrap.divider-lg
-      .clearfix
-        %img.img-circle.logo-size.inlide-block.pull-left{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified= t('books.show.verified')
-              .general-message-name Rita J. Lewis
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-          %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-    .general-message-wrap.divider-lg
-      .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified.pull-right= t('books.show.verified')
-              .general-message-name May J. Novoa
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star.rate-empty
-          %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+      #{t('books.show.reviews')}(#{@book.reviews.length})
+    - approved_reviews(@book).each_with_index do |review|
+      .general-message-wrap.divider-lg
+        .clearfix
+          %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+            = review.name.capitalize.first
+          .ml-70
+            %div
+              .general-message-date.hidden-xs= date(review.created_at)
+              .max-240
+                - unless review.user.nil?
+                  .general-message-verified.pull-right= t('books.show.verified')
+                .general-message-name= review.name
+            .mb-15
+              - review.rating.to_i.times do
+                %i.fa.fa-star.rate-star
+              - (5 - review.rating.to_i).times do
+                %i.fa.fa-star.rate-star.rate-empty
+            %p= review.comment_text
 
     %h3.in-gold-500.mb-25 Write a review
     .general-review-wrap.divider-lg
@@ -91,18 +77,12 @@
       .mb-15
         %fieldset
           %span.star-cb-group
-            = f.radio_button :rating, '5', id:'rating-5'
-            %label{:for => 'rating-5'}
-            = f.radio_button :rating, '4', id:'rating-4'
-            %label{:for => 'rating-4'}
-            = f.radio_button :rating, '3', id:'rating-3'
-            %label{:for => 'rating-3'}
-            = f.radio_button :rating, '2', id:'rating-2'
-            %label{:for => 'rating-2'}
-            = f.radio_button :rating, '1', id:'rating-1'
-            %label{:for => 'rating-1'}
-            = f.radio_button :rating, '0', id:'rating-0'
-            %label{:for => 'rating-0'}
+            - 5.downto(1) do |num|
+              - if num == 4
+                = f.radio_button :rating, num, id:"rating-#{num}", checked: true
+              - else
+                = f.radio_button :rating, num, id:"rating-#{num}"
+              %label{for: "rating-#{num}"}
       .form-group.general-w-50
         = f.label :name, html: {:class => 'control-label input-label', 'data-bar' => 'Enter your name'}
         = f.text_field :name, class: 'form-control', placeholder: 'John Doe'

@@ -74,12 +74,14 @@ ActiveRecord::Schema.define(version: 20170208130109) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "user_id"
-    t.string  "comment_text", default: "",    null: false
-    t.string  "name",         default: "",    null: false
-    t.boolean "approved",     default: false, null: false
-    t.integer "rating"
+    t.integer  "book_id"
+    t.integer  "user_id"
+    t.string   "comment_text", default: "",    null: false
+    t.string   "name",         default: "",    null: false
+    t.boolean  "approved",     default: false, null: false
+    t.integer  "rating"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["book_id"], name: "index_reviews_on_book_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end

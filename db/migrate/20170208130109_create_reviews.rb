@@ -7,6 +7,7 @@ class CreateReviews < ActiveRecord::Migration[5.0]
       t.string :name, null: false, default: ''
       t.boolean :approved, default: false, null: false
       t.integer :rating
+      t.timestamps
     end
   end
 end
