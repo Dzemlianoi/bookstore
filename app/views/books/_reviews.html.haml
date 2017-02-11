@@ -1,6 +1,6 @@
 .mb-80
   %h3.in-gold-500.mb-25
-    #{t('books.show.reviews')}(#{@book.reviews.length})
+    #{t('books.reviews.title')}(#{approved_reviews(@book).length})
   - approved_reviews(@book).each_with_index do |review|
     .general-message-wrap.divider-lg
       .clearfix
@@ -11,7 +11,7 @@
             .general-message-date.hidden-xs= date(review.created_at)
             .max-240
               - unless review.user.nil?
-                .general-message-verified.pull-right= t('books.show.verified')
+                .general-message-verified.pull-right= t('books.reviews.verified')
               .general-message-name= review.name
           .mb-15
             - review.rating.to_i.times do
@@ -20,10 +20,10 @@
               %i.fa.fa-star.rate-star.rate-empty
           %p= review.comment_text
 
-  %h3.in-gold-500.mb-25 Write a review
+  %h3.in-gold-500.mb-25= t('books.reviews.write')
   .general-review-wrap.divider-lg
   = form_for :review, url: book_reviews_path(@book), html: { method: :post} do |f|
-    %h4.general-review-h Score
+    %h4.general-review-h= t('books.reviews.score')
     .mb-15
       %fieldset
         %span.star-cb-group
@@ -34,10 +34,10 @@
               = f.radio_button :rating, num, id:"rating-#{num}"
             %label{for: "rating-#{num}"}
     .form-group.general-w-50
-      = f.label :name, html: {:class => 'control-label input-label', 'data-bar' => 'Enter your name'}
-      = f.text_field :name, class: 'form-control', placeholder: 'John Doe'
+      = f.label :name, html: {class: 'control-label input-label', 'data-bar' => t('books.reviews.name_label')}
+      = f.text_field :name, class: 'form-control', placeholder: t('books.reviews.name_placeholder')
     .form-group.general-w-50
-      = f.label :comment_text, html: {:class => 'control-label input-label', 'data-bar' => 'Enter text of review'}
-      = f.text_area :comment_text, size: '30x10', class: 'form-control', placeholder: 'Everything is awesome'
+      = f.label :comment_text, html: {class: 'control-label input-label', 'data-bar' => t('books.reviews.comment_label')}
+      = f.text_area :comment_text, size: '30x10', class: 'form-control', placeholder: t('books.reviews.comment_placeholder')
     .col-xs-8.col-md-3
       = f.submit 'Post', class: 'btn btn-default pull-right general-position'

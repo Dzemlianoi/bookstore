@@ -1,27 +1,27 @@
 .col-md-5.mb-40
   .visible-xs.visible-sm
-    %h3.general-subtitle.mt-0 Billing Address
+    %h3.general-subtitle.mt-0= t('users.addresses.billing_address')
   .form-group.has-error
-    %label.control-label.input-label{for: "firstName"} First Name
-    %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
-    %span.help-block Please enter your first name
+    %label.control-label.input-label{for: 'firstName'}= t('users.addresses.first_name.label')
+    %input#firstName.form-control{name:'fname', type: 'text', placeholder: "#{t('users.addresses.first_name.placeholder')}"}
+    %span.help-block= t('users.addresses.first_name.help-block')
   .form-group
-    %label.control-label.input-label{for: "lastName"} Last Name
-    %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
+    %label.control-label.input-label{for: 'lastName'}= t('users.addresses.last_name.label')
+    %input#lastName.form-control{name:'lname', type: 'text', placeholder: "#{t('users.addresses.last_name.placeholder')}"}
   .form-group
-    %label.control-label.input-label{for: "address"} Address
-    %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
+    %label.control-label.input-label{for: 'address'}= t('users.addresses.address.label')
+    %input#address.form-control{name: 'address', type: 'text', placeholder: "#{t('users.addresses.address.placeholder')}"}
   .form-group
-    %label.control-label.input-label{for: "city"} City
-    %input#city.form-control{name: "city", type: "text", placeholder: "City"}
+    %label.control-label.input-label{for: 'city'}= t('users.addresses.city.label')
+    %input#city.form-control{name: 'city', type: 'text', placeholder: "#{t('users.addresses.city.placeholder')}"}
   .form-group
-    %label.control-label.input-label{for: "zip"} Zip
-    %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
+    %label.control-label.input-label{for: 'zip'}= t('users.addresses.zip.label')
+    %input#zip.form-control{name: 'zip', type: 'text', placeholder: "#{t('users.addresses.zip.placeholder')}"}
   .form-group
-    %label.control-label.input-label{for: "сountry"} Country
-    %input#country.form-control{name: "country", type: "text", placeholder: "Select a country"}
+    %label.control-label.input-label{for: 'сountry'}= t('users.addresses.country.label')
+    %input#country.form-control{name: 'country', type: 'text', placeholder: "#{t('users.addresses.country.placeholder')}"}
   .form-group.mb-60
-    %label.control-label.input-label{for: "phone"} Phone
-    %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
+    %label.control-label.input-label{for: 'phone'}= t('users.addresses.phone.label')
+    %input#phone.form-control{name: 'phone', type: 'tel', placeholder: "#{t('users.addresses.phone.placeholder')}"}
   .text-center.general-text-align
-    %button.btn.disabled Save
+    %button.btn= t('users.addresses.save')

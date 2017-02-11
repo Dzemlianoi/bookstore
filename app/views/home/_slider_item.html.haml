@@ -1,12 +1,11 @@
-.item
-  .row
-    .col-sm-5
-      .general-img-wrap
-        %img.img-shadow.general-thumbnail-img{src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg'}
-    .col-sm-7
-      .mb-60
-        %h1= book.name
-        %p.lead= book.description.split('.')[0]
-        %p.lead.small= book.all_authors
-        .general-align
-          = link_to t('general.buy_now'), book_path(book), class: 'btn btn-primary'
+.row
+  .col-sm-5
+    .general-img-wrap
+      %img.img-shadow.general-thumbnail-img{src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg'}
+  .col-sm-7
+    .mb-60
+      %h1= book.name
+      %p.lead= book.description.split('.')[0]
+      %p.lead.small= book.all_authors
+      .general-align
+        = link_to t('general.buy_now'), book_path(book), class: 'btn btn-primary'

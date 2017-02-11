@@ -28,6 +28,35 @@ en:
         want_changes: 'If you want to change your password immediately go'
         here: 'here'
         bye: 'Have a nice day!'
+    addresses:
+      billing_address: 'Billing Address'
+      first_name:
+        label: 'First Name'
+        placeholder: 'First Name'
+        help-block: 'Please enter your first name'
+      last_name:
+        label: 'Last Name'
+        placeholder: 'Last Name'
+      address:
+        label: 'Address'
+        placeholder: 'Address'
+      city:
+        label: 'City'
+        placeholder: 'city'
+      zip:
+        label: 'Zip'
+        placeholder: 'Zip'
+      country:
+        label: 'Country'
+        placeholder: 'Select a country'
+      phone:
+        label: 'Phone'
+        placeholder: 'Example +355 66 123 4567'
+      save: 'Save'
+    privacy:
+      remove_btn: 'Remove Account'
+      remove_link: 'Please Remove My Account'
+      remove_checkbox: 'I understand that all data will be lost'
   books:
     catalog:
       catalog: 'Catalog'
@@ -51,8 +80,15 @@ en:
       publication_year: 'Year of publication'
       dimensions: 'Dimensions'
       materials: 'Materials'
-      reviews: 'Reviews'
+    reviews:
+      title: 'Reviews'
       verified: 'Verified Reviewer'
+      write: 'Write a review'
+      score: 'Score'
+      name_label: 'Enter your name'
+      comment_label: 'Enter text of your review'
+      name_placeholder: 'John Doe'
+      comment_placeholder: 'Everything is awesome'
 
 
 

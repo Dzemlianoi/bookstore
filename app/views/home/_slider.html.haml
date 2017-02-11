@@ -6,9 +6,11 @@
   .carousel-inner{role: 'listbox'}
     - newest_books.each_with_index do |book, key|
       - if key == 0
-        = render 'home/active_slider_item', book: book
+        .item.active
+          = render 'home/slider_item', book: book
       - else
-        = render 'home/slider_item', book: book
+        .item
+          = render 'home/slider_item', book: book
   %a.left.carousel-control{href: '#slider', role: 'button', 'data-slide': 'prev'}
     %span.icon-prev{'aria-hidden': 'true'}
     %span.sr-only= t('categories.previous')
