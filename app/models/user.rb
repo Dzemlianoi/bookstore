@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many   :reviews
+  has_many :reviews, dependent: :destroy
 
   devise :database_authenticatable,
          :registerable,
