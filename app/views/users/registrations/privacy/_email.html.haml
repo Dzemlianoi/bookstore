@@ -1,8 +1,8 @@
 .col-sm-5
   %p.in-gold-500.font-18.mb-25 Email
-  %form.general-form-md
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form-md', method: :patch }) do |f|
     .form-group.mb-35
-      %label.control-label.input-label{for: "email"} Enter Email
-      %input#email.form-control{name:"email", type: "email", placeholder: "Enter your email"}
+      = f.label :email, html: {class: 'control-label input-label', 'data-bar' => 'Enter Email'}
+      = f.email_field :email, class: 'form-control', placeholder: 'Enter your Email'
     .general-text-align
-      %button.btn.btn-default.mb-35 Save
+      = f.submit t('users.addresses.save'), class: 'btn btn-default mb-35'
