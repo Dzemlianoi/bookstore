@@ -1,23 +1,23 @@
 = devise_error_messages!
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title Sign up
+    %h3.general-login-title= t('layout.links.signup')
     = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
       %i.fa.fa-facebook-official
-    %p.general-login-text or
+    %p.general-login-text= t('general.or')
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'general-form'}) do |f|
     .form-group.mb-30.field
-      = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => 'Enter Email'}
-      = f.email_field :email, autofocus: true, id: 'email', class: 'form-control', placeholder: 'Enter Email'
+      = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_email')}
+      = f.email_field :email, autofocus: true, id: 'email', class: 'form-control', placeholder: t('users.privacy.enter_email')
     .form-group.mb-30
-      = f.label :password, html: {:class => 'control-label input-label', 'data-bar' => 'Enter Password'}
-      = f.password_field :password, autocomplete: false, class: 'form-control', placeholder: 'Password'
+      = f.label :password, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_password')}
+      = f.password_field :password, autocomplete: false, class: 'form-control', placeholder: t('general.password')
     .form-group.mb-30
-      = f.label :password_confirmation, html: {:class => 'control-label input-label', 'data-bar' => 'Confirm Password'}
-      = f.password_field :password_confirmation, autocomplete: false, class: 'form-control', placeholder: 'Password'
+      = f.label :password_confirmation, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.confirm_password')}
+      = f.password_field :password_confirmation, autocomplete: false, class: 'form-control', placeholder: t('general.password')
     .text-center
-      = f.submit 'Sign Up', class: 'btn btn-default mb-20'
+      = f.submit t('layout.links.signup'), class: 'btn btn-default mb-20'
   %p.general-sign-text.text-center
-    Have an account?
-    = link_to 'Log in', new_user_session_path, class: 'in-gold-500'
+    = t('users.privacy.have_account')
+    = link_to t('layout.links.login'), new_user_session_path, class: 'in-gold-500'
 

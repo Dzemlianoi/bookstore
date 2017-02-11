@@ -5,7 +5,7 @@
   .col-sm-7
     .mb-60
       %h1= book.name
-      %p.lead= book.description.split('.')[0]
-      %p.lead.small= book.all_authors
+      %p.lead= first_sentence_description(book)
+      %p.lead.small= all_authors(book)
       .general-align
         = link_to t('general.buy_now'), book_path(book), class: 'btn btn-primary'

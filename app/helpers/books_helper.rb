@@ -15,4 +15,8 @@ module BooksHelper
   def current_catalog_name
     @category.nil? ? 'All' : @category.name
   end
+
+  def first_sentence_description(book)
+    book.description.split('.')[0]
+  end
 end

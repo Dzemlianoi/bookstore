@@ -5,9 +5,9 @@ class ReviewsController < ApplicationController
 
   def create
     if @review.update_attributes(review_params.to_h)
-      flash[:success] = 'You review will be moderied and added to the list!'
+      flash[:success] = t('flashes.success.review_success')
     else
-      flash[:error] = 'Please, check all fields!'
+      flash[:error] = t('flashes.error.review_fails')
     end
     redirect_to :back
   end

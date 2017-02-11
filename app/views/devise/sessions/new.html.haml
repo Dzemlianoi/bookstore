@@ -1,28 +1,28 @@
 = devise_error_messages!
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title Log In
+    %h3.general-login-title= t('layout.links.login')
     = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
       %i.fa.fa-facebook-official
-    %p.general-login-text or
+    %p.general-login-text= t('general.or')
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'general-form'}) do |f|
     .form-group.mb-30.field
-      = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => 'Enter Email'}
-      = f.email_field :email, autofocus: true, id: 'email', class: 'form-control', placeholder: 'Enter Email'
+      = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_email')}
+      = f.email_field :email, autofocus: true, id: 'email', class: 'form-control', placeholder: t('users.privacy.enter_email')
     .form-group.mb-30
-      = f.label :password, html: {:class => 'control-label input-label', 'data-bar' => 'Enter Password'}
-      = f.password_field :password, autocomplete: false, class: 'form-control', placeholder: 'Password'
+      = f.label :password, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_password')}
+      = f.password_field :password, autocomplete: false, class: 'form-control', placeholder: t('general.password')
       - if devise_mapping.recoverable?
-        = link_to 'Forgot password?', new_password_path(resource_name), class: 'in-gold-500'
+        = link_to t('users.privacy.forgot_password'), new_password_path(resource_name), class: 'in-gold-500'
     - if devise_mapping.rememberable?
       .form-group.checkbox.text-center.mb-30
         %label.checkbox-label
           = f.check_box :remember_me, hidden: 'true', class: 'checkbox-input'
           %span.checkbox-icon
             %i.fa.fa-check
-          %span.checkbox-text Remember me
+          %span.checkbox-text= t('users.privacy.remember_me')
       .text-center
-        = f.submit 'Sign in',  class: 'btn btn-default mb-20'
+        = f.submit t('layout.links.login'),  class: 'btn btn-default mb-20'
   %p.general-sign-text.text-center
-    Don’t have an Account?
-    = link_to 'Sign Up', new_user_registration_path, class: 'in-gold-500'
+    = t('users.privacy.dont_have_account')
+    = link_to t('layout.links.signup'), new_user_registration_path, class: 'in-gold-500'

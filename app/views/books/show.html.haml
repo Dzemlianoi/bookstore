@@ -16,7 +16,7 @@
             %img{src: 'https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg'}
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= @book.all_authors
+      %p.lead.small= all_authors(@book)
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
@@ -24,10 +24,10 @@
         = form_for @book, url: cart_path(@book), html: { method: :put} do |f|
           .col-xs-5.col-md-3
             .input-group.general-position
-              %a.input-link{href: '#'}
+              %a.input-link
                 %i.fa.fa-minus.line-height-40
               = f.text_field :quantity, class: 'form-control quantity-input', value: 1, pattern: '[0-9]*'
-              %a.input-link{href: '#'}
+              %a.input-link
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
             = f.submit t('books.show.cart_add'), class: 'btn btn-default pull-right general-position'
@@ -43,11 +43,11 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.dimensions')
-          %p.lead.small.pull-right= @book.total_dimensions
+          %p.lead.small.pull-right= total_dimensions(@book)
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.materials')
-          %p.lead.small.pull-right= @book.all_materials
+          %p.lead.small.pull-right= all_materials(@book)
   = render 'books/reviews'
 
 

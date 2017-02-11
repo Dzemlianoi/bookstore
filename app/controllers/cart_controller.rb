@@ -6,7 +6,7 @@ class CartController < ApplicationController
   end
 
   def index
-    flash[:warning] = 'Cart is empty now'
+    flash[:warning] = t('flashes.error.empty_cart')
     flash.keep
     redirect_back(fallback_location: root_path)
   end
@@ -42,10 +42,10 @@ class CartController < ApplicationController
   end
 
   def error
-    flash[:danger] = 'Book is already in cart'
+    flash[:danger] = t('flashes.error.already_persist')
   end
 
   def success
-    flash[:success] = 'Book is added to cart'
+    flash[:success] = t('flashes.success.book_added')
   end
 end

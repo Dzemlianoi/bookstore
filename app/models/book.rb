@@ -31,20 +31,6 @@ class Book < ApplicationRecord
   after_save :increment_books_count
   after_destroy :decrement_books_count
 
-  def all_authors
-    self.authors.map(&:full_name).join(', ')
-  end
-
-  def all_materials
-    self.materials.map(&:name).join(', ')
-  end
-
-  def total_dimensions
-    "H: #{self.book_dimension.height}\" x
-     W: #{self.book_dimension.width}\" x
-     D: #{self.book_dimension.depth}\""
-  end
-
   private
 
   def increment_books_count
