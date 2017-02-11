@@ -1,0 +1,43 @@
+.mb-80
+  %h3.in-gold-500.mb-25
+    #{t('books.show.reviews')}(#{@book.reviews.length})
+  - approved_reviews(@book).each_with_index do |review|
+    .general-message-wrap.divider-lg
+      .clearfix
+        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+          = review.name.capitalize.first
+        .ml-70
+          %div
+            .general-message-date.hidden-xs= date(review.created_at)
+            .max-240
+              - unless review.user.nil?
+                .general-message-verified.pull-right= t('books.show.verified')
+              .general-message-name= review.name
+          .mb-15
+            - review.rating.to_i.times do
+              %i.fa.fa-star.rate-star
+            - (5 - review.rating.to_i).times do
+              %i.fa.fa-star.rate-star.rate-empty
+          %p= review.comment_text
+
+  %h3.in-gold-500.mb-25 Write a review
+  .general-review-wrap.divider-lg
+  = form_for :review, url: book_reviews_path(@book), html: { method: :post} do |f|
+    %h4.general-review-h Score
+    .mb-15
+      %fieldset
+        %span.star-cb-group
+          - 5.downto(1) do |num|
+            - if num == 4
+              = f.radio_button :rating, num, id:"rating-#{num}", checked: true
+            - else
+              = f.radio_button :rating, num, id:"rating-#{num}"
+            %label{for: "rating-#{num}"}
+    .form-group.general-w-50
+      = f.label :name, html: {:class => 'control-label input-label', 'data-bar' => 'Enter your name'}
+      = f.text_field :name, class: 'form-control', placeholder: 'John Doe'
+    .form-group.general-w-50
+      = f.label :comment_text, html: {:class => 'control-label input-label', 'data-bar' => 'Enter text of review'}
+      = f.text_area :comment_text, size: '30x10', class: 'form-control', placeholder: 'Everything is awesome'
+    .col-xs-8.col-md-3
+      = f.submit 'Post', class: 'btn btn-default pull-right general-position'

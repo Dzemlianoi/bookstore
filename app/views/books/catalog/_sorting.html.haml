@@ -5,4 +5,4 @@
   %li
   - Book::ORDERING.each do |value, _|
     %li
-      = link_to t("books.sorting.#{value}"), permitted_params.merge(order: value)
+      = link_to t("books.sorting.#{value}"), book_params.merge(order: value)

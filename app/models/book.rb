@@ -12,12 +12,11 @@ class Book < ApplicationRecord
   mount_uploaders :images, ImagesUploader
   paginates_per 12
 
-  PER_PAGE = 12
   DEFAULT_SORT_KEY = :titleA
   ORDERING = {
     priceA: 'price ASC',
     priceD: 'price DESC',
-    new: 'created_at DESC',
+    new:    'created_at DESC',
     titleA: 'name ASC',
     titleD: 'name DESC'
   }
@@ -25,14 +24,19 @@ class Book < ApplicationRecord
   validates :name, :price, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :publication_year, length:  { is: 4 }
-  validates :publication_year, numericality: { only_integer: true, greater_than: 1000 }
+  validates :publication_year, numericality: { only_integer: true, greater_than: 0 }
   validates :description, length:  { maximum: 1000 }
+  validates :price, numericality: { greater_than: 0 }
 
   after_save :increment_books_count
   after_destroy :decrement_books_count
 
   def all_authors
     self.authors.map(&:full_name).join(', ')
+  end
+
+  def all_materials
+    self.materials.map(&:name).join(', ')
   end
 
   def total_dimensions
