@@ -24,10 +24,10 @@
         = form_for @book, url: cart_path(@book), html: { method: :put} do |f|
           .col-xs-5.col-md-3
             .input-group.general-position
-              %a.input-link
+              %a.input-link.minus-link
                 %i.fa.fa-minus.line-height-40
               = f.text_field :quantity, class: 'form-control quantity-input', value: 1, pattern: '[0-9]*'
-              %a.input-link
+              %a.input-link.plus-link
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
             = f.submit t('books.show.cart_add'), class: 'btn btn-default pull-right general-position'

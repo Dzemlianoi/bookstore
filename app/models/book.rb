@@ -1,5 +1,8 @@
 class Book < ApplicationRecord
 
+  scope :newest,      -> { order('created_at DESC') }
+  scope :bestsellers, -> { order('name ASC') }
+
   belongs_to :category
   has_one    :book_dimension
   has_many   :book_materials
