@@ -16,7 +16,10 @@ $text-colors: (
               grey-900  :  #1e1e1c,
               gold-500  :  #c59c71
 );
-
+$unchecked-star: '\2606';
+$unchecked-color: #888;
+$checked-star: #c59c71;
+$checked-color: #c59c71;
 @each $color in $text-colors {
   .in-#{nth($color, 1)} {
     color: nth($color, 2) !important;
