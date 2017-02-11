@@ -127,7 +127,7 @@ en:
       already_persist: 'Book is already in cart'
       review_fails: 'Please, check all fields!'
     success:
-      book_added: 'Please, check all fields!'
+      book_added: 'Book is added to cart!'
       review_success: 'You review will be moderied and added to the list!'
 
 
