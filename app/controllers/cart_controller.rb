@@ -1,14 +1,16 @@
 class CartController < ApplicationController
   def update
-    first_buy? ? initialize_cart : add_one_more_book
+    empty_cart? ? initialize_cart : add_one_more_book
     flash.keep
-    redirect_back(fallback_location: books_path)
+    redirect_back(books_path)
   end
 
   def index
-    flash[:warning] = t('flashes.error.empty_cart')
-    flash.keep
-    redirect_back(fallback_location: root_path)
+    @books = cart_books.map{|k,v| {Book.find_by_id(k) => v}}.reduce(:merge).reject {|k, v| k.nil? || v.to_i <= 0}
+    byebug
+    render and return unless empty_cart?
+    flash[:error] = t('flashes.error.empty_cart')
+    redirect_back(root_path)
   end
 
   private
@@ -26,19 +28,22 @@ class CartController < ApplicationController
     cookies[:cart] = JSON.generate(hash_params)
   end
 
-  def first_buy?
+  def empty_cart?
     !cookies.key? :cart
   end
 
   def add_one_more_book
-    cart = JSON.parse(cookies[:cart])
-    return error if cart.key? params[:id]
-    cookies[:cart] = JSON.generate(cart.reverse_merge!(hash_params))
+    return error if cart_books.key? params[:id]
+    cookies[:cart] = JSON.generate(cart_books.reverse_merge!(hash_params))
     success
   end
 
   def permitted_options
     params.require(:book).permit(:quantity)
+  end
+
+  def cart_books
+    JSON.parse(cookies[:cart])
   end
 
   def error

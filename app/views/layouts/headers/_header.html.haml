@@ -7,11 +7,11 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand= t('general.project_name')
-      %a.shop-link.pull-right.visible-xs{href: '#'}
+      = link_to(cart_index_path, class: 'shop-link pull-right visible-xs') do
         %span.shop-icon
           - unless empty_cart?
             %span.shop-quantity= purchase_count
-    %a.shop-link.pull-right.hidden-xs{href: '#'}
+    = link_to(cart_index_path, class: 'shop-link pull-right hidden-xs') do
       %span.shop-icon
         - unless empty_cart?
           %span.shop-quantity= purchase_count
