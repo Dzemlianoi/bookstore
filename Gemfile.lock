@@ -61,6 +61,11 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.4)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    country_select (2.1.1)
+      countries (>= 0.9.3, < 0.10.0)
+    currencies (0.4.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -239,6 +244,7 @@ DEPENDENCIES
   cancancan
   carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
+  country_select (~> 2.1.0)
   devise (~> 4.2.0)
   ffaker (~> 2.4.0)
   figaro
