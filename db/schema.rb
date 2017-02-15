@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170212170850) do
     t.string   "zip",              null: false
     t.string   "country",          null: false
     t.string   "phone",            null: false
-    t.integer  "type",             null: false
+    t.integer  "kind",             null: false
     t.string   "addressable_type"
     t.integer  "addressable_id"
     t.datetime "created_at",       null: false
