@@ -1,10 +1,36 @@
 #address.tab-pane.fade.in.active.general-main-wrap
   .hidden-xs.hidden-sm
     .row
-      .col-md-5
-        %h3.general-subtitle.mt-0= t('users.addresses.billing_address')
-      .col-md-5.col-md-offset-1
-        %h3.general-subtitle.mt-0= t('users.addresses.shipping_address')
+      - Address.kinds.each_key do |kind|
+        .col-md-5
+          %h3.general-subtitle.mt-0= t("users.addresses.#{kind}_address")
   .row
-    = render 'users/registrations/addresses/billing'
-    = render 'users/registrations/addresses/shipping'
+    - Address.kinds.each_key do |kind|
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0= t("users.addresses.#{kind}_address")
+        = form_for form_details(kind)[:for], url: addresses_path, html: { method: form_details(kind)[:method] } do |f|
+          = f.hidden_field :kind, value: kind
+          .form-group
+            = f.label :first_name, t('users.addresses.first_name.label') , class: 'control-label input-label'
+            = f.text_field :first_name, class:' form-control', placeholder: "#{t('users.addresses.first_name.placeholder')}"
+          .form-group
+            = f.label :last_name, t('users.addresses.last_name.label') , class: 'control-label input-label'
+            = f.text_field :last_name, class:' form-control', placeholder: "#{t('users.addresses.last_name.placeholder')}"
+          .form-group
+            = f.label :address, t('users.addresses.address.label') , class: 'control-label input-label'
+            = f.text_field :address, class:' form-control', placeholder: "#{t('users.addresses.address.placeholder')}"
+          .form-group
+            = f.label :city, t('users.addresses.city.label') , class: 'control-label input-label'
+            = f.text_field :city, class:' form-control', placeholder: "#{t('users.addresses.city.placeholder')}"
+          .form-group
+            = f.label :zip, t('users.addresses.zip.label') , class: 'control-label input-label'
+            = f.text_field :zip, class:' form-control', placeholder: "#{t('users.addresses.zip.placeholder')}"
+          .form-group
+            = f.label :country, t('users.addresses.country.label') , class: 'control-label input-label'
+            = f.country_select :country, {}, { class:' form-control', prompt_text: t('users.addresses.country.placeholder')}
+          .form-group.mb-
+            = f.label :phone, t('users.addresses.phone.label') , class: 'control-label input-label'
+            = f.phone_field :phone, class:' form-control', placeholder: "#{t('users.addresses.phone.placeholder')}"
+          .text-center.general-text-align
+            = f.submit t('users.addresses.save'), class: 'btn btn-default'
