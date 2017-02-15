@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :books do
     resources :reviews, only: :create
   end
+  resource :addresses
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
