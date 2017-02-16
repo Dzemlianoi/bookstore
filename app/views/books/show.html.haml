@@ -21,7 +21,8 @@
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
             = "€#{@book.price}"
-        = form_for :book, url: cart_path(@book), html: { method: :put} do |f|
+        = form_for :order_item, url: order_item_path, html: { method: :post} do |f|
+          = f.hidden_field :book_id, value: @book.id
           .col-xs-5.col-md-3
             .input-group.general-position
               %a.input-link.minus-link

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212170850) do
+ActiveRecord::Schema.define(version: 20170216090214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,36 @@ ActiveRecord::Schema.define(version: 20170212170850) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "books_id"
+    t.integer  "orders_id"
+    t.index ["books_id"], name: "index_order_items_on_books_id", using: :btree
+    t.index ["orders_id"], name: "index_order_items_on_orders_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "shipping_address_id"
+    t.integer  "billing_address_id"
+    t.datetime "completed_date"
+    t.integer  "delivery_id"
+    t.integer  "coupon_id"
+    t.integer  "credit_card_id"
+    t.decimal  "total_price",         precision: 5, scale: 2
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+    t.integer  "user_id"
+    t.string   "aasm_state",                                  default: "cart"
+    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id", using: :btree
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id", using: :btree
+    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
+    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "book_id"
     t.integer  "user_id"
@@ -128,4 +158,7 @@ ActiveRecord::Schema.define(version: 20170212170850) do
 
   add_foreign_key "book_dimensions", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "order_items", "books", column: "books_id"
+  add_foreign_key "order_items", "orders", column: "orders_id"
+  add_foreign_key "orders", "users"
 end

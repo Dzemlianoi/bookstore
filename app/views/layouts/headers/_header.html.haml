@@ -10,11 +10,11 @@
       = link_to(cart_index_path, class: 'shop-link pull-right visible-xs') do
         %span.shop-icon
           - unless empty_cart?
-            %span.shop-quantity= purchase_count
+            %span.shop-quantity= purchases_count
     = link_to(cart_index_path, class: 'shop-link pull-right hidden-xs') do
       %span.shop-icon
         - unless empty_cart?
-          %span.shop-quantity= purchase_count
+          %span.shop-quantity= purchases_count
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': 'false'}
       .visible-xs
         %button.close{type: 'button', 'aria-label': 'Close'}

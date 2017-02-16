@@ -4,7 +4,7 @@ class CreateBooks < ActiveRecord::Migration[5.0]
       # Four book’s photos, Materials
       t.string :name
       t.text :description
-      t.string :quantity, default: 0
+      t.integer :quantity, default: 1
       t.integer :publication_year, min: 1000
       t.decimal :price, precision: 5, scale: 2, default: 0.00
       t.decimal :height, precision: 4, scale: 2 , default: 0.00

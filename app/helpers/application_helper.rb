@@ -7,7 +7,7 @@ module ApplicationHelper
     !cookies.key? :cart
   end
 
-  def purchase_count
-    JSON.parse(cookies[:cart]).length
+  def purchases_count
+    current_order.order_items.count unless current_order.nil?
   end
 end
