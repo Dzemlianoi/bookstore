@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216090214) do
+ActiveRecord::Schema.define(version: 20170216202820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20170216090214) do
   create_table "books", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "quantity",                                 default: "0"
     t.integer  "publication_year"
     t.decimal  "price",            precision: 5, scale: 2, default: "0.0"
     t.datetime "created_at",                                               null: false
@@ -90,13 +89,13 @@ ActiveRecord::Schema.define(version: 20170216090214) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "books_id"
-    t.integer  "orders_id"
-    t.index ["books_id"], name: "index_order_items_on_books_id", using: :btree
-    t.index ["orders_id"], name: "index_order_items_on_orders_id", using: :btree
+    t.integer  "quantity",   default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "book_id"
+    t.integer  "order_id"
+    t.index ["book_id"], name: "index_order_items_on_book_id", using: :btree
+    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -158,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170216090214) do
 
   add_foreign_key "book_dimensions", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "order_items", "books", column: "books_id"
-  add_foreign_key "order_items", "orders", column: "orders_id"
+  add_foreign_key "order_items", "books"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
 end
