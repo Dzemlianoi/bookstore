@@ -1,7 +1,12 @@
 class OrderItemsController < ApplicationController
   def create
     @order = current_user.orders.where(aasm_state: 'cart').first_or_create
-    @order.order_items.create(order_params) ? success_flash : error_flash
+    if @order.order_items.find_by(book_id: order_params[:book_id]).nil?
+      @order.order_items.create(order_params)
+      success_flash
+    else
+      error_flash
+    end
     redirect_back(fallback_location: root_path)
   end
 
