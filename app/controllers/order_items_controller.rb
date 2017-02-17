@@ -7,13 +7,26 @@ class OrderItemsController < ApplicationController
     else
       error_flash
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to :books
+  end
+
+  def destroy
+    current_order.order_items.destroy(destroy_params[:order_item])
+    redirect_to :back
   end
 
   private
 
   def order_params
     params.require(:order_item).permit(:quantity, :book_id)
+  end
+
+  def destroy_params
+    params.permit(:order_item)
+  end
+
+  def update_params
+    params.permit(:order_item, :quantity)
   end
 
   def success_flash

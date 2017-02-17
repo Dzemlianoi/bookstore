@@ -123,12 +123,15 @@ en:
     change_password: 'Change password'
   flashes:
     error:
-      empty_cart: 'Cart is empty now'
       already_persist: 'Book is already in cart'
       review_fails: 'Please, check all fields!'
     success:
       book_added: 'Book is added to cart!'
       review_success: 'You review will be moderied and added to the list!'
+  cart:
+      empty_cart: 'Cart is empty now'
+      was_deleted: 'Book was successfully deleted'
+
 
 
 

@@ -16,5 +16,5 @@
   %td
     %span.font-16.in-gold-500 €#{purchase.price_with_quantity}
   %td
-    %button.close.general-cart-close{type: 'button', 'aria-label': 'Close'}
+    = link_to order_item_path(order_item: purchase), method: :delete, class: 'close general-cart-close', data: {confirm: 'Are you sure?'}do
       %span{'aria-hidden': 'true'} &times;
