@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :reviews, only: :create
   end
   resource :addresses
-  resource :order_item, only: [:create, :destroy]
+  resource :order_item, only: [:create, :destroy, :update]
   resources :order
 
 
