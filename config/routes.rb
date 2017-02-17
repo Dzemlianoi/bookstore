@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   resource :addresses
   resource :order_item, only: :create
-  resource :orders
+  resources :order
 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

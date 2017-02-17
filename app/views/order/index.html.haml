@@ -1,8 +1,8 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Cart
   .visible-xs
-    - @books.each do |book, quantity|
-      = render 'order/tile/mobile', book: book, quantity: quantity
+    - @purchases.each do |purchase|
+      = render 'order/tile/mobile', purchase: purchase
   .hidden-xs
     %table.table.table-hover
       %tr.no-hover
@@ -16,8 +16,8 @@
         %th.col-total
           %span.in-grey-600 SubTotal
         %th.col-close
-      - @books.each do |book, quantity|
-        = render 'order/tile/desktop', book: book, quantity: quantity
+      - @purchases.each do |purchase|
+        = render 'order/tile/desktop', purchase: purchase
   .general-order-wrap
     .row
       .col-sm-4
@@ -34,7 +34,7 @@
               %td
                 %p.font-16 Subtotal:
               %td
-                %p.font-16 €lol
+                %p.font-16 €#{current_order.total_price}
             %tr
               %td
                 %p.font-16 Coupon:
@@ -44,6 +44,6 @@
               %td
                 %strong.font-18 Order Total:
               %td
-                %strong.font-18 €117.69
+                %strong.font-18 €#{current_order.total_price}
           %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
   %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout

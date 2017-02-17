@@ -1,6 +1,5 @@
 class OrderController < ApplicationController
   def index
-    byebug
-    @books = current_order.order_items.map(&:books)
+    @purchases = current_order.order_items
   end
 end

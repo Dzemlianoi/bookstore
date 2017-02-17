@@ -10,6 +10,8 @@ class Book < ApplicationRecord
   has_many   :reviews
   has_many   :materials, through: :book_materials
   has_many   :authors, through: :book_authors
+  has_many   :order_items
+  has_many   :orders, through: :order_items
   accepts_nested_attributes_for :book_dimension
 
   mount_uploaders :images, ImagesUploader

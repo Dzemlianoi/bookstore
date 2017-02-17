@@ -3,13 +3,13 @@
     %span{'aria-hidden': 'true'} &times;
   .general-img-wrap-table
     %img.cart-img-shadow{src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book'}
-  %p.title= book.name
+  %p.title= purchase.book.name
   %table.table
     %tr
       %td
         %span.in-grey-600 Price
       %td
-        %span.font-16.in-gold-500 €#{book.price}
+        %span.font-16.in-gold-500 €#{purchase.book.price}
     %tr
       %td.vertical-middle
         %span.in-grey-600 Quantity
@@ -17,11 +17,11 @@
         .input-group
           %a.input-link{href: '#'}
             %i.fa.fa-minus.line-height-40
-          %input.form-control.quantity-input{type: 'text', value: quantity}
+          %input.form-control.quantity-input{type: 'text', value: purchase.quantity.to_i}
           %a.input-link{href: '#'}
             %i.fa.fa-plus.line-height-40
     %tr
       %td
         %span.in-grey-600 SubTotal
       %td
-        %span.font-16.in-gold-500 €#{book.price * quantity.to_f}
+        %span.font-16.in-gold-500 €#{purchase.price_with_quantity}
