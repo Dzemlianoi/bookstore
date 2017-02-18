@@ -19,7 +19,7 @@ class Order < ApplicationRecord
   def subtotal_price
     self.order_items
         .map { |item| item.book[:price] * item.quantity }
-        .reduce(0, :+)
+        .inject(&:+)
   end
 
   def total_price

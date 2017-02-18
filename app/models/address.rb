@@ -5,10 +5,10 @@ class Address < ApplicationRecord
   has_one :order, foreign_key: 'billing_address_id'
   enum kind: [:billing, :shipping]
 
+  scope :shipping_address,  -> { where(kind: 'shipping').first }
+  scope :billing_address,   -> { where(kind: 'billing').first }
+
   validates_presence_of :first_name, :last_name, :address, :city, :zip, :country, :phone, :kind
-  validates :phone, :uniqueness => {
-      :scope => [:addressable_type]
-  }
   validates_inclusion_of :kind, in: Address.kinds.keys
   validates :first_name, length:  { maximum: 20 }
 end

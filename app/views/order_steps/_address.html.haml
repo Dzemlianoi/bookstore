@@ -1,0 +1,41 @@
+= form_tag wizard_path, class: 'res-mb-100', method: :patch do
+  .hidden-xs.hidden-sm
+    .row
+      .col-md-5
+        %h3.general-subtitle= t('users.addresses.billing_address')
+        %p.general-info-text= t('orders.fields_required')
+      .col-md-5.col-md-offset-1
+        %h3.general-subtitle= t('users.addresses.shipping_address')
+  .row
+    .col-md-5.mb-40
+      .visible-xs.visible-sm
+        %h3.general-subtitle= t('users.addresses.billing_address')
+        %p.general-info-text= t('orders.fields_required')
+      = fields_for :billing_address, @form.billing_address do |f|
+        = render 'forms/address_form', f: f, kind: :billing
+    .col-md-5.col-md-offset-1.mb-60
+      .visible-xs.visible-sm
+        %h3.general-subtitle= t('users.addresses.shipping_address')
+      .shipping-fields
+        = fields_for :shipping_address, @form.shipping_address do |f|
+          = render 'forms/address_form', f: f, kind: :shipping
+      .form-group.checkbox
+        %label.checkbox-label
+          = check_box_tag :shipping_check, false, false, hidden: true, class: 'checkbox-input'
+          %span.checkbox-icon
+            %i.fa.fa-check
+          %span.checkbox-text= t('orders.use_billing')
+  .general-text-align.mb-60
+    %p.in-gold-500.font-18= t('orders.order_summary')
+    %table.general-summary-table
+      %tr
+        %td
+          %p.font-16= t('orders.items_total')
+        %td
+          %p.font-16 €#{current_order.subtotal_price}
+      %tr
+        %td
+          %p.font-16= t('orders.order_total')
+        %td
+          %p.font-16 €#{current_order.total_price}
+    = submit_tag t('orders.save_and_continue'), class:'btn center-block mb-20'

@@ -47,5 +47,5 @@
                 %strong.font-18= t('orders.order_total')
               %td
                 %strong.total-price.font-18 €#{current_order.total_price}
-          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('orders.checkout')
-  %button.btn.btn-default.mb-20.hidden-xs.center-block= t('orders.checkout')
+          = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default mb-20 visible-xs-inline-block'
+  = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default w-20 mb-20 hidden-xs center-block'

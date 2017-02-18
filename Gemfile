@@ -11,6 +11,7 @@ gem 'puma', '~> 3.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'ffaker', '~> 2.4.0'
+gem 'wicked'
 
 gem 'devise', '~> 4.2.0'
 gem 'omniauth', '~> 1.3.1'

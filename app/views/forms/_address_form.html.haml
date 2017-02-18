@@ -1,0 +1,22 @@
+= f.hidden_field :kind, value: kind
+.form-group
+  = f.label :first_name, t('users.addresses.first_name.label') , class: 'control-label input-label'
+  = f.text_field :first_name, class:' form-control', placeholder: "#{t('users.addresses.first_name.placeholder')}"
+.form-group
+  = f.label :last_name, t('users.addresses.last_name.label') , class: 'control-label input-label'
+  = f.text_field :last_name, class:' form-control', placeholder: "#{t('users.addresses.last_name.placeholder')}"
+.form-group
+  = f.label :address, t('users.addresses.address.label') , class: 'control-label input-label'
+  = f.text_field :address, class:' form-control', placeholder: "#{t('users.addresses.address.placeholder')}"
+.form-group
+  = f.label :city, t('users.addresses.city.label') , class: 'control-label input-label'
+  = f.text_field :city, class:' form-control', placeholder: "#{t('users.addresses.city.placeholder')}"
+.form-group
+  = f.label :zip, t('users.addresses.zip.label') , class: 'control-label input-label'
+  = f.text_field :zip, class:' form-control', placeholder: "#{t('users.addresses.zip.placeholder')}"
+.form-group
+  = f.label :country, t('users.addresses.country.label') , class: 'control-label input-label'
+  = f.country_select :country, {}, { class:' form-control', prompt_text: t('users.addresses.country.placeholder')}
+.form-group.mb-
+  = f.label :phone, t('users.addresses.phone.label') , class: 'control-label input-label'
+  = f.phone_field :phone, class:' form-control', placeholder: "#{t('users.addresses.phone.placeholder')}"

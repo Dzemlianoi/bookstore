@@ -138,9 +138,13 @@ en:
     total_price: 'Total price'
     subtotal: 'Subtotal'
     order_total: 'Order total'
+    items_total: 'Items total'
     checkout: 'Checkout'
     product: 'Product'
     order_summary: 'Order summary'
+    save_and_continue: 'Save and continue'
+    fields_required: 'all fields are required'
+    use_billing: 'Use Billing Adress'
     coupon:
       coupon: 'Coupon'
       not_found: 'There is no coupon with such code'

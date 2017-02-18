@@ -4,7 +4,7 @@ class CouponsController < ApplicationController
     redirect_to :back, alert: t('orders.coupon.not_found') and return if @coupon.nil?
     if lower_then_subtotal?
       @coupon.update(order:current_order)
-      flash.keep.success = t('orders.coupon.added')
+      flash.keep.notice = t('orders.coupon.added')
     else
       flash.keep.alert = t('orders.coupon.subtotal_greater')
     end
