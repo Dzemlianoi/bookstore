@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   end
   resources :categories, only: :show
   resources :books, only: [:index, :show]
-  resources :cart, only: [:index, :update]
   resources :books do
     resources :reviews, only: :create
   end
   resource :addresses
   resource :order_item, only: [:create, :destroy, :update]
+  resource :coupon, only: [:create, :destroy, :update]
   resources :order
 
 

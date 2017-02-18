@@ -21,12 +21,13 @@
   .general-order-wrap
     .row
       .col-sm-4
-        = form_for :coupon, coupon_path, html: { method: :post } do |f|
-          .input-group.general-input-group
-            = f.label :code, t('orders.coupon.enter_coupon') , class: 'input-label'
-            = f.text_field :code, class:'form-control mb-30', placeholder: t('orders.coupon.enter_coupon')
-            %div
-              = f.submit t('orders.coupon.update_cart'), class: 'btn btn-primary mb-15 res-block'
+        - if current_order.coupon.nil?
+          = form_for :coupon, url: coupon_path, html: { method: :patch } do |f|
+            .input-group.general-input-group
+              = f.label :code, t('orders.coupon.enter_coupon') , class: 'input-label'
+              = f.text_field :code, class:'form-control mb-30', placeholder: t('orders.coupon.enter_coupon')
+              %div
+                = f.submit t('orders.coupon.update_cart'), class: 'btn btn-primary mb-15 res-block'
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18= t('orders.order_summary')

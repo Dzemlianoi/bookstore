@@ -147,6 +147,7 @@ en:
       added: 'Coupon was successfully added'
       enter_coupon: 'Enter Your Coupon Code'
       update_cart: 'Update cart'
+      subtotal_greater: 'The coupon is more expensive than subtotal'
 
 
 

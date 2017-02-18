@@ -4,14 +4,13 @@ class OrderItemsController < ApplicationController
     if book_present?
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
-      @order.order_items.create(order_params)
+      @order.order_items.create(create_params)
       flash.keep[:success] = t('flashes.success.book_added')
     end
     redirect_to :books
   end
 
   def update
-    byebug
     @order_item = current_order.order_items.find(update_params[:id])
     respond_to do |format|
       format.html { redirect_to current_order }
@@ -43,7 +42,7 @@ class OrderItemsController < ApplicationController
   end
 
   def book_present?
-    !current_order.order_items.find_by(book: order_params[:book]).nil?
+    !current_order.order_items.find_by(book: create_params[:book_id]).nil?
   end
 
   def update_data

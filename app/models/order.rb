@@ -23,7 +23,8 @@ class Order < ApplicationRecord
   end
 
   def total_price
-    subtotal_price - discount
+    price = subtotal_price - discount
+    price >= 0 ? price : 0.00
   end
 
   def discount
