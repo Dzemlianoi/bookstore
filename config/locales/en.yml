@@ -10,6 +10,7 @@ en:
     or: 'or'
     change: 'Change'
     cancel: 'Cancel'
+    cart: 'Cart'
   layout:
     links:
       home: 'Home'
@@ -129,8 +130,23 @@ en:
       book_added: 'Book is added to cart!'
       review_success: 'You review will be moderied and added to the list!'
   cart:
-      empty_cart: 'Cart is empty now'
-      was_deleted: 'Book was successfully deleted'
+    empty_cart: 'Cart is empty now'
+    was_deleted: 'Book was successfully deleted'
+  orders:
+    price: 'Price'
+    quantity: 'Quantity'
+    total_price: 'Total price'
+    subtotal: 'Subtotal'
+    order_total: 'Order total'
+    checkout: 'Checkout'
+    product: 'Product'
+    order_summary: 'Order summary'
+    coupon:
+      coupon: 'Coupon'
+      not_found: 'There is no coupon with such code'
+      added: 'Coupon was successfully added'
+      enter_coupon: 'Enter Your Coupon Code'
+      update_cart: 'Update cart'
 
 
 

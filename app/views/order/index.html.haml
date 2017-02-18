@@ -1,5 +1,5 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin Cart
+  %h1.general-title-margin= t('general.cart')
   .visible-xs
     - @purchases.each do |purchase|
       = render 'order/tile/mobile', purchase: purchase
@@ -7,43 +7,44 @@
     %table.table.table-hover
       %tr.no-hover
         %th.col-pic.pl-0
-          %span.in-grey-600 Product
+          %span.in-grey-600= t('orders.product')
         %th.col-title
         %th.col-price
-          %span.in-grey-600 Price
+          %span.in-grey-600= t('orders.price')
         %th.col-quantity
-          %span.in-grey-600 Quantity
+          %span.in-grey-600= t('orders.quantity')
         %th.col-total
-          %span.in-grey-600 SubTotal
+          %span.in-grey-600= t('orders.subtotal')
         %th.col-close
       - @purchases.each do |purchase|
         = render 'order/tile/desktop', purchase: purchase
   .general-order-wrap
     .row
       .col-sm-4
-        .input-group.general-input-group
-          %label.input-label Enter Your Coupon Code
-          %input.form-control.mb-30{type: 'text', placeholder: 'Enter Your Coupon Code '}
-          %div
-            %button.btn.btn-primary.mb-15.res-block Update cart
+        = form_for :coupon, coupon_path, html: { method: :post } do |f|
+          .input-group.general-input-group
+            = f.label :code, t('orders.coupon.enter_coupon') , class: 'input-label'
+            = f.text_field :code, class:'form-control mb-30', placeholder: t('orders.coupon.enter_coupon')
+            %div
+              = f.submit t('orders.coupon.update_cart'), class: 'btn btn-primary mb-15 res-block'
       .col-sm-8
         .res-mr-200.text-center.general-text-right
-          %p.in-gold-500.font-18 Order Summary
+          %p.in-gold-500.font-18= t('orders.order_summary')
           %table.general-summary-table.general-summary-table-right.general-text-right
             %tr
               %td
-                %p.font-16 Subtotal:
+                %p.font-16 #{t('orders.subtotal')}:
               %td
                 %p.subtotal.font-16 €#{current_order.subtotal_price}
             %tr
               %td
-                %p.font-16 Coupon:
+                %p.font-16 #{t('orders.coupon.coupon')}:
               %td
                 %p.font-16 €#{current_order.discount}
             %tr
               %td
-                %strong.font-18 Order Total:
+                %strong.font-18= t('orders.order_total')
               %td
                 %strong.total-price.font-18 €#{current_order.total_price}
-          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-  %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('orders.checkout')
+  %button.btn.btn-default.mb-20.hidden-xs.center-block= t('orders.checkout')
