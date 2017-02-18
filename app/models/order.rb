@@ -11,16 +11,13 @@ class Order < ApplicationRecord
   has_many :books, through: :order_items
   belongs_to :user
 
-  private
-
-  def recalculate_total(item)
-    self.update(total_price: new_total_sum)
+  def recalculate_total(*record)
+    self.update(total_price: total_sum)
   end
 
-  def new_total_sum
+  def total_sum
     self.order_items
         .map { |item| item.book[:price] * item.quantity }
         .reduce(0, :+)
   end
-
 end

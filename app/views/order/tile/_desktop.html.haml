@@ -1,4 +1,5 @@
 %tr
+  %input.purchase-id{type: 'hidden', value: purchase.id}
   %td
     .general-img-wrap-table
       %img.cart-img-shadow.pull-left{src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book'}
@@ -8,13 +9,13 @@
     %span.font-16.in-gold-500 €#{purchase.book.price}
   %td
     .input-group
-      %a.input-link{href: '#'}
-        %i.fa.fa-minus.line-height-40
-      %input.form-control.quantity-input{type: 'text', value: purchase.quantity.to_i}
-      %a.input-link{href: '#'}
-        %i.fa.fa-plus.line-height-40
+      %a.input-link
+        %i.fa.switchers.fa-minus.line-height-40
+      %input.form-control.quantity-input{type: 'text', value: purchase.quantity.to_i, readonly: true}
+      %a.input-link
+        %i.fa.switchers.fa-plus.line-height-40
   %td
-    %span.font-16.in-gold-500 €#{purchase.price_with_quantity}
+    %span.position-price.font-16.in-gold-500 €#{purchase.price_with_quantity}
   %td
     = link_to order_item_path(order_item: purchase), method: :delete, class: 'close general-cart-close', data: {confirm: 'Are you sure?'}do
       %span{'aria-hidden': 'true'} &times;

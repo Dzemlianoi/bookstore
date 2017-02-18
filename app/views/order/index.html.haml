@@ -34,7 +34,7 @@
               %td
                 %p.font-16 Subtotal:
               %td
-                %p.font-16 €#{current_order.total_price}
+                %p.subtotal.font-16 €#{current_order.total_price}
             %tr
               %td
                 %p.font-16 Coupon:
@@ -44,6 +44,6 @@
               %td
                 %strong.font-18 Order Total:
               %td
-                %strong.font-18 €#{current_order.total_price}
+                %strong.total-price.font-18 €#{current_order.total_price}
           %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
   %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
