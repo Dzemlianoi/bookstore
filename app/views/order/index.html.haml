@@ -34,12 +34,12 @@
               %td
                 %p.font-16 Subtotal:
               %td
-                %p.subtotal.font-16 €#{current_order.total_price}
+                %p.subtotal.font-16 €#{current_order.subtotal_price}
             %tr
               %td
                 %p.font-16 Coupon:
               %td
-                %p.font-16 €0.00
+                %p.font-16 €#{current_order.discount}
             %tr
               %td
                 %strong.font-18 Order Total:

@@ -64,9 +64,22 @@ def generate_dimensions_for_books
   end
 end
 
+def generate_coupons
+  Order.all.each do |order|
+    if order.coupon.nil?
+      Coupon.create!(
+        code: SecureRandom.hex(4).upcase,
+        order: order,
+        discount: rand(1...10)
+      )
+    end
+  end
+end
+
 generate_users
 generate_categories
 generate_materials
 15.times{ generate_author }
 100.times{ generate_book }
 generate_dimensions_for_books
+generate_coupons

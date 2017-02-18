@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('.switchers').click(function () {
-        var purchase_id = $(this).closest('tr').find('.purchase-id').val();
+        var purchase_id = $(this).closest('.purchase').find('.purchase-id').val();
         var quantity_input = $(this).closest('.input-group').find('.quantity-input');
         var quantity = parseInt(quantity_input.val());
         quantity_input.val($(this).hasClass('fa-plus')
@@ -21,11 +21,12 @@ $(document).ready(function() {
             ),
             success: function(response){
                 if (response.status == 'updated'){
-                    $(this).closest('tr')
+                    $(this).closest('.purchase')
                         .find('.position-price')
                         .text('€' + response.position_price);
+                    $('.coupon').text('€' + response.discount);
                     $('.total-price').text('€' + response.total_price);
-                    $('.subtotal').text('€' + response.total_price)
+                    $('.subtotal').text('€' + response.subtotal_price)
                 }
             }
         });
