@@ -22,8 +22,8 @@ class OrderStepsForm
     @order.credit_card || CreditCard.new
   end
 
-  def delivery
-    Delivery.all
+  def deliveries
+    Delivery.all.order('price')
   end
 
   def create_addresses(billing, shipping)
@@ -31,7 +31,6 @@ class OrderStepsForm
       @order.addresses.create(billing)
       @order.addresses.create(shipping)
     else
-      byebug
       @order.addresses.find_by(kind: :billing).update_attributes(billing)
       @order.addresses.find_by(kind: :shipping).update_attributes(shipping)
     end
@@ -45,13 +44,11 @@ class OrderStepsForm
     end
   end
 
-  def create_delivery(delivery)
-    if Delivery.find_by_id(delivery[:id])
-      if @order.delivery
-        @order.update(delivery_id: delivery[:id])
-      else
-        @order.delivery_id = delivery[:id]
-      end
+  def create_delivery(delivery_id)
+    if Delivery.find_by_id(delivery_id)
+      @order.update(delivery_id: delivery_id) and return if @order.delivery
+      @order.delivery_id = delivery_id
+      @order.recalculate_total
     end
   end
 

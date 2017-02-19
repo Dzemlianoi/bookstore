@@ -1,0 +1,74 @@
+= form_tag wizard_path, method: :patch do
+  %h3.general-subtitle Credit Card
+  .visible-xs
+    .general-cart-item.divider-lg-bottom
+      %table.table
+        %tr
+          %td.col-half
+            %span.in-grey-600 Method
+          %td.col-half
+            .form-group.radio.mt-0.mb-0
+              %label.radio-label
+                %input.radio-input{type: "radio", hidden: "true"}
+                %span.radio-icon
+                %span.radio-text Delivery Next Day!
+        %tr
+          %td
+            %span.in-grey-600 Days
+          %td
+            %span.font-16.fw-300 3 to 7 days
+        %tr
+          %td
+            %span.in-grey-600 Price
+          %td
+            %span.font-16.in-gold-500 €5.00
+    .general-cart-item.divider-lg-bottom.mb-30
+      %table.table
+        %tr
+          %td.col-half
+            %span.in-grey-600 Method
+          %td.col-half
+            .form-group.radio.mt-0.mb-0
+              %label.radio-label
+                %input.radio-input{type: "radio", hidden: "true"}
+                %span.radio-icon
+                %span.radio-text Delivery Next Day!
+        %tr
+          %td
+            %span.in-grey-600 Days
+          %td
+            %span.font-16.fw-300 3 to 7 days
+        %tr
+          %td
+            %span.in-grey-600 Price
+          %td
+            %span.font-16.in-gold-500 €5.00
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.col-method
+            %span.in-grey-600.ml-40 Method
+          %th
+            %span.in-grey-600 Days
+          %th
+            %span.in-grey-600 Price
+      %tbody
+        - @form.deliveries.each do |delivery|
+          %tr
+            %td
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  = radio_button_tag :delivery, delivery.id, false, class: 'radio-input', hidden: 'true', checked: (delivery == current_order.delivery)
+                  %span.radio-icon
+                  %span.radio-text= delivery.title
+            %td
+              %span #{delivery.optimistic_days} to #{delivery.pesimistic_days} days
+            %td
+              %span.font-16.in-gold-500 €#{delivery.price}
+  .general-text-align
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table
+      = render 'order_steps/price'
+  .text-center
+    = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-20'

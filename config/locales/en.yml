@@ -135,6 +135,7 @@ en:
   orders:
     price: 'Price'
     quantity: 'Quantity'
+    delivery: 'Delivery'
     total_price: 'Total price'
     subtotal: 'Subtotal'
     order_total: 'Order total'

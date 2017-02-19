@@ -76,6 +76,16 @@ def generate_coupons
   end
 end
 
+
+def generate_delivery
+  Delivery.create!(
+      price: rand(1...15),
+      title: FFaker::Lorem.word,
+      optimistic_days: rand(1...3),
+      pesimistic_days: rand(4...7)
+  )
+end
+
 generate_users
 generate_categories
 generate_materials
@@ -83,3 +93,4 @@ generate_materials
 100.times{ generate_book }
 generate_dimensions_for_books
 generate_coupons
+4.times { generate_delivery }

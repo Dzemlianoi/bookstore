@@ -21,20 +21,6 @@
 .general-text-align
   %p.in-gold-500.font-18 Order Summary
   %table.general-summary-table
-    %tr
-      %td
-        %p.font-16 Subtotal:
-      %td
-        %p.font-16 €117.69
-    %tr
-      %td
-        %p.font-16 Coupon:
-      %td
-        %p.font-16 €0.00
-    %tr
-      %td
-        %strong.font-18 Order Total:
-      %td
-        %strong.font-18 €117.69
+    = render 'order_steps/price'
 .text-center
-  %button.btn.btn-default.mb-80 Save and Continue
+  = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-80'

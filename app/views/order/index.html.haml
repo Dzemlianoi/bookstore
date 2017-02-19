@@ -32,20 +32,6 @@
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18= t('orders.order_summary')
           %table.general-summary-table.general-summary-table-right.general-text-right
-            %tr
-              %td
-                %p.font-16 #{t('orders.subtotal')}:
-              %td
-                %p.subtotal.font-16 €#{current_order.subtotal_price}
-            %tr
-              %td
-                %p.font-16 #{t('orders.coupon.coupon')}:
-              %td
-                %p.font-16 €#{current_order.discount}
-            %tr
-              %td
-                %strong.font-18= t('orders.order_total')
-              %td
-                %strong.total-price.font-18 €#{current_order.total_price}
+            = render 'order_steps/price'
           = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default mb-20 visible-xs-inline-block'
   = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default w-20 mb-20 hidden-xs center-block'

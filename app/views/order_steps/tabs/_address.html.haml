@@ -28,14 +28,5 @@
   .general-text-align.mb-60
     %p.in-gold-500.font-18= t('orders.order_summary')
     %table.general-summary-table
-      %tr
-        %td
-          %p.font-16= t('orders.items_total')
-        %td
-          %p.font-16 €#{current_order.subtotal_price}
-      %tr
-        %td
-          %p.font-16= t('orders.order_total')
-        %td
-          %p.font-16 €#{current_order.total_price}
-    = submit_tag t('orders.save_and_continue'), class:'btn center-block mb-20'
+      = render 'order_steps/price'
+    = submit_tag t('orders.save_and_continue'), class:'btn btn-default center-block mb-20'
