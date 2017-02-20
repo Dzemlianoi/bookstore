@@ -18,8 +18,8 @@ class OrderStepsForm
         Address.new
   end
 
-  def credit_card
-    @order.credit_card || CreditCard.new
+  def card
+    @order.card || Card.new
   end
 
   def deliveries
@@ -36,11 +36,11 @@ class OrderStepsForm
     end
   end
 
-  def create_credit_card(credit_card)
-    if @order.credit_card
-      @order.credit_card.assign_attributes(credit_card)
+  def create_card(credit_card)
+    if @order.card
+      @order.card.assign_attributes(credit_card)
     else
-      @order.create_credit_card(credit_card)
+      @order.create_card(credit_card)
     end
   end
 
@@ -64,7 +64,7 @@ class OrderStepsForm
       when :delivery
         create_delivery(params[:delivery])
       when :payment
-        create_credit_card(params[:credit_card])
+        create_card(params[:credit_card])
       else
         @order.create
     end

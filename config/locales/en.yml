@@ -153,6 +153,13 @@ en:
       enter_coupon: 'Enter Your Coupon Code'
       update_cart: 'Update cart'
       subtotal_greater: 'The coupon is more expensive than subtotal'
+    card:
+      credit: 'Credit card'
+      number: 'Card Number'
+      help: 'Please enter a valid credit card number'
+      name: 'Name on Card'
+      mmyy: 'MM/YY'
+      CVV: 'CVV'
 
 
 

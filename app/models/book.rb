@@ -27,7 +27,6 @@ class Book < ApplicationRecord
   }
 
   validates :name, :price, presence: true
-  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :publication_year, length:  { is: 4 }
   validates :publication_year, numericality: { only_integer: true, greater_than: 0 }
   validates :description, length:  { maximum: 1000 }

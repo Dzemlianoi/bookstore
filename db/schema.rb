@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219210448) do
+ActiveRecord::Schema.define(version: 20170220152735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,16 +128,14 @@ ActiveRecord::Schema.define(version: 20170219210448) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "completed_date"
-    t.integer  "delivery_id"
-    t.integer  "coupon_id"
-    t.integer  "credit_card_id"
     t.decimal  "total_price",    precision: 5, scale: 2
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
     t.integer  "user_id"
     t.string   "aasm_state",                             default: "cart"
-    t.index ["coupon_id"], name: "index_orders_on_coupon_id", using: :btree
-    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+    t.integer  "delivery_id"
+    t.integer  "card_id"
+    t.index ["card_id"], name: "index_orders_on_card_id", using: :btree
     t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end

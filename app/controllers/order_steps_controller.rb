@@ -22,7 +22,7 @@ class OrderStepsController < ApplicationController
       :delivery,
       shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
       billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
-      credit_card:      [:number, :CVV, :expiration_month, :expiration_year, :first_name, :last_name],
+      credit_card:      [:card_number, :CVV, :expire_date, :name],
     )
   end
 
@@ -31,9 +31,8 @@ class OrderStepsController < ApplicationController
   end
 
   def check_order_steps
-    redirect_to wizard_path(:address) unless current_order.addresses.count != 2
-    # return redirect_to wizard_path(:delivery) unless current_order.delivery
-    # return redirect_to wizard_path(:payment) unless current_order.credit_card
-    # render_wizard
+    return redirect_to wizard_path(:address) unless current_order.addresses.count != 2
+    redirect_to wizard_path(:delivery) unless current_order.delivery
+    redirect_to wizard_path(:payment) unless current_order.card
   end
 end

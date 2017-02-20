@@ -1,26 +1,25 @@
-%h3.general-subtitle Credit Card
-%form.max-600.mb-80
-  .form-group.has-error
-    %label.control-label.input-label{for: "cardNumber"} Card Number
-    %input#cardNumber.form-control{type: "number", name: "cardnumber", placeholder: "Card Number"}
-    %span.help-block Please enter a valid credit card number
-  .row
-    .col-sm-6
-      .form-group
-        %label.control-label.input-label{for: "cardName"} Name on Card
-        %input#cardName.form-control{type: "text", name: "ccname", placeholder: "Name on Card"}
-    .col-sm-3
-      .form-group
-        %label.control-label.input-label{for: "firstName"} MM / YY
-        %input#firstName.form-control{name: "exp-date", type: "text", placeholder: "MM / YY"}
-    .col-sm-3
-      .form-group.relative
-        %label.control-label.input-label{for: "firstName"} CVV
-        %input#firstName.form-control{name: "cvc", type: "number", placeholder: "CVV"}
-        %i.fa.fa-question-circle.general-form-help
-.general-text-align
-  %p.in-gold-500.font-18 Order Summary
-  %table.general-summary-table
-    = render 'order_steps/price'
-.text-center
-  = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-80'
+%h3.general-subtitle= t('orders.card.credit')
+= form_tag wizard_path, class: 'max-600 mb-80', method: :patch do
+  = fields_for :card, @form.card do |f|
+    .form-group
+      = f.label :card_number, t('orders.card.number') , class: 'control-label input-label'
+      = f.text_field :card_number, class:' form-control', placeholder: t('orders.card.number')
+    .row
+      .col-sm-6
+        .form-group
+          = f.label :name, t('orders.card.name') , class: 'control-label input-label'
+          = f.text_field :name, class:' form-control', placeholder: t('orders.card.name')
+      .col-sm-3
+        .form-group
+          = f.label :expire_date, t('orders.card.mmyy') , class: 'control-label input-label'
+          = f.text_field :expire_date, class:' form-control', placeholder: t('orders.card.mmyy')
+      .col-sm-3
+        .form-group.relative
+          = f.label :cvv, t('orders.card.CVV') , class: 'control-label input-label'
+          = f.text_field :cvv, class:' form-control', placeholder: t('orders.card.CVV')
+  .general-text-align
+    %p.in-gold-500.font-18= t('orders.order_summary')
+    %table.general-summary-table
+      = render 'order_steps/price'
+  .text-center
+    = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-80'

@@ -44,9 +44,7 @@ def generate_book
       name: FFaker::Book.title,
       description: FFaker::Book.description,
       price: rand(0.02...99.99),
-      quantity: rand(1...6),
       publication_year: rand(1001...2017),
-
       authors: Author.order("random()").first(2),
       materials: Material.order("random()").first(2),
       category: Category.order("random()").first
@@ -65,15 +63,10 @@ def generate_dimensions_for_books
 end
 
 def generate_coupons
-  Order.all.each do |order|
-    if order.coupon.nil?
-      Coupon.create!(
-        code: SecureRandom.hex(4).upcase,
-        order: order,
-        discount: rand(1...10)
-      )
-    end
-  end
+  Coupon.create!(
+    code: SecureRandom.hex(4).upcase,
+    discount: rand(1...10)
+  )
 end
 
 
@@ -92,5 +85,5 @@ generate_materials
 15.times{ generate_author }
 100.times{ generate_book }
 generate_dimensions_for_books
-generate_coupons
+20.times { generate_coupons }
 4.times { generate_delivery }
