@@ -9,13 +9,13 @@ class OrderStepsForm
   def billing_address
     @order.addresses.find_by(kind: :billing)        ||
       @order.user.addresses.find_by(kind: :billing) ||
-        Address.new
+        Address.new(kind: :billing)
   end
 
   def shipping_address
     @order.addresses.find_by(kind: :shipping) ||
-      @order.user.addresses.shipping_address  ||
-        Address.new
+      @order.user.addresses.find_by(kind: :shipping) ||
+        Address.new(kind: :shipping)
   end
 
   def card
