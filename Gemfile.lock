@@ -248,6 +248,7 @@ DEPENDENCIES
   cancancan
   carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
+  countries
   country_select (~> 2.1.0)
   devise (~> 4.2.0)
   ffaker (~> 2.4.0)

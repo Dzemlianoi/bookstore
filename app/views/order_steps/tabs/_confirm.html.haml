@@ -1,91 +1,67 @@
 .row.mb-20
   .col-sm-3
-    %h3.general-subtitle Shipping Address
+    %h3.general-subtitle= t('users.addresses.shipping_address')
     %p.general-address
-      John Doe
+      #{current_order.addresses.shipping.first.first_name} #{current_order.addresses.shipping.first.last_name}
       %span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = current_order.addresses.shipping.first.address
       %br
-      New York NY 1001
+      #{current_order.addresses.shipping.first.city} #{current_order.addresses.shipping.first.zip}
       %br
-      United States
+      = current_order.addresses.shipping.first.country_name
       %br
-      Phone +16507599755
+      Phone #{current_order.addresses.shipping.first.phone}
   .col-sm-3
     %h3.general-subtitle Billing Address
     %p.general-address
-      John Doe
+      #{current_order.addresses.billing.first.first_name} #{current_order.addresses.billing.first.last_name}
       %span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = current_order.addresses.billing.first.address
       %br
-      New York NY 1001
+      #{current_order.addresses.billing.first.city} #{current_order.addresses.billing.first.zip}
       %br
-      United States
+      = current_order.addresses.billing.first.country_name
       %br
-      Phone +16507599755
+      Phone #{current_order.addresses.shipping.first.phone}
   .col-sm-3
     %h3.general-subtitle Shipments
     %p.general-address
-      Delivery Next Day!
+      = current_order.delivery.title
       %span.general-edit edit
       %br
-      By train
+      €#{current_order.delivery.price}
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
       ** ** ** 8756
       %span.general-edit edit
       %br
-      12/2018
+      = current_order.card.expire_date
 .visible-xs
-  .general-cart-item.divider-lg
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %P.in-grey-600.fw-300 A recipe-based book to help you efficiently create amazing PHP-based applications with Laravel 5.x
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          %span 1
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
-  .general-cart-item.divider-lg.mb-55
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          .input-group
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-heaght-40
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
+  - current_order.order_items.each do |item|
+    .general-cart-item.divider-lg
+      .general-img-wrap-table
+        %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+      %p.title= item.book.name
+      %P.in-grey-600.fw-300= first_sentence_description(item.book)
+      %table.table
+        %tr
+          %td
+            %span.in-grey-600= t('orders.price')
+          %td
+            %span.font-16.in-gold-500 €#{item.book.price}
+        %tr
+          %td.vertical-middle
+            %span.in-grey-600 Quantity
+          %td
+            %span= item.quantity
+        %tr
+          %td
+            %span.in-grey-600 SubTotal
+          %td
+            %span.font-16.in-gold-500 €#{item.price_with_quantity}
 .hidden-xs.divider-lg.pt-20
   %table.table.table-hover
     %thead
@@ -100,22 +76,23 @@
         %th
           %span.in-grey-600 Total
     %tbody
-      %tr
-        %td
-          .general-img-wrap-table
-            %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-        %td
-          %p.title Android Programming for Beginners
-          %p.in-grey-600.fw-300 Maximize the potential of Bootstrap with a collection of real-world site projects for better, faster, more responsive web applications
-        %td
-          %span.font-16.in-gold-500 €28.50
-        %td
-          %span.ml-30 1
-        %td
-          %span.font-16.in-gold-500 €32.90
+      - current_order.order_items.each do |item|
+        %tr
+          %td
+            .general-img-wrap-table
+              %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          %td
+            %p.title= item.book.name
+            %p.in-grey-600.fw-300= first_sentence_description(item.book)
+          %td
+            %span.font-16.in-gold-500 €#{item.book.price}
+          %td
+            %span.ml-30= item.quantity
+          %td
+            %span.font-16.in-gold-500 €#{item.price_with_quantity}
 .text-center.general-text-right
-  %p.in-gold-500.font-18 Order Summary
+  %p.in-gold-500.font-18= t('orders.order_summary')
   %table.general-summary-table.general-summary-table-right.general-text-right
     = render 'order_steps/price'
 .text-center
-  = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-20'
+  = link_to t('orders.save_and_continue'), order_step_path(:confirm, success: 'true'), class:'btn btn-default mb-20', method: :patch

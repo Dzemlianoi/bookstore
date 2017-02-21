@@ -11,4 +11,9 @@ class Address < ApplicationRecord
   validates_presence_of :first_name, :last_name, :address, :city, :zip, :country, :phone, :kind
   validates_inclusion_of :kind, in: Address.kinds.keys
   validates :first_name, length:  { maximum: 20 }
+
+  def country_name
+    country = ISO3166::Country[self.country]
+    country.translations[I18n.locale.to_s] || country.name
+  end
 end

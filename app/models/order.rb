@@ -36,4 +36,8 @@ class Order < ApplicationRecord
   def delivery_price
     self.delivery.nil? ? 0 : self.delivery.price
   end
+
+  def proved?
+    self.verified && self.card && self.delivery && self.addresses.count == 2
+  end
 end

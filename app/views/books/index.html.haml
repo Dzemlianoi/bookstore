@@ -17,5 +17,5 @@
         - group.each do |book|
           = render 'books/tile/book_tile', book: book
     .text-center
-      = link_to_previous_page(@books, t('books.catalog.prev'), params: book_params, class: 'btn btn-primary')
+      = link_to_previous_page(@books, t('books.catalog.prev'), params: book_params, class: 'btn mg-r-20 btn-primary')
       = link_to_next_page(@books, t('books.catalog.view_more'), params: book_params, class: 'btn btn-primary')

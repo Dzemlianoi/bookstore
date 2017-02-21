@@ -38,7 +38,7 @@ class OrderStepsForm
 
   def create_card(credit_card)
     if @order.card
-      @order.card.assign_attributes(credit_card)
+      @order.card.update_attributes(credit_card)
     else
       @order.create_card(credit_card)
     end
@@ -50,6 +50,10 @@ class OrderStepsForm
       @order.delivery_id = delivery_id
       @order.recalculate_total
     end
+  end
+
+  def confirm_order success
+    @order.update_attributes(verified: true) if success
   end
 
   def save
@@ -64,7 +68,9 @@ class OrderStepsForm
       when :delivery
         create_delivery(params[:delivery])
       when :payment
-        create_card(params[:credit_card])
+        create_card(params[:card])
+      when :confirm
+        confirm_order(params[:success])
       else
         @order.create
     end

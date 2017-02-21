@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    current_user.nil? ? nil : current_user.orders.find_by(aasm_state: 'cart')
+    return nil unless current_user
+    current_user.orders.find_by(aasm_state: 'cart')
   end
 end

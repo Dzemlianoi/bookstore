@@ -86,7 +86,7 @@ en:
       catalog: 'Catalog'
       all: 'All'
       view_more: 'View More'
-      prev:   'Previous page'
+      prev:   'Previous '
       filter: 'Filter by category'
       sort_by: 'Sort_by'
     sorting:

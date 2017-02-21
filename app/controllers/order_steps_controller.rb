@@ -6,7 +6,10 @@ class OrderStepsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    check_order_steps if step.eql? :confirm
+    redirect_to :root and return unless current_order
+    step_to(:complete) and return if (current_order.proved? && !on_step?(:complete))
+    check_info_steps and return if current_step? :confirm
+    step_to(:confirm) if (!current_order.proved? && on_step?(:complete))
   end
 
   def update
@@ -20,9 +23,10 @@ class OrderStepsController < ApplicationController
     params.permit(
       :shipping_check,
       :delivery,
+      :success,
       shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
       billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
-      credit_card:      [:card_number, :CVV, :expire_date, :name],
+      card:             [:card_number, :cvv, :expire_date, :name]
     )
   end
 
@@ -30,9 +34,17 @@ class OrderStepsController < ApplicationController
     @form = OrderStepsForm.new current_order
   end
 
-  def check_order_steps
-    return redirect_to wizard_path(:address) unless current_order.addresses.count != 2
-    redirect_to wizard_path(:delivery) unless current_order.delivery
-    redirect_to wizard_path(:payment) unless current_order.card
+  def on_step? step
+    current_step? step
+  end
+
+  def step_to step
+    redirect_to wizard_path(step)
+  end
+
+  def check_info_steps
+    step_to(:address) and return unless current_order.addresses.count.eql? 2
+    step_to(:delivery) and return unless current_order.delivery
+    step_to(:payment) unless current_order.card
   end
 end
