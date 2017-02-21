@@ -53,7 +53,7 @@ class OrderStepsForm
   end
 
   def confirm_order success
-    @order.update_attributes(verified: true) if success
+    @order.in_confirmation! if success
   end
 
   def save

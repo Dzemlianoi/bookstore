@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
 
   def current_order
     return nil unless current_user
-    current_user.orders.find_by(aasm_state: 'cart')
+    current_user.orders.where(aasm_state: [:cart, :filled]).order('created_at').last
+  end
+
+  def last_order
+    return nil unless current_user
+    current_user.orders.order('created_at').last
   end
 end

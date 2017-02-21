@@ -1,9 +1,6 @@
 class Order < ApplicationRecord
-  # include AASM
-  #
-  # aasm do
-  #   state :cart, initial: true
-  # end
+  include AASM
+
   has_many   :addresses, as: :addressable, dependent: :destroy
   has_many   :order_items, dependent: :destroy,
                after_add: :recalculate_total,
@@ -13,6 +10,45 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :card
   belongs_to :delivery
+
+  aasm column: 'aasm_state' do
+    state :cart, initial: true
+    state :filled, initial: true
+    state :in_confirmation, after_enter: :send_confirmation
+    state :confirmed, after_enter: :send_confirmation
+    state :in_delivery
+    state :completed, after_enter: :send_success
+    state :canceled
+
+
+    event :filled do
+      transitions from: :cart, to: :filled
+    end
+
+    event :in_confirmation do
+      transitions from: :filled, to: :in_confirmation
+    end
+
+    event :confirmed do
+      transitions from: :in_confirmation, to: :confirmaed
+    end
+
+    event :to_deliver do
+      transitions from: :confirmed, to: :in_delivery
+    end
+
+    event :complete do
+      transitions from: :in_delivery, to: :completed
+    end
+
+    event :cancel do
+      transitions from: [:cart, :filled, :in_confirmation, :in_delivery, :confirmed, :completed], to: :canceled
+    end
+  end
+
+  def send_confirmation
+    OrderMailer.confirmation_send(self.user, self).deliver_now
+  end
 
   def recalculate_total(*record)
     self.update_attributes(total_price: total_price)
@@ -39,6 +75,10 @@ class Order < ApplicationRecord
   end
 
   def proved?
-    self.verified && self.card && self.delivery && self.addresses.count == 2
+    self.card && self.delivery && self.addresses.count == 2
+  end
+
+  def in_progress?
+    self.cart? || self.in_confirmation? || self.confirmed?
   end
 end

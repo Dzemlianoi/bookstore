@@ -1,15 +1,19 @@
 class OrderStepsController < ApplicationController
 
+  before_action :go_root_unless_order
   before_action :initialize_form
 
   include Wicked::Wizard
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    redirect_to :root and return unless current_order
-    step_to(:complete) and return if (current_order.proved? && !on_step?(:complete))
-    check_info_steps and return if current_step? :confirm
-    step_to(:confirm) if (!current_order.proved? && on_step?(:complete))
+    step_to(:complete) and return if last_order.confirmed?
+    check_info_steps if on_step? :confirm
+    if on_step? :confirm
+      return check_info_steps
+    end
+    step_to(:confirm) if last_order.in_confirmation?
+    step_to(:confirm) if on_step?(:complete) && !last_order.in_confirmation?
   end
 
   def update
@@ -18,6 +22,11 @@ class OrderStepsController < ApplicationController
   end
 
   private
+
+  def go_root_unless_order
+    redirect_to :root unless last_order.in_progress? || last_order
+  end
+
 
   def order_params
     params.permit(
@@ -43,8 +52,9 @@ class OrderStepsController < ApplicationController
   end
 
   def check_info_steps
-    step_to(:address) and return unless current_order.addresses.count.eql? 2
-    step_to(:delivery) and return unless current_order.delivery
-    step_to(:payment) unless current_order.card
+    step_to(:address) and return unless last_order.addresses.count.eql? 2
+    step_to(:delivery) and return unless last_order.delivery
+    step_to(:payment) and return unless last_order.card
+    last_order.filled! unless last_order.filled? || last_order.in_confirmation?
   end
 end

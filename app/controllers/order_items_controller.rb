@@ -27,6 +27,10 @@ class OrderItemsController < ApplicationController
     redirect_to :back
   end
 
+  def completing
+    byebug
+  end
+
   private
 
   def create_params
