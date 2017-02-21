@@ -128,7 +128,7 @@ en:
       review_fails: 'Please, check all fields!'
     success:
       book_added: 'Book is added to cart!'
-      review_success: 'You review will be moderied and added to the list!'
+      review_success: 'Thanks for Review. It will be published as soon as Admin will approve it'
   cart:
     empty_cart: 'Cart is empty now'
     was_deleted: 'Book was successfully deleted'
