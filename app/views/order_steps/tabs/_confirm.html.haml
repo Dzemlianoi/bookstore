@@ -3,7 +3,7 @@
     %h3.general-subtitle= t('users.addresses.shipping_address')
     %p.general-address
       #{current_order.addresses.shipping.first.first_name} #{current_order.addresses.shipping.first.last_name}
-      %span.general-edit edit
+      = link_to t('general.edit'), wizard_path(:address), class:'general-edit'
       %br
       = current_order.addresses.shipping.first.address
       %br
@@ -13,10 +13,10 @@
       %br
       Phone #{current_order.addresses.shipping.first.phone}
   .col-sm-3
-    %h3.general-subtitle Billing Address
+    %h3.general-subtitle= t('users.addresses.billing_address')
     %p.general-address
       #{current_order.addresses.billing.first.first_name} #{current_order.addresses.billing.first.last_name}
-      %span.general-edit edit
+      = link_to t('general.edit'), wizard_path(:address), class:'general-edit'
       %br
       = current_order.addresses.billing.first.address
       %br
@@ -24,19 +24,19 @@
       %br
       = current_order.addresses.billing.first.country_name
       %br
-      Phone #{current_order.addresses.shipping.first.phone}
+      = "#{t('general.phone')} #{current_order.addresses.shipping.first.phone}"
   .col-sm-3
-    %h3.general-subtitle Shipments
+    %h3.general-subtitle= t('orders.shipments')
     %p.general-address
       = current_order.delivery.title
-      %span.general-edit edit
+      = link_to t('general.edit'), wizard_path(:delivery), class:'general-edit'
       %br
       €#{current_order.delivery.price}
   .col-sm-3
-    %h3.general-subtitle Payment Information
+    %h3.general-subtitle= t('orders.payment_info')
     %p.general-address
-      ** ** ** 8756
-      %span.general-edit edit
+      = private_show(current_order.card.card_number)
+      = link_to t('general.edit'), wizard_path(:payment), class:'general-edit'
       %br
       = current_order.card.expire_date
 .visible-xs
@@ -54,12 +54,12 @@
             %span.font-16.in-gold-500 €#{item.book.price}
         %tr
           %td.vertical-middle
-            %span.in-grey-600 Quantity
+            %span.in-grey-600= t('orders.quantity')
           %td
             %span= item.quantity
         %tr
           %td
-            %span.in-grey-600 SubTotal
+            %span.in-grey-600= t('orders.subtotal')
           %td
             %span.font-16.in-gold-500 €#{item.price_with_quantity}
 .hidden-xs.divider-lg.pt-20
@@ -67,14 +67,14 @@
     %thead
       %tr
         %th
-          %span.in-grey-600 Book
+          %span.in-grey-600= t('general.book')
         %th.col-method
         %th
-          %span.in-grey-600 Price
+          %span.in-grey-600= t('orders.price')
         %th
-          %span.in-grey-600 Quantity
+          %span.in-grey-600= t('orders.quantity')
         %th
-          %span.in-grey-600 Total
+          %span.in-grey-600= t('orders.total_price')
     %tbody
       - current_order.order_items.each do |item|
         %tr

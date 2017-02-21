@@ -4,6 +4,6 @@ module CategoriesHelper
   end
 
   def bestsellers
-    @books.bestsellers.limit(3)
+    @books.bestsellers.limit(4)
   end
 end

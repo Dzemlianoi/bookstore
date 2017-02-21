@@ -1,7 +1,6 @@
 module DeviseHelper
   def devise_error_messages!
     return '' if resource.errors.empty?
-
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
     <div class="text-center alert alert-error alert-danger">
@@ -9,7 +8,6 @@ module DeviseHelper
        #{messages}
     </div>
     HTML
-
     html.html_safe
   end
 end

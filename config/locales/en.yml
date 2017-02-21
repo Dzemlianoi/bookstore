@@ -1,5 +1,7 @@
 en:
   general:
+    book: 'Book'
+    phone: 'Phone'
     welcome: 'Welcome'
     hello: 'Hello'
     project_name: 'Bookstore'
@@ -8,6 +10,7 @@ en:
     email: 'Email'
     settings: 'Settings'
     or: 'or'
+    edit: 'edit'
     change: 'Change'
     cancel: 'Cancel'
     cart: 'Cart'
@@ -146,6 +149,8 @@ en:
     save_and_continue: 'Save and continue'
     fields_required: 'all fields are required'
     use_billing: 'Use Billing Adress'
+    shipments: 'Shipments'
+    payment_info: 'Payment Information'
     coupon:
       coupon: 'Coupon'
       not_found: 'There is no coupon with such code'

@@ -25,8 +25,9 @@ class Order < ApplicationRecord
   end
 
   def total_price
+    return 0.00 if self.order_items.empty?
     price = subtotal_price + delivery_price - discount
-    price >= 0 ? price : 0.00
+    price.positive? ? price : 0.00
   end
 
   def discount

@@ -1,10 +1,10 @@
 module ApplicationHelper
-  def categories
+  def active_categories
     Category.active
   end
 
   def empty_cart?
-    !cookies.key? :cart
+    current_user ? current_user.orders.empty? : true
   end
 
   def purchases_count
