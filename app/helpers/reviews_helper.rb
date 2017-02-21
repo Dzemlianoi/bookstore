@@ -6,4 +6,9 @@ module ReviewsHelper
   def approved_reviews(book)
     book.reviews.where(approved: true)
   end
+
+  def verified?(user)
+    return if user.nil?
+    user.verified.present?
+  end
 end

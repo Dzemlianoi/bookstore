@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :orders, dependent: :destroy
 
+  scope :verified ,-> {}
+
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -21,5 +23,9 @@ class User < ApplicationRecord
       user.skip_confirmation!
       UserMailer.facebook_reg(user, generated_password).deliver
     end
+  end
+
+  def verified
+    self.orders.find_by(aasm_state: :complited)
   end
 end

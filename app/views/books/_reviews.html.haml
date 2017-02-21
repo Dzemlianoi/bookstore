@@ -10,7 +10,7 @@
           %div
             .general-message-date.hidden-xs= date(review.created_at)
             .max-240
-              - unless review.user.nil?
+              - if verified?(current_user)
                 .general-message-verified.pull-right= t('books.reviews.verified')
               .general-message-name= review.name
           .mb-15
