@@ -35,8 +35,16 @@
       .general-info-wrap.divider-lg
         %p= t('books.show.description')
         %p.lead.small.line-height-2
-          = @book.description
-          %a.in-gold-500.ml-10{href: '#'}= t('books.show.read_more')
+          - if @book.description.length >= 250
+            = truncate(@book.description, length: 250)
+            = link_to t('books.show.read_more'), '', class: 'in-gold-500 ml-10 read-more'
+            :javascript
+              $('.read-more').on('click', function(e) {
+                e.preventDefault();
+                $(this).parent().html("#{@book.description}")
+              })
+          - else
+            = @book.description
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.publication_year')

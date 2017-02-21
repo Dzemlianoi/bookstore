@@ -42,7 +42,7 @@ end
 def generate_book
   Book.new(
       name: FFaker::Book.title,
-      description: FFaker::Book.description,
+      description: FFaker::Book.description(8),
       price: rand(0.02...99.99),
       publication_year: rand(1001...2017),
       authors: Author.order("random()").first(2),

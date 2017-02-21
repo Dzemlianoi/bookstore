@@ -25,8 +25,8 @@ $(document).ready(function() {
                         .find('.position-price')
                         .text('€' + response.position_price);
                     $('.coupon').text('€' + response.discount);
-                    $('.total-price').text('€' + response.total_price);
-                    $('.subtotal').text('€' + response.subtotal_price)
+                    $('.total-price .pricable').text('€' + response.total_price);
+                    $('.items-total .pricable').text('€' + response.subtotal_price)
                 }
             }
         });
