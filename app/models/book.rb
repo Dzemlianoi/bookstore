@@ -12,9 +12,10 @@ class Book < ApplicationRecord
   has_many   :authors, through: :book_authors
   has_many   :order_items
   has_many   :orders, through: :order_items
+  has_many   :images, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :images
   accepts_nested_attributes_for :book_dimension
 
-  mount_uploaders :images, ImagesUploader
   paginates_per 12
 
   DEFAULT_SORT_KEY = :titleA

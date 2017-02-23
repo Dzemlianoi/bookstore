@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_one  :image, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :image
 
   scope :verified ,-> {}
 
@@ -23,9 +25,5 @@ class User < ApplicationRecord
       user.skip_confirmation!
       UserMailer.facebook_reg(user, generated_password).deliver
     end
-  end
-
-  def verified
-    self.orders.find_by(aasm_state: :complited)
   end
 end
