@@ -3,15 +3,12 @@ class BooksController < ApplicationController
   helper_method :book_params
 
   load_resource :category
+  load_resource :book
   load_and_authorize_resource through: :category, only: :index, if: -> { !@category.nil? }
   load_and_authorize_resource only: :index, unless:  -> { !@category.nil? }
 
   def index
     @books = @books.order(ordering).page book_params[:page]
-  end
-
-  def show
-    @book = Book.find_by_id(book_params[:id])
   end
 
   private
