@@ -129,6 +129,10 @@ en:
     error:
       already_persist: 'Book is already in cart'
       review_fails: 'Please, check all fields!'
+      no_order: 'You have no active order!'
+      expire_slash: 'Expire date should contatin /'
+      expire_month: 'Month should be beetween 01-12'
+      expire_year: 'Year should be not less than this year'
     success:
       book_added: 'Book is added to cart!'
       review_success: 'Thanks for Review. It will be published as soon as Admin will approve it'

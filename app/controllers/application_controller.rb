@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
-
-  helper_method :current_order
-
   include CanCan::ControllerAdditions
+
+  helper_method :current_order, :last_order
 
   protect_from_forgery with: :exception
 
@@ -16,12 +15,12 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    return nil unless current_user
-    current_user.orders.where(aasm_state: [:cart, :filled]).order('created_at').last
+    return unless current_user
+    current_user.orders.in_progress.order('created_at').last
   end
 
   def last_order
-    return nil unless current_user
+    return unless current_user
     current_user.orders.order('created_at').last
   end
 end

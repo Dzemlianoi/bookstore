@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   belongs_to :card
   belongs_to :delivery
 
+  scope :in_progress,       -> { where(aasm_state: [:cart, :filled] ) }
+
   aasm column: 'aasm_state' do
     state :cart, initial: true
     state :filled, initial: true
@@ -78,7 +80,11 @@ class Order < ApplicationRecord
     self.card && self.delivery && self.addresses.count == 2
   end
 
-  def in_progress?
-    self.cart? || self.in_confirmation? || self.confirmed?
+  def checkout_state?
+    self.cart? || self.filled?
+  end
+
+  def final_state?
+    self.cart? || self.in_confirmation? || self.filled?
   end
 end

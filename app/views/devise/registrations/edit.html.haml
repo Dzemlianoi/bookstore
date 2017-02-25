@@ -6,6 +6,7 @@
     %li.tab-item{role: 'presentation'}
       %a.tab-link{href: '#privacy', 'aria-controls': 'privacy', role: 'tab', 'data-toggle': 'tab'}= t('users.privacy.link')
   .tab-content
+    - byebug
     = render 'users/registrations/addresses'
     = render 'users/registrations/privacy'
 

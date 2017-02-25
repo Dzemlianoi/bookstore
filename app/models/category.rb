@@ -6,7 +6,7 @@ class Category < ApplicationRecord
 
   scope :active, -> { where('count_books > 0') }
 
-  def self.default_category
+  def self.default
     Category.find_by_name('Mobile Development')
   end
 end

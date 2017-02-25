@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
   def create
-    @order = current_user.orders.where(aasm_state: 'cart').first_or_create
-    if book_present?
+    @order = current_order || current_user.orders.create
+    if book_already_in_order?
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
       @order.order_items.create(create_params)
@@ -27,10 +27,6 @@ class OrderItemsController < ApplicationController
     redirect_to :back
   end
 
-  def completing
-    byebug
-  end
-
   private
 
   def create_params
@@ -45,7 +41,7 @@ class OrderItemsController < ApplicationController
     params.permit(:order_item)
   end
 
-  def book_present?
+  def book_already_in_order?
     !current_order.order_items.find_by(book: create_params[:book_id]).nil?
   end
 

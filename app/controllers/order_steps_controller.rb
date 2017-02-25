@@ -1,5 +1,4 @@
 class OrderStepsController < ApplicationController
-
   before_action :go_root_unless_order
   before_action :initialize_form
 
@@ -7,24 +6,26 @@ class OrderStepsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    step_to(:complete) and return if last_order.confirmed?
+    step_to(:complete) and return if last_order.confirmed? && !on_step?(:complete)
     check_info_steps if on_step? :confirm
-    if on_step? :confirm
-      return check_info_steps
-    end
-    step_to(:confirm) if last_order.in_confirmation?
-    step_to(:confirm) if on_step?(:complete) && !last_order.in_confirmation?
+    step_to(:confirm) and return if last_order.in_confirmation? && !on_step?(:confirm)
+    step_to(:confirm) if on_step?(:complete) && !last_order.confirmed?
   end
 
   def update
-    @form.update(step, order_params)
-    render_wizard @form
+    if @form.update(step, order_params)
+      step_to next_step
+    else
+      render 'order_steps/show'
+    end
   end
 
   private
 
   def go_root_unless_order
-    redirect_to :root unless last_order.in_progress? || last_order
+    unless last_order && (last_order(&:checkout_state?) || last_order(&:in_confirmation?))
+      redirect_to :root, alert: t('flashes.error.no_order')
+    end
   end
 
 
@@ -40,7 +41,7 @@ class OrderStepsController < ApplicationController
   end
 
   def initialize_form
-    @form = OrderStepsForm.new current_order
+    @form = OrderStepsForm.new last_order
   end
 
   def on_step? step

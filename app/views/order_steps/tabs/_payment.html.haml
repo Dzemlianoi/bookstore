@@ -1,3 +1,4 @@
+= render_error @form.card
 %h3.general-subtitle= t('orders.card.credit')
 = form_tag wizard_path, class: 'max-600 mb-80', method: :patch do
   = fields_for :card, @form.card do |f|
@@ -16,7 +17,7 @@
       .col-sm-3
         .form-group.relative
           = f.label :cvv, t('orders.card.CVV') , class: 'control-label input-label'
-          = f.text_field :cvv, class:' form-control', placeholder: t('orders.card.CVV')
+          = f.password_field :cvv, class:' form-control', placeholder: t('orders.card.CVV')
   .general-text-align
     %p.in-gold-500.font-18= t('orders.order_summary')
     %table.general-summary-table

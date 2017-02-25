@@ -4,9 +4,7 @@ class User < ApplicationRecord
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_one  :image, as: :imageable, dependent: :destroy
-  accepts_nested_attributes_for :image
 
-  scope  :without_provider,      -> { where(provider: nil, uid: nil) }
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -16,6 +14,8 @@ class User < ApplicationRecord
          :confirmable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+  scope  :without_provider,      -> { where(provider: nil, uid: nil) }
+
   def self.from_omniauth(auth)
     @auth = auth
     case
@@ -24,16 +24,15 @@ class User < ApplicationRecord
         @user.update_attributes(provider: @auth.provider, uid: @auth.uid)
         save_avatar
       when where(provider: @auth.provider, uid: @auth.uid).empty?
-        @user = self.new(provider: @auth.provider, uid: @auth.uid, email: @auth.info.email)
         generated_password = Devise.friendly_token[0, 20]
-        @user.password = generated_password
-        @user.save
+        @user = create!(
+            provider: @auth.provider, uid: @auth.uid,
+            email: @auth.info.email, password: generated_password
+        )
         save_avatar
-        @user.skip_confirmation!
         UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
     end
     @user || self.find_by_uid(@auth.uid)
-
   end
 
   def self.save_avatar
@@ -46,6 +45,10 @@ class User < ApplicationRecord
   end
 
   def password_required?
+    super && provider.blank?
+  end
+
+  def confirmation_required?
     super && provider.blank?
   end
 end

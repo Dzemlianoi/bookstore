@@ -1,17 +1,17 @@
 class OrderController < ApplicationController
   def index
-    @purchases = current_order.order_items
-    redirect_to root_path if @purchases.empty?
+    return redirect_to :root, alert: t('flashes.error.no_order') unless last_is_active?
+    @purchases = last_order.order_items
   end
 
   def update
-    byebug
     user.order.in_confirmation.deliver
   end
 
   private
 
-  def order_params
-    params.require(:order)
+  def last_is_active?
+    return unless last_order
+    last_order.checkout_state? && !last_order(&:order_items).nil?
   end
 end

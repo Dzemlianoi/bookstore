@@ -1,10 +1,10 @@
 module AddressesHelper
-  def profile_address type
-    current_user.addresses.where(kind: type).first
+  def address_form(kind)
+    current_user.addresses.find_by_kind(kind) || @address || Address.new
   end
 
-  def form_details type
-    return { method: :post, for: :address } if (profile_address type).nil?
-    { method: :patch, for: profile_address(type) }
+  def type_of? kind
+    return unless @address
+    @address.kind.eql? kind
   end
 end

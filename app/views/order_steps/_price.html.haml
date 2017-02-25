@@ -2,21 +2,21 @@
   %td
     %p.font-16= t('orders.items_total')
   %td
-    %p.pricable.font-16 €#{current_order.subtotal_price}
-- if current_order.coupon
+    %p.pricable.font-16 €#{last_order.subtotal_price}
+- if last_order.coupon
   %tr.coupon-price
     %td
       %p.font-16= t('orders.coupon.coupon')
     %td
-      %p.pricable.font-16 €#{current_order.discount}
-- if current_order.delivery
+      %p.pricable.font-16 €#{last_order.discount}
+- if last_order.delivery
   %tr.delivery-price
     %td
       %p.font-16= t('orders.delivery')
     %td
-      %p.pricable.font-16 €#{current_order.delivery_price}
+      %p.pricable.font-16 €#{last_order.delivery_price}
 %tr.total-price
   %td
     %p.font-16= t('orders.order_total')
   %td
-    %p.pricable.font-16 €#{current_order.total_price}
+    %p.pricable.font-16 €#{last_order.total_price}
