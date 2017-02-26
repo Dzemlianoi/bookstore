@@ -7,11 +7,11 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand= t('general.project_name')
-      = link_to(order_index_path, class: 'shop-link pull-right visible-xs') do
+      = link_to(order_items_path, class: 'shop-link pull-right visible-xs') do
         %span.shop-icon
           - unless empty_cart?
             %span.shop-quantity= purchases_count
-    = link_to(order_index_path, class: 'shop-link pull-right hidden-xs') do
+    = link_to(order_items_path, class: 'shop-link pull-right hidden-xs') do
       %span.shop-icon
         - unless empty_cart?
           %span.shop-quantity= purchases_count

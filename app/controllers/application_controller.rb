@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
 
+  def go_back
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def current_order
