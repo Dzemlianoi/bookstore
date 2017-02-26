@@ -1,9 +1,4 @@
-class OrderController < ApplicationController
-  def index
-    return redirect_to :root, alert: t('flashes.error.no_order') unless last_is_active?
-    @purchases = last_order.order_items
-  end
-
+class OrdersController < ApplicationController
   def update
     user.order.in_confirmation.deliver
   end

@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   resources :books do
     resources :reviews, only: :create
   end
-  resource :addresses
-  resource :order_item, only: [:create, :destroy, :update]
-  resource :coupon, only: [:create, :destroy, :update]
-  resources :order
+  resources :addresses
+  resources :order_items, only: [:index, :create, :destroy, :update]
+  resources :coupons, only: [:create, :destroy, :update]
+  resources :orders
   resources :order_steps, only: [:show, :update]
   get '/order_steps/complete', to: 'order_steps#show', as: 'order_completing'
 

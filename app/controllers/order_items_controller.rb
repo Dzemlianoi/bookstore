@@ -1,4 +1,9 @@
 class OrderItemsController < ApplicationController
+  def index
+    return redirect_to :root, alert: t('flashes.error.no_order') unless last_is_active?
+    @purchases = last_order.order_items
+  end
+
   def create
     @order = current_order || current_user.orders.create
     if book_already_in_order?
@@ -24,13 +29,13 @@ class OrderItemsController < ApplicationController
 
   def destroy
     current_order.order_items.destroy(destroy_params[:order_item])
-    redirect_to :back
+    go_back
   end
 
   private
 
   def create_params
-    params.require(:order_item).permit(:quantity, :book_id)
+    params.require(:order_items).permit(:quantity, :book_id)
   end
 
   def update_params

@@ -4,11 +4,11 @@ class ReviewsController < ApplicationController
 
   def create
     if @review.update(review_params.merge(user: current_user))
-      flash[:success] = t('flashes.success.review_success')
+      flash.keep[:success] = t('flashes.success.review_success')
+      redirect_to book_path @review.book
     else
-      flash[:alert] = t('flashes.error.review_fails')
+      render 'books/show'
     end
-    redirect_back(fallback_location: root_path)
   end
 
   private
