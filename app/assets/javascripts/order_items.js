@@ -13,11 +13,14 @@ $(document).ready(function() {
       context: this,
       type: "PUT",
       dataType: "json",
-      url: '/order_item',
+      url: "/order_items/" + purchase_id,
       contentType: 'application/json',
-      data: JSON.stringify(
-        {id: purchase_id, quantity: quantity_input.val() }
-      ),
+      data: JSON.stringify({
+        order_item: {
+          id: purchase_id,
+          quantity: quantity_input.val()
+        }
+      }),
       success: function(response){
         if (response.status == 'updated'){
           $(this).closest('.purchase').find('.position-price').text('€' + response.position_price);

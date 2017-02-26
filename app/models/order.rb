@@ -48,43 +48,53 @@ class Order < ApplicationRecord
     end
   end
 
+  def book_in_order?(book_id)
+    !order_items.find_by(book: book_id).nil?
+  end
+
+  def subtotal_more_than_discount?(coupon)
+    subtotal_price > coupon.discount
+  end
+
   def send_confirmation
-    OrderMailer.confirmation_send(self.user, self).deliver_now
+    OrderMailer.confirmation_send(user, self).deliver_now
   end
 
   def recalculate_total(*record)
-    self.update_attributes(total_price: total_price)
+    update_attributes(total_price: total_price)
   end
 
   def subtotal_price
-    self.order_items
-        .map { |item| item.book[:price] * item.quantity }
-        .inject(&:+)
+    order_items.map{ |item| item.book[:price] * item.quantity }.inject(&:+)
   end
 
   def total_price
-    return 0.00 if self.order_items.empty?
+    return 0.00 if order_items.empty?
     price = subtotal_price + delivery_price - discount
     price.positive? ? price : 0.00
   end
 
   def discount
-    self.coupon.nil? ? 0 : self.coupon.discount
+    coupon.nil? ? 0 : coupon.discount
   end
 
   def delivery_price
-    self.delivery.nil? ? 0 : self.delivery.price
+    delivery.nil? ? 0 : delivery.price
   end
 
   def proved?
-    self.card && self.delivery && self.addresses.count == 2
+    card && delivery && addresses.count == 2
   end
 
   def checkout_state?
-    self.cart? || self.filled?
+    cart? || filled?
+  end
+
+  def active?
+    checkout_state? && !order_items.empty?
   end
 
   def final_state?
-    self.cart? || self.in_confirmation? || self.filled?
+    checkout_state? || in_confirmation?
   end
 end

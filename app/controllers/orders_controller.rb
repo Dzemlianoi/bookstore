@@ -5,8 +5,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def last_is_active?
-    return unless last_order
-    last_order.checkout_state? && !last_order(&:order_items).nil?
+  def active?(order)
+    return unless order
+    order.checkout_state? && !order(&:order_items).nil?
   end
 end

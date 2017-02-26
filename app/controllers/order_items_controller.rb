@@ -1,53 +1,43 @@
 class OrderItemsController < ApplicationController
+  load_and_authorize_resource :order_item, only: [:destroy, :update]
+
   def index
-    return redirect_to :root, alert: t('flashes.error.no_order') unless last_is_active?
+    return redirect_to :root, alert: t('flashes.error.no_order') unless last_order_active?
     @purchases = last_order.order_items
   end
 
   def create
     @order = current_order || current_user.orders.create
-    if book_already_in_order?
+    if @order.book_in_order? order_item_params[:book_id]
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
-      @order.order_items.create(create_params)
+      @order.order_items.create(order_item_params)
       flash.keep[:success] = t('flashes.success.book_added')
     end
     redirect_to :books
   end
 
   def update
-    @order_item = current_order.order_items.find(update_params[:id])
     respond_to do |format|
-      format.html { redirect_to current_order }
-      if @order_item.update(update_params)
-        format.json { render json: update_data }
-      else
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
-      end
+      format.html { go_back }
+      format.json { render json: update_data } if @order_item.update(order_item_params)
     end
   end
 
   def destroy
-    current_order.order_items.destroy(destroy_params[:order_item])
+    current_order.order_items.destroy(@order_item)
     go_back
   end
 
   private
 
-  def create_params
-    params.require(:order_items).permit(:quantity, :book_id)
+  def last_order_active?
+    return unless last_order
+    last_order.active?
   end
 
-  def update_params
-    params.permit(:id, :quantity)
-  end
-
-  def destroy_params
-    params.permit(:order_item)
-  end
-
-  def book_already_in_order?
-    !current_order.order_items.find_by(book: create_params[:book_id]).nil?
+  def order_item_params
+    params.require(:order_item).permit(:quantity, :book_id, :id)
   end
 
   def update_data

@@ -32,7 +32,7 @@ class User < ApplicationRecord
         save_avatar
         UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
     end
-    @user || self.find_by_uid(@auth.uid)
+    @user || find_by_uid(@auth.uid)
   end
 
   def self.save_avatar

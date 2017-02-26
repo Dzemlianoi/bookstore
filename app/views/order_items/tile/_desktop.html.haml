@@ -17,5 +17,5 @@
   %td
     %span.position-price.font-16.in-gold-500 €#{purchase.price_with_quantity}
   %td
-    = link_to order_item_path(order_item: purchase), method: :delete, class: 'close general-cart-close', data: {confirm: 'Are you sure?'}do
+    = link_to order_item_path(purchase), method: :delete, class: 'close general-cart-close' do
       %span{'aria-hidden': 'true'} &times;
