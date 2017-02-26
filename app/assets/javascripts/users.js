@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $( "#accept-delete" ).change(function() {
-        $('.remove-btn').toggleClass('disabled');
-    });
+  $( "#accept-delete" ).change(function(){
+    $('.remove-btn').toggleClass('disabled');
+  });
 });
