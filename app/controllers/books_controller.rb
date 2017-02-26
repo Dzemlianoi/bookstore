@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   load_resource :category
   load_resource :book, only: :show
   load_and_authorize_resource through: :category, only: :index, if: -> { !@category.nil? }
-  load_and_authorize_resource only: :index, unless:  -> { !@category.nil? }
+  load_and_authorize_resource only: :index, if:  -> { @category.nil? }
 
   def index
     @books = @books.order(ordering).page book_params[:page]
