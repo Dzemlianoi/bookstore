@@ -4,7 +4,7 @@ class OrderMailer < ApplicationMailer
     @user = user
     mail(to: @user.email,
          subject: 'Confirm your purchase',
-         template_path: 'order/mailers',
+         template_path: 'orders/mailers',
          template_name: 'confirm')
   end
 end

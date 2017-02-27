@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :coupons, only: [:create, :destroy, :update]
   resources :orders
   resources :order_steps, only: [:show, :update]
-  get '/order_steps/complete', to: 'order_steps#show', as: 'order_completing'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }

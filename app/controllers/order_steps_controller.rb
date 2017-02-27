@@ -1,8 +1,8 @@
 class OrderStepsController < ApplicationController
+  include Wicked::Wizard
   before_action :go_root_unless_order
   before_action :initialize_form
 
-  include Wicked::Wizard
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
@@ -16,6 +16,10 @@ class OrderStepsController < ApplicationController
     @updating_result = @form.update(step, order_params)
     step_to next_step and return if @updating_result
     render 'order_steps/show', step: step
+  end
+
+  def confirming
+    byebug
   end
 
   private
@@ -36,6 +40,10 @@ class OrderStepsController < ApplicationController
       billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
       card:             [:card_number, :cvv, :expire_date, :name]
     )
+  end
+
+  def confirmation_params
+
   end
 
   def initialize_form

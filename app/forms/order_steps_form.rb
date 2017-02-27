@@ -1,27 +1,24 @@
 class OrderStepsForm
-
   include ActiveModel::Model
+
+  attr_accessor :billing_address, :shipping_address, :card
 
   def initialize(order)
     @order = order
-    @billing_address = @order.address.find_by(kind: :billing)
-    @shipping_address = @order.address.find_by(kind: :billing)
-    @card= @order.card
+    @billing_address = @order.billing_address
+    @shipping_address = @order.shipping_address
+    @card = @order.card
   end
 
-  def shipping_address
-    @order.addresses.find_by(kind: kind)        ||
-      @order.user.addresses.find_by(kind: kind) ||
-        Address.new(kind: kind)
+  def form_shipping_address
+    @shipping_address || @order.user.shipping_address || Address.new(kind: :shipping)
   end
 
-  def billing_address
-    @order.addresses.find_by(kind: kind)        ||
-        @order.user.addresses.find_by(kind: kind) ||
-        Address.new(kind: kind)
+  def form_billing_address
+    @billing_address || @order.user.billing_address || Address.new(kind: :billing)
   end
 
-  def card
+  def form_card
     @card || Card.new
   end
 

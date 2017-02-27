@@ -1,9 +1,19 @@
 class OrdersController < ApplicationController
-  def update
-    user.order.in_confirmation.deliver
+  load_and_authorize_resource :order
+  def show
+    if @order.confirmation_token == confirmation_params[:token]
+      @order.confirmed!
+      redirect_to order_step_path(id: :complete)
+    else
+      redirect_to :root
+    end
   end
 
   private
+
+  def confirmation_params
+    params.permit(:token)
+  end
 
   def active?(order)
     return unless order

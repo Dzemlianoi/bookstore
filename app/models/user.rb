@@ -4,9 +4,6 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_one  :image, as: :imageable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
-  has_one  :billing_address, -> {addresses.find_by(kind: :billing)}
-  has_one  :shipping_address, -> {addresses.find_by(kind: :shipping)}
-
 
   devise :database_authenticatable,
          :registerable,
@@ -18,6 +15,14 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
 
   scope  :without_provider,      -> { where(provider: nil, uid: nil) }
+
+  def billing_address
+    addresses.find_by(kind: :billing)
+  end
+
+  def shipping_address
+    addresses.find_by(kind: :shipping)
+  end
 
   def self.from_omniauth(auth)
     @auth = auth

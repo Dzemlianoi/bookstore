@@ -2,8 +2,8 @@ class Order < ApplicationRecord
   include AASM
 
   has_many   :addresses, as: :addressable, dependent: :destroy
-  has_one    :billing_addres, ->{ addresses.find_by_kind :billing}
-  has_one    :shipping_addres, ->{ addresses.find_by_kind :shipping}
+  has_one    :billing_address, -> (order) { order.addresses.find_by(kind: 'billing') }
+  has_one    :shipping_address, -> (order) { order.addresses.find_by(kind: 'shipping')}
   has_many   :order_items, dependent: :destroy,
                after_add: :recalculate_total,
                after_remove: :recalculate_total
@@ -37,7 +37,7 @@ class Order < ApplicationRecord
     end
 
     event :confirmed do
-      transitions from: :in_confirmation, to: :confirmaed
+      transitions from: :in_confirmation, to: :confirmed
     end
 
     event :to_deliver do
@@ -53,6 +53,14 @@ class Order < ApplicationRecord
     end
   end
 
+  def billing_address
+    addresses.find_by(kind: 'billing')
+  end
+
+  def shipping_address
+    addresses.find_by(kind: 'shipping')
+  end
+
   def book_in_order?(book_id)
     !order_items.find_by(book: book_id).nil?
   end
@@ -62,6 +70,7 @@ class Order < ApplicationRecord
   end
 
   def send_confirmation
+    update_attributes(confirmation_token: Devise.friendly_token)
     OrderMailer.confirmation_send(user, self).deliver_now
   end
 

@@ -1,4 +1,5 @@
-= render_error @form
+= render_error @form.billing_address
+= render_error @form.shipping_address
 -#= render_error @form
 = form_tag wizard_path, class: 'res-mb-100', method: :patch do
   .hidden-xs.hidden-sm
@@ -13,13 +14,13 @@
       .visible-xs.visible-sm
         %h3.general-subtitle= t('users.addresses.billing_address')
         %p.general-info-text= t('orders.fields_required')
-      = fields_for :billing_address, @form.address(:billing) do |f|
+      = fields_for :billing_address, @form.form_billing_address do |f|
         = render 'forms/address_form', f: f, kind: :billing
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
         %h3.general-subtitle= t('users.addresses.shipping_address')
       .shipping-fields
-        = fields_for :shipping_address, @form.address(:shipping) do |f|
+        = fields_for :shipping_address, @form.form_shipping_address do |f|
           = render 'forms/address_form', f: f, kind: :shipping
       .form-group.checkbox
         %label.checkbox-label

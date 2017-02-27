@@ -1,7 +1,7 @@
-= render_error @form.card if @form.card
+= render_error @form.card
 %h3.general-subtitle= t('orders.card.credit')
 = form_tag wizard_path, class: 'max-600 mb-80', method: :patch do
-  = fields_for :card, @form.card do |f|
+  = fields_for :card, @form.form_card do |f|
     .form-group
       = f.label :card_number, t('orders.card.number') , class: 'control-label input-label'
       = f.text_field :card_number, class:' form-control', placeholder: t('orders.card.number')

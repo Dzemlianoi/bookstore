@@ -1,7 +1,6 @@
 module ApplicationHelper
 
   def render_error(instance)
-    byebug
     return '' if instance.errors.empty?
     messages = instance.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
