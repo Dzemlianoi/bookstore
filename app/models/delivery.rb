@@ -9,13 +9,13 @@ class Delivery < ApplicationRecord
                             less_than: 31
   validates_format_of :price, with: /\A\d+(?:\.\d{0,2})?\z/
   validates_format_of :title,
-                      with: /\A[-a-z0-9, ]+\z/i,
-                      message: t('flashes.error.wrong_title_delivery')
+                      with: /\A[-a-z0-9, !?&.]+\z/i,
+                      message: I18n.t('flashes.error.wrong_title_delivery')
   validate :pesimistic_greater_optimistic
 
   def pesimistic_greater_optimistic
     if pesimistic_days < optimistic_days
-      errors.add(:optimistic_days, t('flashes.error.wrong_days_delivery'))
+      errors.add(:optimistic_days, I18n.t('flashes.error.wrong_days_delivery'))
     end
   end
 end

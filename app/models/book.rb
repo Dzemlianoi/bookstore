@@ -31,7 +31,7 @@ class Book < ApplicationRecord
   validates_numericality_of :publication_year, only_integer: true, greater_than: 0
   validates_length_of :description, maximum: 1000
   validates_format_of :price, with: /\A\d+(?:\.\d{0,2})?\z/
-  validates_format_of :name, with: /\A[-a-z]+\z/i
+  validates_format_of :name, with: /\A[-a-z !?,.@:=&'"]+\z/i
   validate :valid_year
 
   after_save :increment_books_count
