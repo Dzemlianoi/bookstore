@@ -8,6 +8,6 @@
       %p.lead= first_sentence_description(book)
       %p.lead.small= all_authors(book)
       .general-align
-        = form_for :order_item, url: order_item_path, html: { method: :post} do |f|
+        = form_for :order_item, url: order_items_path, html: { method: :post} do |f|
           = f.hidden_field :book_id, value: book.id
           = f.submit t('general.buy_now'), class: 'btn btn-primary'

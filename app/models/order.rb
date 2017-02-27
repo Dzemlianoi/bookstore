@@ -11,7 +11,10 @@ class Order < ApplicationRecord
   belongs_to :card
   belongs_to :delivery
 
-  scope :in_progress,       -> { where(aasm_state: [:cart, :filled] ) }
+  validates_uniqueness_of :track_number
+  validates_length_of :track_number, minimem: 4, maximum: 10
+
+  scope :in_progress, -> { where(aasm_state: [:cart, :filled] ) }
 
   aasm column: 'aasm_state' do
     state :cart, initial: true

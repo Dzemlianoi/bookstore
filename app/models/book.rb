@@ -27,16 +27,23 @@ class Book < ApplicationRecord
     titleD: 'name DESC'
   }
 
-  validates :name, :price, presence: true
-  validates :publication_year, length:  { is: 4 }
-  validates :publication_year, numericality: { only_integer: true, greater_than: 0 }
-  validates :description, length:  { maximum: 1000 }
-  validates :price, numericality: { greater_than: 0 }
+  validates_presence_of :name, :price, :publication_year
+  validates_numericality_of :publication_year, only_integer: true, greater_than: 0
+  validates_length_of :description, maximum: 1000
+  validates_format_of :price, with: /\A\d+(?:\.\d{0,2})?\z/
+  validates_format_of :name, with: /\A[-a-z]+\z/i
+  validate :valid_year
 
   after_save :increment_books_count
   after_destroy :decrement_books_count
 
   private
+
+  def valid_year
+    if Date.current.year < publication_year.to_i
+      errors.add(:publication_year, t('flashes.error.wrong_year'))
+    end
+  end
 
   def increment_books_count
     category.increment!(:count_books)

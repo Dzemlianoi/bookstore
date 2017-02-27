@@ -2,7 +2,7 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
-  validates_presence_of :name, :rating, :comment_text, :book_id
+  validates_presence_of :name, :rating, :comment_text, :book, :user
   validates_length_of :comment_text, maximum: 500
   validates_length_of :name, maximum: 80
   validates_format_of :comment_text, :with => /\A[A-z!#$%&_?+{|^}]+\z/i

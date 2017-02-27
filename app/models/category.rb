@@ -1,8 +1,9 @@
 class Category < ApplicationRecord
   has_many :books
 
-  validates :name, presence: true
-  validates :count_books, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates_presence_of :name
+  validates_numericality_of :count_books,
+                            only_integer: true, greater_than_or_equal_to: 0
 
   scope :active, -> { where('count_books > 0') }
 
