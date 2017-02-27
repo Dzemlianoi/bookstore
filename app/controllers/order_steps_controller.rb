@@ -13,9 +13,8 @@ class OrderStepsController < ApplicationController
   end
 
   def update
-    byebug
     @updating_result = @form.update(step, order_params)
-    step_to next_step and return if @updating_result.eql?(true)
+    step_to next_step and return if @updating_result
     render 'order_steps/show', step: step
   end
 
@@ -40,7 +39,7 @@ class OrderStepsController < ApplicationController
   end
 
   def initialize_form
-    @form = OrderStepsForm.new last_order
+    @form ||= OrderStepsForm.new last_order
   end
 
   def on_step? step

@@ -1,4 +1,4 @@
-= render_error @form.card
+= render_error @form.card if @form.card
 %h3.general-subtitle= t('orders.card.credit')
 = form_tag wizard_path, class: 'max-600 mb-80', method: :patch do
   = fields_for :card, @form.card do |f|

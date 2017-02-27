@@ -1,12 +1,12 @@
 class Card < ApplicationRecord
-  has_many :orders
+  has_one :order
 
   validates_presence_of :cvv, :expire_date, :card_number, :name
   validates_length_of :cvv, minimum: 3
   validates_length_of :name, maximum: 50
   validates_length_of :card_number, is: 16
   validates_numericality_of :card_number, :cvv, only_integer: true
-  validates_format_of :name, :with => /\A[A-z ]+\z/i
+  validates_format_of :name, with: /\A[A-z ]+\z/i
   validate :correct_expiration_date
 
   private

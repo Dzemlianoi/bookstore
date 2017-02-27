@@ -1,8 +1,8 @@
 module ApplicationHelper
 
   def render_error(instance)
-    return '' unless instance
-    return '' unless instance.errors.empty?
+    byebug
+    return '' if instance.errors.empty?
     messages = instance.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
     <div class="text-center alert alert-error alert-danger">

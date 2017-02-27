@@ -4,16 +4,25 @@ class OrderStepsForm
 
   def initialize(order)
     @order = order
+    @billing_address = @order.address.find_by(kind: :billing)
+    @shipping_address = @order.address.find_by(kind: :billing)
+    @card= @order.card
   end
 
-  def address(kind)
+  def shipping_address
     @order.addresses.find_by(kind: kind)        ||
       @order.user.addresses.find_by(kind: kind) ||
         Address.new(kind: kind)
   end
 
+  def billing_address
+    @order.addresses.find_by(kind: kind)        ||
+        @order.user.addresses.find_by(kind: kind) ||
+        Address.new(kind: kind)
+  end
+
   def card
-    @order.card || Card.new
+    @card || Card.new
   end
 
   def deliveries
@@ -25,7 +34,7 @@ class OrderStepsForm
     current_address ? current_address.update(params) : @order.addresses.create(params)
   end
 
-  def create_card(credit_card)
+  def create_credit_card(credit_card)
     @order.card ? @order.card.update(credit_card) : @order.create_card(credit_card)
   end
 
@@ -42,7 +51,7 @@ class OrderStepsForm
       when :delivery
         create_delivery(params[:delivery])
       when :payment
-        create_card(params[:card])
+        create_credit_card(params[:card])
       when :confirm
         @order.in_confirmation! if (params[:success])
     end
