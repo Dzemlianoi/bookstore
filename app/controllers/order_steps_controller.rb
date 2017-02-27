@@ -13,11 +13,10 @@ class OrderStepsController < ApplicationController
   end
 
   def update
-    if @form.update(step, order_params)
-      step_to next_step
-    else
-      render 'order_steps/show'
-    end
+    byebug
+    @updating_result = @form.update(step, order_params)
+    step_to next_step and return if @updating_result.eql?(true)
+    render 'order_steps/show', step: step
   end
 
   private

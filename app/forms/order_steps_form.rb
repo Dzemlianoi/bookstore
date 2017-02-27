@@ -6,16 +6,10 @@ class OrderStepsForm
     @order = order
   end
 
-  def billing_address
-    @order.addresses.find_by(kind: :billing)        ||
-      @order.user.addresses.find_by(kind: :billing) ||
-        Address.new(kind: :billing)
-  end
-
-  def shipping_address
-    @order.addresses.find_by(kind: :shipping) ||
-      @order.user.addresses.find_by(kind: :shipping) ||
-        Address.new(kind: :shipping)
+  def address(kind)
+    @order.addresses.find_by(kind: kind)        ||
+      @order.user.addresses.find_by(kind: kind) ||
+        Address.new(kind: kind)
   end
 
   def card
@@ -26,53 +20,31 @@ class OrderStepsForm
     Delivery.all.order('price')
   end
 
-  def create_addresses(billing, shipping)
-    if @order.addresses.count != 2
-      @order.addresses.create(billing)
-      @order.addresses.create(shipping)
-    else
-      @order.addresses.find_by(kind: :billing).update_attributes(billing)
-      @order.addresses.find_by(kind: :shipping).update_attributes(shipping)
-    end
+  def create_address(params)
+    current_address = @order.addresses.find_by_kind(params[:kind])
+    current_address ? current_address.update(params) : @order.addresses.create(params)
   end
 
   def create_card(credit_card)
-    if @order.card
-      @order.card.update_attributes(credit_card)
-    else
-      @order.create_card(credit_card)
-    end
+    @order.card ? @order.card.update(credit_card) : @order.create_card(credit_card)
   end
 
   def create_delivery(delivery_id)
-    if Delivery.find_by_id(delivery_id)
-      @order.update(delivery_id: delivery_id) and return if @order.delivery
-      @order.delivery_id = delivery_id
-      @order.recalculate_total
-    end
-  end
-
-  def confirm_order success
-    @order.in_confirmation! if success
-  end
-
-  def save
-    @order.save
+    return unless Delivery.find_by_id(delivery_id)
+    @order.update(delivery_id: delivery_id)
   end
 
   def update(step, params)
     case step
       when :address
         params[:shipping_address] = params[:billing_address] if params.has_key? :shipping_check
-        create_addresses(params[:billing_address], params[:shipping_address].merge(kind: :shipping))
+        create_address(params[:billing_address]) && create_address(params[:shipping_address])
       when :delivery
         create_delivery(params[:delivery])
       when :payment
         create_card(params[:card])
       when :confirm
-        confirm_order(params[:success])
-      else
-        @order.create
+        @order.in_confirmation! if (params[:success])
     end
   end
 end

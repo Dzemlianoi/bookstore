@@ -41,7 +41,7 @@ class Book < ApplicationRecord
 
   def valid_year
     if Date.current.year < publication_year.to_i
-      errors.add(:publication_year, t('flashes.error.wrong_year'))
+      errors.add(:publication_year, I18n.t('flashes.error.wrong_year'))
     end
   end
 
