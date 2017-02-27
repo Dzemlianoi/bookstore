@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
       @order.order_items.create(order_item_params)
       flash.keep[:success] = t('flashes.success.book_added')
     end
-    redirect_to :books
+    go_back
   end
 
   def update
