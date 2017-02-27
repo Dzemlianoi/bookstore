@@ -128,6 +128,8 @@ en:
   flashes:
     error:
       already_persist: 'Book is already in cart'
+      wrong_title_delivery: 'Title of delivery should contains letter, numbers, spaces or "-", ","'
+      wrong_days_delivery: 'Pesimistic number of days delivery should be greater then optimistic'
       review_fails: 'Please, check all fields!'
       no_order: 'You have no active order!'
       expire_slash: 'Expire date should contatin /'

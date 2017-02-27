@@ -18,7 +18,7 @@ class Address < ApplicationRecord
   validates_format_of :zip, :with => /\A[-0-9]+\z/
   validates_format_of :address, :with => /\A[-a-z0-9, ]+\z/i
   validates_format_of :phone, :with => /\A[+]{1}[0-9]{8,14}\z/
-  validates_inclusion_of :kind, in: self.kinds.keys
+  validates_inclusion_of :kind, in: kinds.keys
   validates_uniqueness_of :kind, scope: [:addressable_id, :addressable_type]
 
   def country_name

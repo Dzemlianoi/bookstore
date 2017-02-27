@@ -39,11 +39,11 @@ class Book < ApplicationRecord
   private
 
   def increment_books_count
-    self.category.increment!(:count_books)
+    category.increment!(:count_books)
   end
 
   def decrement_books_count
-    self.category.decrement!(:count_books)
+    category.decrement!(:count_books)
   end
 
   def self.default_sort
