@@ -19,7 +19,7 @@ class OrderStepsForm
   end
 
   def form_card
-    @card || Card.new
+    @card || @order.build_card
   end
 
   def deliveries
@@ -50,7 +50,7 @@ class OrderStepsForm
       when :payment
         create_credit_card(params[:card])
       when :confirm
-        @order.in_confirmation! if (params[:success])
+        @order.in_confirmation! if params[:success] && !@order.in_confirmation?
     end
   end
 end

@@ -1,5 +1,5 @@
-= render_error @form.billing_address
-= render_error @form.shipping_address
+= render_error @form.billing_address if @form.billing_address
+= render_error @form.shipping_address if @form.shipping_address
 -#= render_error @form
 = form_tag wizard_path, class: 'res-mb-100', method: :patch do
   .hidden-xs.hidden-sm

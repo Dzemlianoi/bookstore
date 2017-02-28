@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
   load_and_authorize_resource :order
+
   def show
     if @order.confirmation_token == confirmation_params[:token]
-      @order.confirmed!
-      redirect_to order_step_path(id: :complete)
-    else
-      redirect_to :root
+      @order.update_attributes(confirmation_token: nil)
+      @order.treat!
+      flash.keep[:success] = 'Your order is successfull! One more usefull letter was sent to your email'
     end
+    redirect_to :root
   end
 
   private

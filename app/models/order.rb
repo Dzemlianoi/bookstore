@@ -14,19 +14,18 @@ class Order < ApplicationRecord
   belongs_to :delivery
 
   validates_uniqueness_of :track_number
-  validates_length_of :track_number, minimem: 4, maximum: 10
+  validates_length_of :track_number, maximum: 25
 
   scope :in_progress, -> { where(aasm_state: [:cart, :filled] ) }
 
   aasm column: 'aasm_state' do
     state :cart, initial: true
-    state :filled, initial: true
+    state :filled
     state :in_confirmation, after_enter: :send_confirmation
-    state :confirmed, after_enter: :send_confirmation
+    state :in_processing, after_enter: :send_treating
     state :in_delivery
     state :completed, after_enter: :send_success
     state :canceled
-
 
     event :filled do
       transitions from: :cart, to: :filled
@@ -36,12 +35,12 @@ class Order < ApplicationRecord
       transitions from: :filled, to: :in_confirmation
     end
 
-    event :confirmed do
-      transitions from: :in_confirmation, to: :confirmed
+    event :treat do
+      transitions from: :in_confirmation, to: :in_processing
     end
 
     event :to_deliver do
-      transitions from: :confirmed, to: :in_delivery
+      transitions from: :in_processing, to: :in_delivery
     end
 
     event :complete do
@@ -49,7 +48,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:cart, :filled, :in_confirmation, :in_delivery, :confirmed, :completed], to: :canceled
+      transitions from: [:cart, :filled, :in_confirmation, :in_delivery, :in_processing, :completed], to: :canceled
     end
   end
 
@@ -70,8 +69,15 @@ class Order < ApplicationRecord
   end
 
   def send_confirmation
-    update_attributes(confirmation_token: Devise.friendly_token)
+    update_attributes(
+        confirmation_token: Devise.friendly_token,
+        track_number: "R-#{id}#{Date.today.to_time.to_i}"
+    )
     OrderMailer.confirmation_send(user, self).deliver_now
+  end
+
+  def send_treating
+    OrderMailer.treating_send(user, self).deliver_now
   end
 
   def recalculate_total(*record)

@@ -6,20 +6,16 @@ class OrderStepsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    step_to(:complete) and return if last_order.confirmed? && !on_step?(:complete)
+    step_to(:complete) and return if last_order.in_confirmation? && !on_step?(:complete)
+    render and return if last_order.in_confirmation? && on_step?(:complete)
     check_info_steps if on_step? :confirm
-    step_to(:confirm) and return if last_order.in_confirmation? && !on_step?(:confirm)
-    step_to(:confirm) if on_step?(:complete) && !last_order.confirmed?
+    step_to(:confirm) if on_step?(:complete) && !last_order.in_processing? && !last_order.in_confirmation?
   end
 
   def update
     @updating_result = @form.update(step, order_params)
-    step_to next_step and return if @updating_result
+    step_to next_step and return if @updating_result.eql?(true)
     render 'order_steps/show', step: step
-  end
-
-  def confirming
-    byebug
   end
 
   private
@@ -62,6 +58,6 @@ class OrderStepsController < ApplicationController
     step_to(:address) and return unless last_order.addresses.count.eql? 2
     step_to(:delivery) and return unless last_order.delivery
     step_to(:payment) and return unless last_order.card
-    last_order.filled! unless last_order.filled? || last_order.in_confirmation?
+    last_order.filled! unless last_order.filled?
   end
 end
