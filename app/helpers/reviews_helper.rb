@@ -9,6 +9,6 @@ module ReviewsHelper
 
   def verified?(user)
     return if user.nil?
-    user.verified.present?
+    user.orders.after_confirmation.present?
   end
 end

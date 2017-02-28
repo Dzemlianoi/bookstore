@@ -9,7 +9,7 @@
             = link_to t('layout.links.shop'), books_path, class: 'nav-link'
           - if user_signed_in?
             %li
-              %a.nav-link{href: '#'}= t('layout.links.orders')
+              = link_to t('orders.my_orders'), orders_path, class: 'nav-link'
             %li
               = link_to t('layout.links.settings'), edit_user_registration_path, class: 'nav-link'
       .col-sm-3

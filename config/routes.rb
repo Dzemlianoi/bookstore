@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :addresses
   resources :order_items, only: [:index, :create, :destroy, :update]
   resources :coupons, only: [:create, :destroy, :update]
-  resources :orders
+  resources :orders do
+    member do
+      get 'confirm'
+    end
+  end
   resources :order_steps, only: [:show, :update]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

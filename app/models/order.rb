@@ -16,7 +16,17 @@ class Order < ApplicationRecord
   validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
-  scope :in_progress, -> { where(aasm_state: [:cart, :filled] ) }
+  scope :in_carting, -> { where(aasm_state: [:cart, :filled] ) }
+  scope :after_confirmation, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
+  scope :after_cart, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
+
+  ORDERING = {
+      priceA: 'price ASC',
+      priceD: 'price DESC',
+      new:    'created_at DESC',
+      titleA: 'name ASC',
+      titleD: 'name DESC'
+  }
 
   aasm column: 'aasm_state' do
     state :cart, initial: true

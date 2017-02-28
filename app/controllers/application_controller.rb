@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def current_order
     return unless current_user
-    current_user.orders.in_progress.order('created_at').last
+    current_user.orders.in_carting.order('created_at').last
   end
 
   def last_active_order

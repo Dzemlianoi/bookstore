@@ -145,6 +145,11 @@ en:
     empty_cart: 'Cart is empty now'
     was_deleted: 'Book was successfully deleted'
   orders:
+    my_orders: 'My orders'
+    place: 'Place Order'
+    number: 'Number'
+    completed_at: 'Completed at'
+    status: 'Status'
     price: 'Price'
     quantity: 'Quantity'
     delivery: 'Delivery'

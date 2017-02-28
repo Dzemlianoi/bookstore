@@ -4,13 +4,16 @@
   - approved_reviews(@book).each_with_index do |review|
     .general-message-wrap.divider-lg
       .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
-          = review.name.capitalize.first
+        - if review.user.image.nil?
+          %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+            = review.name.capitalize.first
+        - else
+          %img.img-circle.logo-size.inlide-block.pull-left{src: review.user.image.attachment.url}
         .ml-70
           %div
             .general-message-date.hidden-xs= date(review.created_at)
             .max-240
-              - if verified?(current_user)
+              - if verified?(review.user)
                 .general-message-verified.pull-right= t('books.reviews.verified')
               .general-message-name= review.name
           .mb-15

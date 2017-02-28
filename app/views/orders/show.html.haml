@@ -1,0 +1,108 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin Order #{@order.track_number}
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle.mt-0= t('users.addresses.shipping_address')
+      %p.general-address
+        #{@order.shipping_address.first_name} #{@order.shipping_address.last_name}
+        %br
+        #{@order.shipping_address.address}
+        %br
+        #{@order.shipping_address.city} #{@order.shipping_address.zip}
+        %br
+        #{@order.shipping_address.country_name}
+        %br
+        Phone #{@order.shipping_address.phone}
+    .col-sm-3
+      %h3.general-subtitle.mt-0= t('users.addresses.billing_address')
+      %p.general-address
+        #{@order.billing_address.first_name} #{@order.billing_address.last_name}
+        %br
+        #{@order.billing_address.address}
+        %br
+        #{@order.billing_address.city} #{@order.billing_address.zip}
+        %br
+        #{@order.billing_address.country_name}
+        %br
+        Phone #{@order.billing_address.phone}
+    .col-sm-3
+      %h3.general-subtitle.mt-0= t('orders.delivery')
+      %p.general-address
+        #{@order.delivery.title}
+    .col-sm-3
+      %h3.general-subtitle.mt-0= t('orders.payment_info')
+      %p.general-address
+        #{private_show(@order.card.card_number)}
+        %br
+        #{@order.card.expire_date}
+  .visible-xs
+    - @order.order_items.each do |item|
+      .general-cart-item.divider-lg
+        .general-img-wrap-table
+          %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        %p.title= item.book.name
+        %P.in-grey-600.fw-300= first_sentence_description(item.book)
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600= t('orders.price')
+            %td
+              %span.font-16.in-gold-500 €#{item.book.price}
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600= t('orders.quantity')
+            %td
+              %span= item.quantity
+          %tr
+            %td
+              %span.in-grey-600= t('orders.subtotal')
+            %td
+              %span.font-16.in-gold-500 €#{item.price_with_quantity}
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600= t('general.book')
+          %th.col-method
+          %th
+            %span.in-grey-600= t('orders.price')
+          %th
+            %span.in-grey-600= t('orders.quantity')
+          %th
+            %span.in-grey-600= t('orders.total_price')
+      %tbody
+        - @order.order_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            %td
+              %p.title= item.book.name
+              %p.in-grey-600.fw-300= first_sentence_description(item.book)
+            %td
+              %span.font-16.in-gold-500 €#{item.book.price}
+            %td
+              %span.ml-30= item.quantity
+            %td
+              %span.font-16.in-gold-500 €#{item.price_with_quantity}
+  .text-center.general-text-right
+    %p.in-gold-500.font-18= t('orders.order_summary')
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      %tr
+        %td
+          %p.font-16= t('orders.subtotal')
+        %td
+          %p.font-16 €#{@order.subtotal_price}
+      %tr
+        %td
+          %p.font-16= t('orders.coupon.coupon')
+        %td
+          %p.font-16 €#{@order.discount}
+      %tr
+        %td
+          %strong.font-18= t('orders.order_total')
+        %td
+          %strong.font-18 €#{@order.total_price}
+  .text-center
+    = link_to t('orders.place'), orders_path, class: 'btn btn-default mb-20'

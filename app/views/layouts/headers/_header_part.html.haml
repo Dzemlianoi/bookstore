@@ -3,14 +3,14 @@
     %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}= t('layout.links.profile')
     %ul.dropdown-menu
       %li
-        %a{href: "#"}= t('layout.links.orders')
+        = link_to(t('layout.links.settings'), edit_user_registration_path)
       %li
-        =link_to(t('layout.links.settings'), edit_user_registration_path)
+        = link_to(t('orders.my_orders'), orders_path)
       %li.divider{role: 'separator'}
       %li
-        =link_to(t('layout.links.logout'), destroy_user_session_path, :method => :delete)
+        = link_to(t('layout.links.logout'), destroy_user_session_path, :method => :delete)
 - else
   %li
-    =link_to(t('layout.links.login'), new_user_session_path)
+    = link_to(t('layout.links.login'), new_user_session_path)
   %li
-    =link_to(t('layout.links.signup'), new_user_registration_path)
+    = link_to(t('layout.links.signup'), new_user_registration_path)
