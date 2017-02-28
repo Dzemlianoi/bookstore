@@ -5,21 +5,21 @@ class OrderStepsForm
 
   def initialize(order)
     @order = order
-    @billing_address = @order.billing_address
-    @shipping_address = @order.shipping_address
-    @card = @order.card
+    @billing_address ||= form_billing_address
+    @shipping_address ||= form_shipping_address
+    @card ||= form_card
   end
 
   def form_shipping_address
-    @shipping_address || @order.user.shipping_address || Address.new(kind: :shipping)
+    @order.shipping_address || @order.user.shipping_address || Address.new(kind: :shipping)
   end
 
   def form_billing_address
-    @billing_address || @order.user.billing_address || Address.new(kind: :billing)
+    @order.billing_address || @order.user.billing_address || Address.new(kind: :billing)
   end
 
   def form_card
-    @card || @order.build_card
+    @order.card || @order.build_card
   end
 
   def deliveries

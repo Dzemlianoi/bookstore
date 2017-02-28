@@ -12,6 +12,7 @@ class Card < ApplicationRecord
   private
 
   def correct_expiration_date
+    return unless expire_date
     expire_arr = expire_date.split('/')
     case
       when expire_arr.count != 2

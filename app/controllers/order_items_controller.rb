@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
 
   def index
     return redirect_to :root, alert: t('flashes.error.no_order') unless last_order_active?
-    @purchases = last_order.order_items
+    @purchases = last_active_order.order_items
   end
 
   def create
@@ -32,8 +32,8 @@ class OrderItemsController < ApplicationController
   private
 
   def last_order_active?
-    return unless last_order
-    last_order.active?
+    return unless last_active_order
+    last_active_order.active?
   end
 
   def order_item_params

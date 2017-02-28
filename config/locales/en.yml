@@ -19,6 +19,7 @@ en:
       home: 'Home'
       shop: 'Shop'
       orders: 'Orders'
+      order: 'Order'
       settings: 'Settings'
       login: 'Log in'
       signup: 'Sign up'
@@ -92,6 +93,7 @@ en:
       prev:   'Previous '
       filter: 'Filter by category'
       sort_by: 'Sort_by'
+      back_to_store: 'Back to store'
     sorting:
       priceA: 'Price: low to high'
       priceD: 'Price: high to low'
@@ -158,6 +160,8 @@ en:
     use_billing: 'Use Billing Adress'
     shipments: 'Shipments'
     payment_info: 'Payment Information'
+    thank_you: 'Thank You for your Order!'
+    confirmation_send: 'An order confirmation has been has been sent to '
     coupon:
       coupon: 'Coupon'
       not_found: 'There is no coupon with such code'

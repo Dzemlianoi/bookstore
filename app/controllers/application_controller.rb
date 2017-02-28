@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
 
-  helper_method :current_order, :last_order
+  helper_method :current_order, :last_active_order
 
   protect_from_forgery with: :exception
 
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     current_user.orders.in_progress.order('created_at').last
   end
 
-  def last_order
+  def last_active_order
     return unless current_user
     current_user.orders.order('created_at').last
   end

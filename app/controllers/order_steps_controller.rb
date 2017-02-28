@@ -6,10 +6,10 @@ class OrderStepsController < ApplicationController
   steps :address, :delivery, :payment, :confirm, :complete
 
   def show
-    step_to(:complete) and return if last_order.in_confirmation? && !on_step?(:complete)
-    render and return if last_order.in_confirmation? && on_step?(:complete)
+    step_to(:complete) and return if last_active_order.in_confirmation? && !on_step?(:complete)
+    render and return if last_active_order.in_confirmation? && on_step?(:complete)
     check_info_steps if on_step? :confirm
-    step_to(:confirm) if on_step?(:complete) && !last_order.in_processing? && !last_order.in_confirmation?
+    step_to(:confirm) if on_step?(:complete) && !last_active_order.in_processing? && !last_active_order.in_confirmation?
   end
 
   def update
@@ -21,7 +21,7 @@ class OrderStepsController < ApplicationController
   private
 
   def go_root_unless_order
-    unless last_order && (last_order(&:checkout_state?) || last_order(&:in_confirmation?))
+    unless last_active_order && (last_active_order(&:checkout_state?) || last_active_order(&:in_confirmation?))
       redirect_to :root, alert: t('flashes.error.no_order')
     end
   end
@@ -43,7 +43,7 @@ class OrderStepsController < ApplicationController
   end
 
   def initialize_form
-    @form ||= OrderStepsForm.new last_order
+    @form ||= OrderStepsForm.new last_active_order
   end
 
   def on_step? step
@@ -55,9 +55,9 @@ class OrderStepsController < ApplicationController
   end
 
   def check_info_steps
-    step_to(:address) and return unless last_order.addresses.count.eql? 2
-    step_to(:delivery) and return unless last_order.delivery
-    step_to(:payment) and return unless last_order.card
-    last_order.filled! unless last_order.filled?
+    step_to(:address) and return unless last_active_order.addresses.count.eql? 2
+    step_to(:delivery) and return unless last_active_order.delivery
+    step_to(:payment) and return unless last_active_order.card
+    last_active_order.filled! unless last_active_order.filled?
   end
 end

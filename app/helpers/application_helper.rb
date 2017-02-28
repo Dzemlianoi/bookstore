@@ -20,6 +20,13 @@ module ApplicationHelper
     current_user ? current_user.orders.empty? : true
   end
 
+  def last_order
+    current_user.orders.
+        where.not(aasm_state: :canceled)
+        .order('updated_at DESC')
+        .first
+  end
+
   def purchases_count
     current_order.order_items.count unless current_order.nil?
   end
