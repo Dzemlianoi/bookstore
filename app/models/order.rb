@@ -2,8 +2,6 @@ class Order < ApplicationRecord
   include AASM
 
   has_many   :addresses, as: :addressable, dependent: :destroy
-  has_one    :billing_address, -> (order) { order.addresses.find_by(kind: 'billing') }
-  has_one    :shipping_address, -> (order) { order.addresses.find_by(kind: 'shipping')}
   has_many   :order_items, dependent: :destroy,
                after_add: :recalculate_total,
                after_remove: :recalculate_total
