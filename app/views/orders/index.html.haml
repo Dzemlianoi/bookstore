@@ -3,17 +3,12 @@
   %p.lead.small.mb-10.visible-xs= t('books.catalog.sort_by')
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      Waiting for processing
+      = t("orders.sorting.#{current_sort}")
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      %li
-        %a{href: "#"} Newest first
-      %li
-        %a{href: "#"} Popular first
-      %li
-        %a{href: "#"} Price: Low to hight
-      %li
-        %a{href: "#"} Price: Low to hight
+      - Order::ORDERING.each do |value, _|
+        %li
+          = link_to t("orders.sorting.#{value}"), order_params.merge(order: value)
   .visible-xs
     - @orders.each do |order|
       = link_to order_path(order), class: 'no-link' do

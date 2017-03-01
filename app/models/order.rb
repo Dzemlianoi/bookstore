@@ -20,12 +20,12 @@ class Order < ApplicationRecord
   scope :after_confirmation, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
   scope :after_cart, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
 
+  DEFAULT_SORT_KEY = :new
   ORDERING = {
-      priceA: 'price ASC',
-      priceD: 'price DESC',
+      priceA: 'total_price ASC',
+      priceD: 'total_price DESC',
       new:    'created_at DESC',
-      titleA: 'name ASC',
-      titleD: 'name DESC'
+      old:    'created_at ASC',
   }
 
   aasm column: 'aasm_state' do
@@ -60,6 +60,10 @@ class Order < ApplicationRecord
     event :cancel do
       transitions from: [:cart, :filled, :in_confirmation, :in_delivery, :in_processing, :completed], to: :canceled
     end
+  end
+
+  def self.default_sort
+    ORDERING[DEFAULT_SORT_KEY]
   end
 
   def billing_address

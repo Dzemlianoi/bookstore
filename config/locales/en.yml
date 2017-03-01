@@ -145,6 +145,11 @@ en:
     empty_cart: 'Cart is empty now'
     was_deleted: 'Book was successfully deleted'
   orders:
+    sorting:
+      priceA: 'Total Price: low to high'
+      priceD: 'Total Price: high to low'
+      new: 'Newest first'
+      old: 'Latest first'
     my_orders: 'My orders'
     place: 'Place Order'
     number: 'Number'
