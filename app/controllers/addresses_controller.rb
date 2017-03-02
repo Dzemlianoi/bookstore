@@ -1,4 +1,6 @@
 class AddressesController < ApplicationController
+  load_and_authorize_resource
+
   def create
     @address = Address.create(address_params.merge(addressable:current_user))
     render 'devise/registrations/edit' if @address.errors

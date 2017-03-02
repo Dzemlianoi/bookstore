@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   resources :addresses
   resources :order_items, only: [:index, :create, :destroy, :update]
-  resources :coupons, only: [:create, :destroy, :update]
+  resources :coupons, only: :create
   resources :orders do
     member do
       get 'confirm'

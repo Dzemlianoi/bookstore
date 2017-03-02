@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
-  load_and_authorize_resource :order_item, only: [:destroy, :update]
+  load_resource :order_item, only: [:destroy, :update]
+  authorize_resource
 
   def index
     return redirect_to :root, alert: t('flashes.error.no_order') unless last_order_active?

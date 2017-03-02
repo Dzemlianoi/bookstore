@@ -14,7 +14,7 @@ class User < ApplicationRecord
          :confirmable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  scope  :without_provider,      -> { where(provider: nil, uid: nil) }
+  scope  :without_provider, -> { where(provider: nil, uid: nil) }
 
   def billing_address
     addresses.find_by(kind: :billing)
@@ -58,5 +58,13 @@ class User < ApplicationRecord
 
   def confirmation_required?
     super && provider.blank?
+  end
+
+  def is_admin?
+    role_name == 'admin'
+  end
+
+  def is_guest?
+    role_name == 'guest'
   end
 end

@@ -145,6 +145,7 @@ en:
     empty_cart: 'Cart is empty now'
     was_deleted: 'Book was successfully deleted'
   orders:
+    successfull: 'Your order is successfull! One more usefull letter was sent to your email'
     sorting:
       priceA: 'Total Price: low to high'
       priceD: 'Total Price: high to low'
@@ -172,13 +173,6 @@ en:
     payment_info: 'Payment Information'
     thank_you: 'Thank You for your Order!'
     confirmation_send: 'An order confirmation has been has been sent to '
-    coupon:
-      coupon: 'Coupon'
-      not_found: 'There is no coupon with such code'
-      added: 'Coupon was successfully added'
-      enter_coupon: 'Enter Your Coupon Code'
-      update_cart: 'Update cart'
-      subtotal_greater: 'The coupon is more expensive than subtotal'
     card:
       credit: 'Credit card'
       number: 'Card Number'
@@ -186,6 +180,13 @@ en:
       name: 'Name on Card'
       mmyy: 'MM/YY'
       CVV: 'CVV'
+  coupon:
+    title: 'Coupon'
+    not_found: 'There is no coupon with such code'
+    added: 'Coupon was successfully added'
+    enter_coupon: 'Enter Your Coupon Code'
+    update_cart: 'Update cart'
+    subtotal_greater: 'The coupon is more expensive than subtotal'
 
 
 

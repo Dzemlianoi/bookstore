@@ -9,14 +9,11 @@ class OrdersController < ApplicationController
     @orders = @orders.after_cart.order(ordering)
   end
 
-  def show
-  end
-
   def confirm
     if @order.confirmation_token == confirmation_params[:token]
       @order.update_attributes(confirmation_token: nil)
       @order.treat!
-      flash.keep[:success] = 'Your order is successfull! One more usefull letter was sent to your email'
+      flash.keep[:success] = I18n.t('orders.successfull')
     end
     redirect_to :root
   end
