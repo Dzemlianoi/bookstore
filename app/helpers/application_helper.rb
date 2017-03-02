@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def empty_cart?
-    current_user ? current_user.orders.empty? : true
+    current_user_or_guest ? current_user_or_guest.orders.empty? : true
   end
 
   def last_order
@@ -25,6 +25,11 @@ module ApplicationHelper
         where.not(aasm_state: :canceled)
         .order('updated_at DESC')
         .first
+  end
+
+  def current_user_or_guest
+    current_user ||
+        User.find_by(guest_token: cookies[:guest_token])  if cookies[:guest_token]
   end
 
   def purchases_count

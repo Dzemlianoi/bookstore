@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_one  :image, as: :imageable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
 
+  validates_uniqueness_of :email, unless: :is_guest?
+  validates_uniqueness_of :guest_token, if: :is_guest?
+
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -22,6 +25,12 @@ class User < ApplicationRecord
 
   def shipping_address
     addresses.find_by(kind: :shipping)
+  end
+
+  def self.create_by_token
+    token = Devise.friendly_token[0, 20]
+    create(guest_token: token)
+    token
   end
 
   def self.from_omniauth(auth)
@@ -49,15 +58,15 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    super && provider.blank?
+    super && provider.blank? && guest_token.blank?
   end
 
   def password_required?
-    super && provider.blank?
+    super && provider.blank? && guest_token.blank?
   end
 
   def confirmation_required?
-    super && provider.blank?
+    super && provider.blank? && guest_token.blank?
   end
 
   def is_admin?
@@ -65,6 +74,6 @@ class User < ApplicationRecord
   end
 
   def is_guest?
-    role_name == 'guest'
+    !guest_token.nil?
   end
 end

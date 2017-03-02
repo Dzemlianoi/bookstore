@@ -3,12 +3,13 @@ class OrderItemsController < ApplicationController
   authorize_resource
 
   def index
-    return redirect_to :root, alert: t('flashes.error.no_order') unless last_order_active?
+    return redirect_to :root, alert: t('flashes.error.no_order') unless current_order_active?
     @purchases = last_active_order.order_items
   end
 
   def create
-    @order = current_order || current_user.orders.create
+    guest_create unless current_user_or_guest
+    @order = current_order || current_user_or_guest.orders.create
     if @order.book_in_order? order_item_params[:book_id]
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
@@ -32,9 +33,13 @@ class OrderItemsController < ApplicationController
 
   private
 
-  def last_order_active?
-    return unless last_active_order
-    last_active_order.active?
+  def guest_create
+    cookies[:guest_token] = User.create_by_token
+  end
+
+  def current_order_active?
+    return unless current_order
+    current_order.active?
   end
 
   def order_item_params

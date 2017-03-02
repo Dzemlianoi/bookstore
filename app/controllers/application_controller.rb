@@ -19,12 +19,21 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    return unless current_user
-    current_user.orders.in_carting.order('created_at').last
+    return unless current_user_or_guest
+    current_user_or_guest.orders.in_carting.order('created_at').last
+  end
+
+  def current_guest
+    User.find_by(guest_token: cookies[:guest_token])  if cookies[:guest_token]
+  end
+
+  def current_user_or_guest
+    current_user || current_guest
+
   end
 
   def last_active_order
-    return unless current_user
-    current_user.orders.order('created_at').last
+    return unless current_user_or_guest
+    current_user_or_guest.orders.order('created_at').last
   end
 end

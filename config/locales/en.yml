@@ -33,6 +33,8 @@ en:
     get_started: 'Get Started'
     best: 'Best Sellers'
   users:
+    returning_customer: 'Returning customers'
+    new_customer: 'New customer'
     mailers:
       facebook:
         thanks: 'Thank you for registration via Facebook!'

@@ -1,0 +1,40 @@
+%main.container
+  %h1.general-title-margin= t('orders.checkout')
+  %ul.steps.list-inline
+    - (wizard_steps - [:fast_sign]).each_with_index  do |checkout_step, number|
+      - if current_step? checkout_step
+        = link_to wizard_path(checkout_step), class: 'step active' do
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.capitalize
+        %li.step-divider
+      - else
+        = link_to wizard_path(checkout_step), class: 'step' do
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.to_s.capitalize
+        %li.step-divider
+  = render_error @form.card if @form.card
+  %h3.general-subtitle= t('orders.card.credit')
+  = form_tag wizard_path, class: 'max-600 mb-80', method: :patch do
+    = fields_for :card, @form.form_card do |f|
+      .form-group
+        = f.label :card_number, t('orders.card.number') , class: 'control-label input-label'
+        = f.text_field :card_number, class:' form-control', placeholder: t('orders.card.number')
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :name, t('orders.card.name') , class: 'control-label input-label'
+            = f.text_field :name, class:' form-control', placeholder: t('orders.card.name')
+        .col-sm-3
+          .form-group
+            = f.label :expire_date, t('orders.card.mmyy') , class: 'control-label input-label'
+            = f.text_field :expire_date, class:' form-control', placeholder: t('orders.card.mmyy')
+        .col-sm-3
+          .form-group.relative
+            = f.label :cvv, t('orders.card.CVV') , class: 'control-label input-label'
+            = f.password_field :cvv, class:' form-control', placeholder: t('orders.card.CVV')
+    .general-text-align
+      %p.in-gold-500.font-18= t('orders.order_summary')
+      %table.general-summary-table
+        = render 'order_steps/price'
+    .text-center
+      = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-80'

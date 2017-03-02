@@ -19,5 +19,8 @@ Rails.application.routes.draw do
   resources :order_steps, only: [:show, :update]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      checkout_sign: 'users/checkout_sign'
+  }
 end
