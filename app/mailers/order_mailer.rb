@@ -16,4 +16,13 @@ class OrderMailer < ApplicationMailer
          template_path: 'orders/mailers',
          template_name: 'treat')
   end
+
+  def success_letter(user, order)
+    @order = order
+    @user = user
+    mail(to: @user.email,
+         subject: 'You order is in proccessing!',
+         template_path: 'orders/mailers',
+         template_name: 'success')
+  end
 end

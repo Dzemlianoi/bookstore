@@ -92,6 +92,10 @@ class Order < ApplicationRecord
     OrderMailer.treating_send(user, self).deliver_now
   end
 
+  def send_success
+    OrderMailer.success_letter(user,self).deliver_later
+  end
+
   def recalculate_total(*record)
     update_attributes(total_price: total_price)
   end
