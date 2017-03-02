@@ -1,7 +1,10 @@
 class Book < ApplicationRecord
 
-  scope :newest,      -> { order('created_at DESC') }
-  scope :bestsellers, -> { order('name ASC') }
+  scope :newest,      -> (num) { order('created_at DESC').limit(num) }
+  scope :bestsellers, -> (num) { joins('LEFT JOIN order_items ON order_items.book_id = books.id')
+                                     .group('books.id')
+                                     .order('count(order_items.book_id) DESC, books.created_at DESC')
+                                     .limit(num)}
 
   belongs_to :category
   has_one    :book_dimension

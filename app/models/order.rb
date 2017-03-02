@@ -6,9 +6,9 @@ class Order < ApplicationRecord
                after_add: :recalculate_total,
                after_remove: :recalculate_total
   has_many   :books, through: :order_items
-  has_one    :coupon
+  has_one    :coupon, dependent: :destroy
+  belongs_to :card, dependent: :destroy
   belongs_to :user
-  belongs_to :card
   belongs_to :delivery
 
   validates_uniqueness_of :track_number

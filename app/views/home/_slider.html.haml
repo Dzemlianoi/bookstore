@@ -1,10 +1,10 @@
 #slider.carousel.slide{'data-ride': 'carousel'}
   %ol.carousel-indicators
     %li.active{'data-target': '#slider', 'data-slide-to': '0'}
-    - (1...newest_books.count).each do |key|
+    - (1...@books.newest(3).count).each do |key|
       %li{'data-target': '#slider', 'data-slide-to': key.to_s}
   .carousel-inner{role: 'listbox'}
-    - newest_books.each_with_index do |book, key|
+    - @books.newest(3).each_with_index do |book, key|
       - if key == 0
         .item.active
           = render 'home/slider_item', book: book
