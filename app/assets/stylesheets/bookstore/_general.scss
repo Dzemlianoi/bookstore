@@ -2,10 +2,14 @@
   width: 20%;
 }
 
-.no-link:hover, .no-link:active, .no-link:visited{
+.centered {
+  margin: 0 auto;
+}
+
+.no-link:hover, .no-link:active, .no-link:visited {
   text-decoration: none;
 }
-.mg-r-20{
+.mg-r-20 {
   margin-right: 20px;
 }
 .inline-block {

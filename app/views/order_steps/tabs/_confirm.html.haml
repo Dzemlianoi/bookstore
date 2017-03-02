@@ -43,7 +43,7 @@
   - last_active_order.order_items.each do |item|
     .general-cart-item.divider-lg
       .general-img-wrap-table
-        %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+        %img.cart-img-shadow{src: get_image(item.book), alt: "design-book"}
       %p.title= item.book.name
       %P.in-grey-600.fw-300= first_sentence_description(item.book)
       %table.table
@@ -80,7 +80,7 @@
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              %img.cart-img-shadow.pull-left{src: get_image(item.book), alt: "design-book"}
           %td
             %p.title= item.book.name
             %p.in-grey-600.fw-300= first_sentence_description(item.book)

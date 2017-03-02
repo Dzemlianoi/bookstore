@@ -76,7 +76,7 @@
           %tr
             %td
               .general-img-wrap-table
-                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                %img.cart-img-shadow.pull-left{src: get_image(item.book), alt: "design-book"}
             %td
               %p.title= item.book.name
               %p.in-grey-600.fw-300= first_sentence_description(item.book)

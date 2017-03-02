@@ -16,6 +16,19 @@ module BooksHelper
     @category.nil? ? 'All' : @category.name
   end
 
+  def get_image(book)
+    if book.images.first.nil?
+      ActionController::Base.helpers.image_url("default_book.jpg")
+    else
+      book.images.first.attachment.url
+    end
+  end
+
+  def get_images(book)
+    return unless book.images
+    book.images
+  end
+
   def first_sentence_description(book)
     book.description.split('.')[0]
   end
