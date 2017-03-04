@@ -27,11 +27,6 @@ module ApplicationHelper
         .first
   end
 
-  def current_user_or_guest
-    current_user ||
-        User.find_by(guest_token: cookies[:guest_token])  if cookies[:guest_token]
-  end
-
   def purchases_count
     current_order.order_items.count unless current_order.nil?
   end

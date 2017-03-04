@@ -11,7 +11,6 @@ class OrderStepsController < ApplicationController
       when :fast_sign then next_step and return if current_user
       when :address, :delivery, :payment
         step_to :fast_sign and return unless current_user
-        step_to :confirm and return if last_active_order.filled?
         step_to :complete and return if last_active_order.in_confirmation?
       when :confirm then return check_info_steps
       when :complete
@@ -23,7 +22,7 @@ class OrderStepsController < ApplicationController
 
   def update
     @updating_result = @form.update(step, order_params)
-    step_to next_step if @updating_result.eql?(true)
+    step_to next_step and return if @updating_result.eql?(true)
     render_wizard
   end
 

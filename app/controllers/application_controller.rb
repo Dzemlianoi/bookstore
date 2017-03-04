@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
 
-  helper_method :current_order, :last_active_order
+  helper_method :current_order, :last_active_order, :current_user_or_guest
 
   protect_from_forgery with: :exception
 
@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
 
   def current_user_or_guest
     current_user || current_guest
-
   end
 
   def last_active_order

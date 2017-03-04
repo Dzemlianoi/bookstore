@@ -4,13 +4,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env['omniauth.auth'])
     wrong_request and return unless @user.persisted?
     if cookies[:guest_token].present?
-      update_guest_order
+      convert_guest_order
       sign_in_and_redirect_checkout
     else
       sign_in_and_redirect @user, :event => :authentication
     end
     set_flash_message(:notice, :success, :kind => 'Facebook') if is_navigational_format?
   end
+
+  private
 
   def failure
     redirect_to root_path
@@ -21,12 +23,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to new_user_registration_url
   end
 
-  def update_guest_order
-    unless @user.orders.in_carting.nil?
-      @user.orders.in_carting.last.order_items.delete_all
-    end
-    current_guest.update(guest_token: nil)
+  def convert_guest_order
+    @user.orders.in_carting.destroy_all if @user.orders.in_carting.present?
     current_guest.orders.first.update(user: @user)
+    current_guest.destroy
     cookies.delete :guest_token
   end
 
