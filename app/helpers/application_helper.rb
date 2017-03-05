@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def render_error(instance)
     return '' if instance.errors.empty?
-    messages = instance.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    messages = instance.errors.full_messages.uniq.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
     <div class="text-center alert alert-error alert-danger">
        <button type="button" class="close" data-dismiss="alert">×</button>

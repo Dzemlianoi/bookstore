@@ -11,11 +11,11 @@ class OrderStepsForm
   end
 
   def form_shipping_address
-    @order.shipping_address || @order.user.shipping_address || Address.new(kind: :shipping)
+    @order.shipping_address || @order.user.shipping_address || @order.addresses.shipping.new
   end
 
   def form_billing_address
-    @order.billing_address || @order.user.billing_address || Address.new(kind: :billing)
+    @order.billing_address || @order.user.billing_address || @order.addresses.billing.new
   end
 
   def form_card
@@ -26,9 +26,17 @@ class OrderStepsForm
     Delivery.all.order('price')
   end
 
-  def create_address(params)
-    current_address = @order.addresses.find_by_kind(params[:kind])
-    current_address ? current_address.update(params) : @order.addresses.create(params)
+  def create_billing(params)
+    byebug
+    @order.billing_address ?
+        @billing_address.update(params) :
+        @order.addresses.billing.create(params)
+  end
+
+  def create_shipping(params)
+    @order.shipping_address ?
+        @shipping_address.update(params) :
+        @order.addresses.shipping.create(params)
   end
 
   def create_credit_card(credit_card)
@@ -44,7 +52,7 @@ class OrderStepsForm
     case step
       when :address
         params[:shipping_address] = params[:billing_address] if params.has_key? :shipping_check
-        create_address(params[:billing_address]) && create_address(params[:shipping_address])
+        create_billing(params[:billing_address]) && create_shipping(params[:shipping_address])
       when :delivery
         create_delivery(params[:delivery])
       when :payment

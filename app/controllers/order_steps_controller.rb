@@ -22,6 +22,7 @@ class OrderStepsController < ApplicationController
 
   def update
     @updating_result = @form.update(step, order_params)
+    byebug
     step_to next_step and return if @updating_result.eql?(true)
     render_wizard
   end
@@ -39,8 +40,8 @@ class OrderStepsController < ApplicationController
       :shipping_check,
       :delivery,
       :success,
-      shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
-      billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone, :kind],
+      shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
+      billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone],
       card:             [:card_number, :cvv, :expire_date, :name]
     )
   end
@@ -55,7 +56,7 @@ class OrderStepsController < ApplicationController
 
   def check_info_steps
     step_to :fast_sign and return unless current_user
-    step_to :address and return unless last_active_order.addresses.count.eql? 2
+    step_to :address and return unless last_active_order.has_valid_addresses?
     step_to :delivery and return unless last_active_order.delivery
     step_to :payment and return unless last_active_order.card
     last_active_order.filled! unless last_active_order.filled? || last_active_order.in_confirmation?

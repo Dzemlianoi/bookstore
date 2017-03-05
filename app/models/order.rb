@@ -60,6 +60,23 @@ class Order < ApplicationRecord
     end
   end
 
+  rails_admin do
+    list do
+      field :aasm_state, :state
+      include_all_fields
+      exclude_fields :confirmation_token, :completed_date
+    end
+    edit do
+      field :aasm_state, :state
+      include_all_fields
+      exclude_fields :confirmation_token, :completed_date
+    end
+  end
+
+  def has_valid_addresses?
+    shipping_address && billing_address
+  end
+
   def self.default_sort
     ORDERING[DEFAULT_SORT_KEY]
   end
