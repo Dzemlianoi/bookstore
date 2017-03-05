@@ -1,7 +1,7 @@
 .mb-80
   %h3.in-gold-500.mb-25
-    #{t('books.reviews.title')}(#{approved_reviews(@book).length})
-  - approved_reviews(@book).each_with_index do |review|
+    #{t('books.reviews.title')}(#{@book.reviews.approved.length})
+  - @book.reviews.approved.each_with_index do |review|
     .general-message-wrap.divider-lg
       .clearfix
         - if review.user.image.nil?

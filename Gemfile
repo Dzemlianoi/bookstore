@@ -36,6 +36,7 @@ gem 'rails_admin', '~> 1.0'
 gem 'countries'
 gem 'country_select', '~> 2.1.0'
 gem 'aasm', '~> 4.11', '>= 4.11.1'
+gem 'rails_admin_aasm'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
