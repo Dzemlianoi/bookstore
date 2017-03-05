@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
-      checkout_sign: 'users/checkout_sign'
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
   }
 end

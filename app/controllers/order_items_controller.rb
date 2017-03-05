@@ -9,7 +9,7 @@ class OrderItemsController < ApplicationController
 
   def create
     guest_create unless current_user_or_guest
-    @order = current_order || current_user_or_guest.orders.create
+    @order = get_order
     if @order.book_in_order? order_item_params[:book_id]
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
@@ -32,6 +32,13 @@ class OrderItemsController < ApplicationController
   end
 
   private
+
+  def get_order
+    current_order ||
+      current_user_or_guest.orders.create(
+        track_number: "R-#{id}#{Date.today.to_time.to_i}"
+      )
+  end
 
   def guest_create
     cookies[:guest_token] = User.create_by_token

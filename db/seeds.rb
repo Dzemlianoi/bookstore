@@ -1,26 +1,13 @@
 require 'ffaker'
 
-def generate_users
-  5.times do |_|
-    password = FFaker::Internet.password
-    user = User.new(
-        email:                  FFaker::Internet.email,
-        password:               password,
-        password_confirmation:  password,
-    )
-    user.skip_confirmation!
-    user.save!
-  end
-
-  admin = User.new(
-      email:                  'admin@test.com',
-      password:               'adminpassword',
-      password_confirmation:  'adminpassword',
-      role_name:              'admin'
+def generate_user(admin = nil)
+  user = User.new(
+    email:                  FFaker::Internet.email,
+    encrypted_password:     FFaker::Internet.password,
   )
-
-  admin.skip_confirmation!
-  admin.save!
+  user[:role_name] = 'admin' if admin
+  user.skip_confirmation!
+  user.save!
 end
 
 def generate_categories
@@ -41,23 +28,23 @@ end
 
 def generate_book
   Book.new(
-      name: FFaker::Book.title,
-      description: FFaker::Book.description(8),
-      price: rand(0.02...99.99),
-      publication_year: rand(1001...2017),
-      authors: Author.order("random()").first(2),
-      materials: Material.order("random()").first(2),
-      category: Category.order("random()").first
+    name: FFaker::Book.title,
+    description: FFaker::Book.description(8),
+    price: rand(0.02...99.99),
+    publication_year: rand(1001...2017),
+    authors: Author.order("random()").first(2),
+    materials: Material.order("random()").first(2),
+    category: Category.order("random()").first
   ).save!
 end
 
 def generate_dimensions_for_books
   Book.all.each do |book|
     BookDimension.new(
-        height: rand(0.50...20.00),
-        width: rand(0.50...20.00),
-        depth: rand(0.50...20.00),
-        book: book
+      height: rand(0.50...20.00),
+      width: rand(0.50...20.00),
+      depth: rand(0.50...20.00),
+      book: book
     ).save!
   end
 end
@@ -72,18 +59,19 @@ end
 
 def generate_delivery
   Delivery.create!(
-      price: rand(1...15),
-      title: FFaker::Lorem.word,
-      optimistic_days: rand(1...3),
-      pesimistic_days: rand(4...7)
+    price: rand(1...15),
+    title: FFaker::Lorem.word,
+    optimistic_days: rand(1...3),
+    pesimistic_days: rand(4...7)
   )
 end
 
-generate_users
+5.times { generate_user }
+generate_user('admin')
 generate_categories
 generate_materials
-15.times{ generate_author }
-100.times{ generate_book }
+15.times { generate_author }
+100.times { generate_book }
 generate_dimensions_for_books
 20.times { generate_coupons }
 4.times { generate_delivery }

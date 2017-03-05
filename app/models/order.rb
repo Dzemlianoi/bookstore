@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :delivery
 
-  validates_uniqueness_of :track_number unless 'track_number.nil?'
+  validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
   scope :in_carting, -> { where(aasm_state: [:cart, :filled] ) }
@@ -81,10 +81,7 @@ class Order < ApplicationRecord
   end
 
   def send_confirmation
-    update_attributes(
-        confirmation_token: Devise.friendly_token,
-        track_number: "R-#{id}#{Date.today.to_time.to_i}"
-    )
+    update_attributes(confirmation_token: Devise.friendly_token)
     OrderMailer.confirmation_send(user, self).deliver_now
   end
 

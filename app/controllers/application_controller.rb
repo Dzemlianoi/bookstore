@@ -35,4 +35,12 @@ class ApplicationController < ActionController::Base
     return unless current_user_or_guest
     current_user_or_guest.orders.order('created_at').last
   end
+
+  # def after_sign_in_path_for(resource)
+  #   if params[:user][:checkout]
+  #     order_step_path(id: :address)
+  #   else
+  #     super
+  #   end
+  # end
 end
