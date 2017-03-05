@@ -34,10 +34,8 @@ class OrderItemsController < ApplicationController
   private
 
   def get_order
-    current_order ||
-      current_user_or_guest.orders.create(
-        track_number: "R-#{id}#{Date.today.to_time.to_i}"
-      )
+    current_order || current_user_or_guest.orders.
+        create(track_number: "R-#{rand(99)}#{Date.today.to_time.to_i}")
   end
 
   def guest_create
