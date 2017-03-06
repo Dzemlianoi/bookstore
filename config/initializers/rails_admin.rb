@@ -2,7 +2,7 @@ RailsAdmin.config do |config|
   config.authenticate_with do
     warden.authenticate! scope: :user
   end
-  config.current_user_method(&:current_user)
+  config.current_user_method(&:current_user_or_guest)
   config.authorize_with :cancan
   config.excluded_models = %w(BookMaterial BookAuthor BookDimension OrderItem)
   config.actions do
