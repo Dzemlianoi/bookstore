@@ -19,14 +19,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path
   end
 
-  def destroy_guest
-    current_guest.destroy
-    cookies.delete :guest_token
-  end
-
   def wrong_request
     session['devise.facebook_data'] = request.env['omniauth.auth']
     redirect_to new_user_registration_url
+  end
+
+  def destroy_guest
+    current_guest.destroy
+    cookies.delete :guest_token
   end
 
   def convert_guest_order

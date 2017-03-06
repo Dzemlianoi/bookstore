@@ -3,7 +3,7 @@ require 'ffaker'
 def generate_user(admin = nil)
   user = User.new(
     email:                  FFaker::Internet.email,
-    encrypted_password:     FFaker::Internet.password,
+    password:               FFaker::Internet.password,
   )
   user[:role_name] = 'admin' if admin
   user.skip_confirmation!

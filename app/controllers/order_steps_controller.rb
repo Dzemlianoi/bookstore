@@ -22,7 +22,6 @@ class OrderStepsController < ApplicationController
 
   def update
     @updating_result = @form.update(step, order_params)
-    byebug
     step_to next_step and return if @updating_result.eql?(true)
     render_wizard
   end

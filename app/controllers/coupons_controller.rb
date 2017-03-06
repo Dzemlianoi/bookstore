@@ -1,9 +1,8 @@
 class CouponsController < ApplicationController
-  load_resource find_by: :code
   authorize_resource
 
   def create
-    byebug
+    @coupon = Coupon.find_by(code: coupon_params[:code], order: nil)
     redirect_to :back, alert: t('coupon.not_found') and return if @coupon.nil?
     if current_order.subtotal_more_than_discount? @coupon
       @coupon.update(order:current_order)
