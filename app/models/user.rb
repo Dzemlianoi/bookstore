@@ -5,10 +5,7 @@ class User < ApplicationRecord
   has_one  :image, as: :imageable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
 
-  # before_validation :set_fake_password
-
   validates_uniqueness_of :email, unless: :is_guest?
-  # validates_uniqueness_of :guest_token, if: :is_guest?
 
   devise :database_authenticatable,
          :registerable,
@@ -21,11 +18,11 @@ class User < ApplicationRecord
 
   scope  :without_provider, -> { where(provider: nil, uid: nil) }
 
-  # def set_fake_password
-  #   generated_password = Devise.friendly_token[0, 20]
-  #   self.password = generated_password
-  #   skip_confirmation!
-  # end
+  def set_fake_password
+    generated_password = Devise.friendly_token[0, 20]
+    self.password = generated_password
+    skip_confirmation!
+  end
 
   def billing_address
     addresses.find_by(kind: :billing)
@@ -78,7 +75,7 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    role_name == 'admin'
+    role_name.eql? 'admin'
   end
 
   def is_guest?
