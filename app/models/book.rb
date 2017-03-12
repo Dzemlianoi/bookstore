@@ -21,8 +21,8 @@ class Book < ApplicationRecord
 
   paginates_per 12
 
-  DEFAULT_SORT_KEY = :titleA
   DEFAULT_IMAGE_NAME = 'book_default.jpg'
+  DEFAULT_SORT_KEY = :titleA
   ORDERING = {
     priceA: 'price ASC',
     priceD: 'price DESC',

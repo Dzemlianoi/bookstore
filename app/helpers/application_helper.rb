@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def render_error(instance)
     return '' if instance.errors.empty?
     messages = instance.errors.full_messages.uniq.map { |msg| content_tag(:li, msg) }.join
@@ -21,10 +20,7 @@ module ApplicationHelper
   end
 
   def last_order
-    current_user.orders.
-        where.not(aasm_state: :canceled)
-        .order('updated_at DESC')
-        .first
+    current_user.orders.active.newest.first
   end
 
   def purchases_count

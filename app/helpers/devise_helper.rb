@@ -1,8 +1,7 @@
 module DeviseHelper
-  def devise_error_messages!(another_resourse = nil)
-    error_handler = another_resourse || resource
-    return '' if error_handler.errors.empty?
-    messages = error_handler.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+  def devise_error_messages!
+    return '' if resource.errors.empty?
+    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
     html = <<-HTML
     <div class="text-center alert alert-error alert-danger">
        <button type="button" class="close" data-dismiss="alert">×</button>
@@ -23,4 +22,5 @@ module DeviseHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
 end

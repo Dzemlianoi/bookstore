@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-
     can :read, Book
     can :read, Category
     can :index, Review

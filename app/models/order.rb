@@ -14,9 +14,11 @@ class Order < ApplicationRecord
   validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
-  scope :in_carting, -> { where(aasm_state: [:cart, :filled] ) }
-  scope :after_confirmation, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
-  scope :after_cart, -> { where(aasm_state: [:in_processing, :in_delivery, :completed] ) }
+  scope :in_carting, -> { where(aasm_state: [:cart, :filled]) }
+  scope :after_confirmation, -> { where(aasm_state: [:in_processing, :in_delivery, :completed]) }
+  scope :after_cart, -> { where(aasm_state: [:in_processing, :in_delivery, :completed]) }
+  scope :newest, -> { order('created_at DESC') }
+  scope :active, -> { where.not(aasm_state: :canceled) }
 
   DEFAULT_SORT_KEY = :new
   ORDERING = {
@@ -132,19 +134,15 @@ class Order < ApplicationRecord
     delivery.nil? ? 0 : delivery.price
   end
 
-  def proved?
-    card && delivery && addresses.count == 2
-  end
-
-  def checkout_state?
-    cart? || filled?
-  end
-
   def active?
     checkout_state? && !order_items.empty?
   end
 
-  def final_state?
-    checkout_state? || in_confirmation?
+  def proved?
+    card && delivery && has_valid_addresses?
+  end
+
+  def checkout_state?
+    cart? || filled?
   end
 end

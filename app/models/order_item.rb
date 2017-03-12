@@ -9,6 +9,6 @@ class OrderItem < ApplicationRecord
   after_update :recalculate_total
 
   def price_with_quantity
-    self.book.price * self.quantity.to_f
+    book.price * quantity.to_f
   end
 end
