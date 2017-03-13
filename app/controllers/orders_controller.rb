@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
 
   def ordering
     order = (order_params.key? :order) ? order_params[:order].to_sym : nil
-    (Order::ORDERING.key? order) ? Order::ORDERING[order] : Order.default_sort
+    Order::ORDERING.key?(order) ? Order::ORDERING[order] : Order.default_sort
   end
 
   def order_params

@@ -3,12 +3,9 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource through: :book, only: :create
 
   def create
-    if @review.update(review_params.merge(user: current_user))
-      flash.keep[:success] = t('flashes.success.review_success')
-      redirect_to book_path @review.book
-    else
-      render 'books/show'
-    end
+    return render 'books/show' unless @review.update(review_params.merge(user: current_user))
+    flash.keep[:success] = t('flashes.success.review_success')
+    redirect_to book_path @review.book
   end
 
   private

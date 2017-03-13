@@ -9,6 +9,8 @@ class CategoriesController < ApplicationController
     @books = @category.books
   end
 
+  private
+
   def category_params
     params.permit(:id)
   end

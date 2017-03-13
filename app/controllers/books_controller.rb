@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   def ordering
     order = (book_params.key? :order) ? book_params[:order].to_sym : nil
-    (Book::ORDERING.key? order) ? Book::ORDERING[order] : Book.default_sort
+    Book::ORDERING.key?(order) ? Book::ORDERING[order] : Book.default_sort
   end
 
   def book_params
