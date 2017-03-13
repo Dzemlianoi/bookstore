@@ -44,13 +44,32 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails'
+  gem 'letter_opener_web'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'wisper-rspec'
+  gem 'with_model'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
+  gem 'rails-erd'
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 
