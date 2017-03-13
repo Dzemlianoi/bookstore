@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
-
   helper_method :current_order, :last_active_order, :current_user_or_guest
+
+  [CanCan::AccessDenied, ActiveRecord::RecordNotFound, ActionController::RoutingError].each do |error|
+    rescue_from error do |exception|
+      redirect_to main_app.root_path, warning: exception.message
+    end
+  end
 
   def configure_permitted_parameters
     update_attrs = [:password, :password_confirmation, :current_password]
@@ -43,8 +48,6 @@ class ApplicationController < ActionController::Base
   def fast_sign?
     request.referer == order_step_url(id: :fast_sign)
   end
-
-  protected
 
   def current_order
     return unless current_user_or_guest
