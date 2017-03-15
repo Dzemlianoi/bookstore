@@ -51,16 +51,13 @@ group :development, :test do
   gem 'shoulda'
   gem 'wisper-rspec'
   gem 'with_model'
-end
-
-group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'poltergeist'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'selenium-webdriver', '~> 2.53.4'
 end
 
 group :development do
@@ -71,5 +68,3 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
-
-
