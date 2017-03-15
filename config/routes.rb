@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'categories#show', id: 'default'
+  root to: 'categories#show', id: Category.default_id
   resources :categories do
     resources :books, only: :index
   end
