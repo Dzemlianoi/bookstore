@@ -1,20 +1,17 @@
 Rails.application.routes.draw do
-  root to: 'categories#show', id: Category.default_id
+  root to: 'categories#default'
   resources :categories do
+    get 'default', on: :member
     resources :books, only: :index
   end
-  resources :categories, only: :show
-  resources :books, only: [:index, :show]
   resources :books do
     resources :reviews, only: :create
   end
   resources :addresses
-  resources :order_items, only: [:index, :create, :destroy, :update]
+  resources :order_items, except: :show
   resources :coupons, only: :create
   resources :orders do
-    member do
-      get 'confirm'
-    end
+    get 'confirm', on: :member
   end
   resources :order_steps, only: [:show, :update]
 

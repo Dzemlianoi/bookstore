@@ -8,7 +8,7 @@ class Category < ApplicationRecord
 
   scope :active, -> { where('count_books > 0') }
 
-  def self.default_id
-    find_by(name: 'Mobile Development').id
+  def self.default
+    find_by(name: 'Mobile Development') || first
   end
 end

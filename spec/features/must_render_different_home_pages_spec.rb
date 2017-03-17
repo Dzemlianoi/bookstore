@@ -1,17 +1,17 @@
-require 'rails_helper'
 feature 'Show books', type: :feature do
-  before do
-    @mobile = create :category, name: 'Mobile Development'
-    @design = create :category, name: 'Web design'
-    @book_mobile = create :book, category: @mobile
-    @book_design = create :book, category: @design
+  let(:mobile) { create :category, name: 'Mobile Development' }
+  let(:design) { create :category, name: 'Web Design' }
+  let(:book_mobile) { create :book, category: mobile }
+  let(:book_design) { create :book, category: design }
+
+  background do
     visit root_path
-    byebug
   end
 
-  context 'First meet' do
-    scenario 'Test' do
-      expect(page).to have_content('Bookstore')
-    end
+  scenario 'Name of store' do
+    expect(page).to have_content(I18n.t('general.project_name'))
+  end
+  scenario 'Get started button' do
+    expect(page).to have_content(I18n.t('general.project_name'))
   end
 end

@@ -44,20 +44,18 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'factory_girl_rails'
-  gem 'letter_opener_web'
-  gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'shoulda'
-  gem 'wisper-rspec'
-  gem 'with_model'
-  gem 'capybara'
-  gem 'capybara-email'
-  gem 'capybara-screenshot'
   gem 'database_cleaner'
-  gem 'poltergeist'
   gem 'shoulda-matchers'
-  gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'rails-controller-testing'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'rubocop'
+  gem 'capybara-email'
+  gem 'letter_opener_web'
 end
 
 group :development do
