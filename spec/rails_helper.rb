@@ -18,6 +18,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ActionDispatch::TestProcess
   config.include I18n
+  config.include FeatureHelper, type: :feature
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 end

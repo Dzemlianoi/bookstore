@@ -18,6 +18,6 @@ module BooksHelper
   end
 
   def first_sentence_description(book)
-    truncate(book.description.split('.')[0], length: 30)
+    truncate(book.description.split('.')[0], length: 50)
   end
 end

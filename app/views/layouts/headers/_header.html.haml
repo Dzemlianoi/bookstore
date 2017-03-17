@@ -31,7 +31,7 @@
           = render 'layouts/headers/header_part'
       .hidden-xs
         %ul.nav.navbar-nav
-          %li.dropdown
+          %li.dropdown.home
             %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}= t('layout.links.home')
             %ul.dropdown-menu
               - active_categories.each do |category|
