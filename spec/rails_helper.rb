@@ -10,6 +10,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'omniauth'
 
+
 ActiveRecord::Migration.maintain_test_schema!
 OmniAuth.config.test_mode = true
 
