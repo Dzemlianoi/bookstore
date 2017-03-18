@@ -8,7 +8,7 @@ feature 'Sign up', type: :feature, js: true do
       fill_in 'user_password', with: '123456'
       fill_in 'user_password_confirmation', with: '123456'
       first('.registrate').click
-      expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
+      expect(page).to have_content(I18n.t('devise.registrations.signed_up_but_unconfirmed'))
     end
   end
 end
