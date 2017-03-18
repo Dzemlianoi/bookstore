@@ -25,7 +25,7 @@ feature 'Show books', type: :feature, js: true, skip: true do
       expect(page).to have_content(I18n.t('layout.links.login'))
     end
 
-    scenario 'registred' do
+    scenario 'users' do
       sign_in(create :user)
       expect(page).to have_content(I18n.t('layout.links.profile'))
     end

@@ -12,7 +12,7 @@ FactoryGirl.define do
       name nil
     end
 
-    trait :long_desc do
+    trait :long_description do
       description { FFaker::CheesyLingo.paragraph }
     end
   end
