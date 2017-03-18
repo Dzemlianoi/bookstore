@@ -5,7 +5,7 @@
       = link_to user_facebook_omniauth_authorize_path(checkout: 'true'), class: 'general-login-icon' do
         %i.fa.fa-facebook-official
       %p.general-login-text= t('general.or')
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'general-form'}) do |f|
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'log-in general-form'}) do |f|
       = f.hidden_field :checkout, value: 1
       .form-group.mb-30.field
         = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_email')}
@@ -21,7 +21,7 @@
       = link_to user_facebook_omniauth_authorize_path(checkout: 'true'), class: 'general-login-icon' do
         %i.fa.fa-facebook-official
       %p.general-login-text= t('general.or')
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'general-form'}) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'sign-up general-form'}) do |f|
       .form-group.mb-30.field
         = f.hidden_field :checkout, value: 1
         = f.label :email, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.enter_email')}

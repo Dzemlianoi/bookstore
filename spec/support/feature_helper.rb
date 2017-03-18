@@ -14,21 +14,10 @@ module FeatureHelper
     first("[value = #{I18n.t('books.reviews.post')}]").click
   end
 
-  def add_book_to_cart(book)
-    visit(book_path(book))
-    click_add_to_cart
-  end
-
   def click_add_to_cart
     within '#new_orders_item' do
       find('[type=submit]').click
     end
-  end
-
-  def visit_cart_with(book)
-    add_book_to_cart(book)
-    sleep 1
-    visit cart_path
   end
 
   def fill_address(type, options)
@@ -41,5 +30,15 @@ module FeatureHelper
       fill_in I18n.t('users.addresses.phone.placeholder'), with: options[:phone]
       first('input[type=submit]').click
     end
+  end
+
+  def fill_address_checkout(type, options)
+    find("##{type}_first_name").set options[:first_name]
+    find("##{type}_last_name").set options[:last_name]
+    find("##{type}_address").set options[:address]
+    find("##{type}_city").set options[:city]
+    find("##{type}_zip").set options[:zip]
+    find("##{type}_phone").set options[:phone]
+    first('input[type=submit]').click
   end
 end
