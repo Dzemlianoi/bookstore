@@ -16,7 +16,7 @@
       = f.label :password_confirmation, html: {:class => 'control-label input-label', 'data-bar' => t('users.privacy.confirm_password')}
       = f.password_field :password_confirmation, autocomplete: false, class: 'form-control', placeholder: t('general.password')
     .text-center
-      = f.submit t('layout.links.signup'), class: 'btn btn-default mb-20'
+      = f.submit t('layout.links.signup'), class: 'registrate btn btn-default mb-20'
   %p.general-sign-text.text-center
     = t('users.privacy.have_account')
     = link_to t('layout.links.login'), new_user_session_path, class: 'in-gold-500'

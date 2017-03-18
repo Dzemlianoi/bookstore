@@ -58,8 +58,10 @@ class User < ApplicationRecord
   end
 
   def self.save_avatar
-    @user.build_image
-    @user.image.remote_attachment_url = @auth.info.image.gsub('http://','https://')
+    if @auth.info.image
+      @user.build_image
+      @user.image.remote_attachment_url = @auth.info.image.gsub('http://','https://')
+    end
   end
 
   def email_required?
