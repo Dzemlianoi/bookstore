@@ -30,4 +30,16 @@ module FeatureHelper
     sleep 1
     visit cart_path
   end
+
+  def fill_address(type, options)
+    within ".#{type}_form" do
+      fill_in I18n.t('users.addresses.first_name.placeholder'), with: options[:first_name]
+      fill_in I18n.t('users.addresses.last_name.placeholder'), with: options[:last_name]
+      fill_in I18n.t('users.addresses.address.placeholder'), with: options[:address]
+      fill_in I18n.t('users.addresses.city.placeholder'), with: options[:city]
+      fill_in I18n.t('users.addresses.zip.placeholder'), with: options[:zip]
+      fill_in I18n.t('users.addresses.phone.placeholder'), with: options[:phone]
+      first('input[type=submit]').click
+    end
+  end
 end
