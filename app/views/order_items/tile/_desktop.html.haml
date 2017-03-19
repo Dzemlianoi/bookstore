@@ -2,7 +2,7 @@
   %input.purchase-id{type: 'hidden', value: purchase.id}
   %td
     .general-img-wrap-table
-      %img.cart-img-shadow.pull-left{src: get_image(purchase.book), alt: 'design-book'}
+      %img.cart-img-shadow.pull-left{src: purchase.book.front_image, alt: 'design-book'}
   %td
     %p.title= purchase.book.name
   %td

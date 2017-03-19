@@ -7,14 +7,14 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive.centered{src: get_image(@book), alt: 'design-book'}
+          %img.img-responsive.centered{src: @book.front_image, alt: 'design-book'}
         .images.clearfix
           - @book.images.each do |image|
             %a.img-link{href: '#'}
               %img{src: image.attachment.url}
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= all_authors(@book)
+      %p.lead.small= @book.all_authors
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
@@ -50,11 +50,11 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.dimensions')
-          %p.lead.small.pull-right= total_dimensions(@book.book_dimension)
+          %p.lead.small.pull-right= @book.total_dimensions
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left= t('books.show.materials')
-          %p.lead.small.pull-right= all_materials(@book)
+          %p.lead.small.pull-right= @book.all_materials
   = render 'books/reviews'
 
 

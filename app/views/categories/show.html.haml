@@ -9,5 +9,5 @@
   .mb-35
     %h3= t('categories.best')
     .row
-      - @books.bestsellers(4).each do |book|
+      - @bestsellers_books.each do |book|
         = render 'home/bestseller_item', book: book

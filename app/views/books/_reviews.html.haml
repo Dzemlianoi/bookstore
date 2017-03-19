@@ -1,7 +1,7 @@
 .mb-80.write-review-block
   %h3.in-gold-500.mb-25
     #{t('books.reviews.title')}(#{@book.reviews.approved.length})
-  - @book.reviews.approved.each_with_index do |review|
+  - @reviews.each_with_index do |review|
     .general-message-wrap.divider-lg
       .clearfix
         - if review.user.image.nil?
@@ -11,9 +11,9 @@
           %img.img-circle.logo-size.inlide-block.pull-left{src: review.user.image.attachment.url}
         .ml-70
           %div
-            .general-message-date.hidden-xs= date(review.created_at)
+            .general-message-date.hidden-xs= review.date
             .max-240
-              - if verified?(review.user)
+              - if review.verified?
                 .general-message-verified.pull-right= t('books.reviews.verified')
               .general-message-name= review.name
           .mb-15

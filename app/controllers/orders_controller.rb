@@ -9,6 +9,10 @@ class OrdersController < ApplicationController
     @orders = @orders.after_cart.order(ordering)
   end
 
+  def show
+    @order = @order.decorate
+  end
+
   def confirm
     if @order.confirmation_token == confirmation_params[:token]
       @order.update_attributes(confirmation_token: nil)

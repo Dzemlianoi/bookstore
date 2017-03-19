@@ -1,6 +1,6 @@
 .general-thumb-wrap
   .thumbnail.general-thumbnail
-    %img.img-shadow.general-thumbnail-img{src: get_image(book) , alt: 'design-book'}
+    %img.img-shadow.general-thumbnail-img{src: book.decorate.front_image , alt: 'design-book'}
     .thumb-hover
       .general-thumb-link-wrap
         = link_to(book_path(book), class: 'thumb-hover-link') do

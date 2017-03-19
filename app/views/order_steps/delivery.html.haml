@@ -15,7 +15,7 @@
   = render_error @form.billing_address if @form.billing_address
   = render_error @form.shipping_address if @form.shipping_address
   = form_tag wizard_path, method: :patch do
-    %h3.general-subtitle Credit Card
+    %h3.general-subtitle Payment
     .visible-xs
       .general-cart-item.divider-lg-bottom
         %table.table
@@ -83,7 +83,7 @@
               %td
                 %span.price.font-16.in-gold-500 €#{delivery.price}
     .general-text-align
-      %p.in-gold-500.font-18 Order Summary
+      %p.in-gold-500.font-18= t('orders.order_summary')
       %table.general-summary-table
         = render 'order_steps/price'
     .text-center

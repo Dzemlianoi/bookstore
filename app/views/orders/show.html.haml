@@ -32,16 +32,16 @@
     .col-sm-3
       %h3.general-subtitle.mt-0= t('orders.payment_info')
       %p.general-address
-        #{private_show(@order.card.card_number)}
+        #{@order.card.private_show}
         %br
         #{@order.card.expire_date}
   .visible-xs
     - @order.order_items.each do |item|
       .general-cart-item.divider-lg
         .general-img-wrap-table
-          %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          %img.cart-img-shadow{src: item.book.decorate.front_image}
         %p.title= item.book.name
-        %P.in-grey-600.fw-300= first_sentence_description(item.book)
+        %P.in-grey-600.fw-300= item.book.decorate.first_sentence_description
         %table.table
           %tr
             %td
@@ -76,10 +76,10 @@
           %tr
             %td
               .general-img-wrap-table
-                %img.cart-img-shadow.pull-left{src: get_image(item.book), alt: "design-book"}
+                %img.cart-img-shadow.pull-left{src: item.book.decorate.front_image, alt: "design-book"}
             %td
               %p.title= item.book.name
-              %p.in-grey-600.fw-300= first_sentence_description(item.book)
+              %p.in-grey-600.fw-300= item.book.decorate.first_sentence_description
             %td
               %span.font-16.in-gold-500 €#{item.book.price}
             %td

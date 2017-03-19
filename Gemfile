@@ -31,6 +31,7 @@ gem 'html2haml'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
+gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
 gem 'draper'
 
 gem 'rails_admin', '~> 1.0'
@@ -54,7 +55,6 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'poltergeist'
   gem 'selenium-webdriver'
-  gem 'rubocop'
   gem 'capybara-email'
   gem 'letter_opener_web'
 end

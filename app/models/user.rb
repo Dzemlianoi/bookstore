@@ -83,4 +83,8 @@ class User < ApplicationRecord
   def is_guest?
     !guest_token.nil?
   end
+
+  def verified?
+    orders.after_confirmation.present?
+  end
 end

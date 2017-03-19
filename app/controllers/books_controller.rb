@@ -10,6 +10,11 @@ class BooksController < ApplicationController
     @books = @books.order(ordering).page book_params[:page]
   end
 
+  def show
+    @reviews = @book.reviews.approved.decorate
+    @book = @book.decorate
+  end
+
   private
 
   def ordering
