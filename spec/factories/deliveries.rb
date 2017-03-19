@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :delivery do
-    title { "#{FFaker::Address.country} delivery" }
+    title { "#{FFaker::Lorem.word} delivery" }
     price 30.02
     optimistic_days 1
     pesimistic_days 5

@@ -5,7 +5,7 @@ FactoryGirl.define do
     address 'Test 12'
     city 'Dnipro'
     zip 49000
-    phone '+3807777777'
+    phone '+380967777777'
     country 'AF'
   end
 
