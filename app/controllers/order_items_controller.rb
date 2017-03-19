@@ -34,18 +34,12 @@ class OrderItemsController < ApplicationController
   private
 
   def get_order
-    current_order || current_user_or_guest.
-        orders.
-        create(track_number: "R-#{rand(99)}#{Date.today.to_time.to_i}")
+    current_order || current_user_or_guest.orders
+      .create(track_number: "R-#{rand(99)}#{Date.today.to_time.to_i}")
   end
 
   def guest_create
     cookies[:guest_token] = User.create_by_token
-  end
-
-  def current_order_active?
-    return unless current_order
-    current_order.active?
   end
 
   def order_item_params

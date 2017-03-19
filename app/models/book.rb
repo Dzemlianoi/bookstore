@@ -44,9 +44,8 @@ class Book < ApplicationRecord
   private
 
   def valid_year
-    if Date.current.year < publication_year.to_i
-      errors.add(:publication_year, I18n.t('flashes.error.wrong_year'))
-    end
+    return unless Date.current.year < publication_year.to_i
+    errors.add(:publication_year, I18n.t('flashes.error.wrong_year'))
   end
 
   def increment_books_count

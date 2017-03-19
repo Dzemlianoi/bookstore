@@ -32,7 +32,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
-gem 'draper'
+gem 'draper', '3.0.0.pre1'
 
 gem 'rails_admin', '~> 1.0'
 gem 'countries'

@@ -14,8 +14,7 @@ class Delivery < ApplicationRecord
   validate :pesimistic_greater_optimistic
 
   def pesimistic_greater_optimistic
-    if pesimistic_days < optimistic_days
-      errors.add(:optimistic_days, I18n.t('flashes.error.wrong_days_delivery'))
-    end
+    return if pesimistic_days > optimistic_days
+    errors.add(:optimistic_days, I18n.t('flashes.error.wrong_days_delivery'))
   end
 end
