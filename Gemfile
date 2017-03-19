@@ -31,6 +31,7 @@ gem 'html2haml'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
+gem 'draper'
 
 gem 'rails_admin', '~> 1.0'
 gem 'countries'

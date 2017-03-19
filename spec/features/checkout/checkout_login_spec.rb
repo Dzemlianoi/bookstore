@@ -1,4 +1,4 @@
-feature 'Checkout login', type: :feature, js: true, skip: true do
+feature 'Checkout login', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let!(:mobile_book) { create(:book, :long_description)  }
   let!(:user) { create :user }

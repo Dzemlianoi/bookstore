@@ -8,7 +8,7 @@ feature 'Book', type: :feature, js: true do
     visit book_path(mobile_book)
   end
 
-  context 'main book page', skip: true do
+  context 'main book page' do
     scenario 'main elements' do
       expect(page).to have_content(I18n.t('books.show.back'))
       expect(first('input.btn-default').value).to eq I18n.t('books.show.cart_add')

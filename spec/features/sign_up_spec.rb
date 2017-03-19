@@ -1,4 +1,4 @@
-feature 'Sign up', type: :feature, js: true, skip: true do
+feature 'Sign up', type: :feature, js: true do
   let!(:category) { create :category, name: 'Mobile Development' }
 
   context 'successfull' do

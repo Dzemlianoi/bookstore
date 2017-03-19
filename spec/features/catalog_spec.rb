@@ -1,4 +1,4 @@
-feature 'Catalog', type: :feature, js: true, skip: true do
+feature 'Catalog', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let!(:design) { create :category, name: 'Design' }
 

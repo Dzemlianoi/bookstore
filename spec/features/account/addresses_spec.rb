@@ -1,4 +1,4 @@
-feature 'My account addresses', type: :feature, js: true, skip: true do
+feature 'My account addresses', type: :feature, js: true do
   let(:user) { create :user }
   let!(:category) { create :category, name: 'Mobile Development' }
   let(:attributes) { attributes_for(:users_address) }

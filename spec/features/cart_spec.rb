@@ -1,4 +1,4 @@
-feature 'Cart', type: :feature, js: true, skip: true do
+feature 'Cart', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let(:mobile_book) { create(:book, category: mobile)  }
   let(:user) { create :user }

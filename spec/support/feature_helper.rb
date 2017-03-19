@@ -39,6 +39,23 @@ module FeatureHelper
     find("##{type}_city").set options[:city]
     find("##{type}_zip").set options[:zip]
     find("##{type}_phone").set options[:phone]
+  end
+
+  def fill_card_checkout(options)
+    find('#card_card_number').set options[:card_number]
+    find('#card_name').set options[:name]
+    find('#card_cvv').set options[:cvv]
+    find('#card_expire_date').set options[:expire_date]
     first('input[type=submit]').click
+  end
+
+  def full_fill_checkout(address, card)
+    fill_address_checkout('shipping_address', address)
+    fill_address_checkout('billing_address', address)
+    find('input[type=submit]').click
+    find('input[type=submit]').click
+    first('span.radio-icon').click
+    find('input[type=submit]').click
+    fill_card_checkout(card)
   end
 end

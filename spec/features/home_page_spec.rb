@@ -1,4 +1,4 @@
-feature 'Show books', type: :feature, js: true, skip: true do
+feature 'Show books', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let!(:design) { create :category, name: 'Web Design' }
   let!(:book_mobile_first) { create :book, category: mobile }

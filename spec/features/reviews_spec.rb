@@ -1,8 +1,7 @@
-feature 'Reviews', type: :feature, js: true, skip: true do
+feature 'Reviews', type: :feature, js: true do
   let!(:book) { create :book }
   let!(:user) { create :user }
   let!(:review) { create :review, user: user, book: book, state: 'approved' }
-
 
   before do
     create_list(:review, 16, { user: (create :user), book: book, state: 'approved' })

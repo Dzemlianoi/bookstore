@@ -1,4 +1,4 @@
-feature 'Sign in', type: :feature, js: true, skip: true do
+feature 'Sign in', type: :feature, js: true do
   let(:user) { create :user }
   let!(:category) { create :category, name: 'Mobile Development' }
 
