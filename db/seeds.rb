@@ -10,6 +10,16 @@ def generate_user(admin = nil)
   user.save!
 end
 
+def generate_admin
+  user = User.new(
+      email:                  'admin@admin.com',
+      password:               'addmin',
+  )
+  user[:role_name] = 'admin' if admin
+  user.skip_confirmation!
+  user.save!
+end
+
 def generate_categories
   ['Mobile Development', 'Web design', 'Web Development', 'Photo'].map do |category|
     Category.new(name: category).save!
@@ -70,6 +80,7 @@ end
 generate_user('admin')
 generate_categories
 generate_materials
+generate_admin
 15.times { generate_author }
 100.times { generate_book }
 generate_dimensions_for_books

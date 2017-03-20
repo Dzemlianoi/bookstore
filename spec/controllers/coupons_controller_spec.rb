@@ -5,9 +5,9 @@ RSpec.describe CouponsController, type: :controller do
 
   context 'right POST #create' do
     before do
-      post :create, coupon: { code: coupon.id }
       allow(controller).to receive(:current_order) { Order.new }
       allow(:current_order).to receive(:subtotal_more_than_discount?).with(coupon).and_return(true)
+      post :create, coupon: { code: coupon.id }
     end
 
     it 'has a 200 status code' do
