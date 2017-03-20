@@ -4,6 +4,7 @@
 !/tmp/.keep
 .ruby-gemset
 /.idea/
+/public/
 
 # Ignore application configuration
 # /config/application.yml
