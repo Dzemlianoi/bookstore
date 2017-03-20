@@ -6,7 +6,7 @@ RSpec.describe ReviewsController, type: :controller do
   context 'POST #create' do
     before do
       allow(controller).to receive(:current_user) { user }
-      post :create, params: { review: attributes_review }
+      post :create, attributes_review
     end
 
     it 'render show' do
