@@ -1,8 +1,6 @@
 class Address < ApplicationRecord
 
   belongs_to :addressable, polymorphic: true
-  has_one :order, foreign_key: 'shipping_address_id'
-  has_one :order, foreign_key: 'billing_address_id'
   enum kind: [:billing, :shipping]
 
   scope :shipping_address,  -> { where(kind: 'shipping').first }

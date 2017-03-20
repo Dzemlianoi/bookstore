@@ -7,7 +7,7 @@ class Book < ApplicationRecord
                                      .limit(num)}
 
   belongs_to :category
-  has_one    :book_dimension
+  has_one    :book_dimension, dependent: :destroy
   has_many   :book_materials
   has_many   :book_authors
   has_many   :reviews

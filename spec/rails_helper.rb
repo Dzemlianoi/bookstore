@@ -8,6 +8,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 require 'spec_helper'
 require 'rspec/rails'
+require 'aasm/rspec'
 require 'omniauth'
 
 
