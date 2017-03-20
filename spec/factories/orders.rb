@@ -6,13 +6,12 @@ FactoryGirl.define do
       order_items { create_list(:order_item, 2) }
     end
 
-    trait :checkout_package do
+    trait :checkout_page do
       order_items { create_list(:order_item, 2) }
-      coupon
-      shipping { create :address_order, :shipping }
-      billing { create :address_order, :billing }
+      addresses { create :address, kind: 'shipping' }
+      addresses { create :address, kind: 'billing' }
       delivery
-      credit_card
+      card
     end
   end
 end

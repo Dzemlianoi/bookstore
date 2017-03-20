@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :delivery
 
-  validates_uniqueness_of :track_number
+  # validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
   scope :in_carting, -> { where(aasm_state: [:cart, :filled]) }
