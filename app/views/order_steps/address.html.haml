@@ -33,12 +33,17 @@
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('users.addresses.shipping_address')
-        .shipping-fields
-          = fields_for :shipping_address, @form.form_shipping_address do |f|
-            = render 'forms/address_form', f: f, kind: :shipping
+        - if @form.order.use_billing
+          .shipping-fields{style: 'display: none'}
+            = fields_for :shipping_address, @form.form_shipping_address do |f|
+              = render 'forms/address_form', f: f, kind: :shipping
+        - else
+          .shipping-fields
+            = fields_for :shipping_address, @form.form_shipping_address do |f|
+              = render 'forms/address_form', f: f, kind: :shipping
         .form-group.checkbox
           %label.checkbox-label
-            = check_box_tag :shipping_check, false, false, hidden: true, class: 'checkbox-input'
+            = check_box_tag :use_billing, @form.order.use_billing, @form.order.use_billing, hidden: true, class: 'checkbox-input'
             %span.checkbox-icon
               %i.fa.fa-check
             %span.checkbox-text= t('orders.use_billing')

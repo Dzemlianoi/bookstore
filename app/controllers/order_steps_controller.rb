@@ -36,7 +36,7 @@ class OrderStepsController < ApplicationController
 
   def order_params
     params.permit(
-      :shipping_check,
+      :use_billing,
       :delivery,
       :success,
       shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone],

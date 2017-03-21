@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
-  load_and_authorize_resource :order, only: [:show, :confirm]
-  load_and_authorize_resource only: :index
-
+  load_and_authorize_resource
   helper_method :order_params
 
   def index

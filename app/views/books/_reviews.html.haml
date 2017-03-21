@@ -3,7 +3,6 @@
     #{t('books.reviews.title')}(#{@book.reviews.approved.length})
 
   - @reviews.each_with_index do |review|
-    -byebug
     .general-message-wrap.divider-lg
       .clearfix
         - if review.user.image.nil?

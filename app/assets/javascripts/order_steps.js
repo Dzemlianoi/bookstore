@@ -3,6 +3,7 @@ $(document).ready(function(){
   var old_delivery_elem = $('input[name = delivery]:checked');
   var total_delivery_price_elem = $('tr.delivery-price .pricable');
   var old_total_price = +total_price_elem.text().slice(1);
+
   $('.checkbox-icon').click(function(){
     $('.shipping-fields').toggle();
   });
@@ -13,5 +14,10 @@ $(document).ready(function(){
     var new_delivery_price = +$(this).closest('tr').find('.price').text().slice(1);
     total_delivery_price_elem.text('€' + new_delivery_price);
     total_price_elem.text('€' + (old_total_price - old_delivery_price + new_delivery_price));
+  })
+
+  $('.checkbox-label').click(function(){
+      var check = $('.checkbox-input');
+      check.val(check[0].checked ? "true" : "false");
   })
 });
