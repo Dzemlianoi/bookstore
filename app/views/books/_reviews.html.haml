@@ -31,10 +31,7 @@
         %fieldset
           %span.star-cb-group
             - 5.downto(1) do |num|
-              - if num == 4
-                = f.radio_button :rating, num, id:"rating-#{num}", checked: true
-              - else
-                = f.radio_button :rating, num, id:"rating-#{num}"
+              = f.radio_button :rating, num, id:"rating-#{num}"
               %label{for: "rating-#{num}"}
       .form-group.general-w-50
         = f.label :name, html: {class: 'control-label input-label', 'data-bar' => t('books.reviews.name_label')}
