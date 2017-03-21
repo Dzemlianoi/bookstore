@@ -12,7 +12,6 @@ class BooksController < ApplicationController
 
   def show
     @reviews = @book.reviews.approved.decorate
-    @book = @book.decorate
   end
 
   private
