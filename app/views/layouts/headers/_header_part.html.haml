@@ -6,6 +6,9 @@
         = link_to(t('layout.links.settings'), edit_user_registration_path)
       %li
         = link_to(t('orders.my_orders'), orders_path)
+      - if current_user(&:is_admin?)
+        %li
+          = link_to(t('general.admin_panel'), rails_admin.dashboard_path)
       %li.divider{role: 'separator'}
       %li
         = link_to(t('layout.links.logout'), destroy_user_session_path, :method => :delete)

@@ -14,6 +14,7 @@ en:
     change: 'Change'
     cancel: 'Cancel'
     cart: 'Cart'
+    admin_panel: 'Admin panel'
   layout:
     links:
       home: 'Home'
