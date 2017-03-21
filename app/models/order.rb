@@ -11,22 +11,16 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :delivery
 
-  # validates_uniqueness_of :track_number
+  validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
+  MY_ORDERS_STATES = [:in_processing, :in_delivery, :completed]
+
   scope :in_carting, -> { where(aasm_state: [:cart, :filled]) }
-  scope :after_confirmation, -> { where(aasm_state: [:in_processing, :in_delivery, :completed]) }
+  scope :after_confirmation, -> { where(aasm_state: MY_ORDERS_STATES) }
   scope :after_cart, -> { where(aasm_state: [:in_processing, :in_delivery, :completed]) }
   scope :newest, -> { order('created_at DESC') }
   scope :active, -> { where.not(aasm_state: :canceled) }
-
-  DEFAULT_SORT_KEY = :new
-  ORDERING = {
-      priceA: 'total_price ASC',
-      priceD: 'total_price DESC',
-      new:    'created_at DESC',
-      old:    'created_at ASC',
-  }
 
   aasm column: 'aasm_state' do
     state :cart, initial: true

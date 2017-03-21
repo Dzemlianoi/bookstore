@@ -1,10 +1,11 @@
 module OrderHelper
   def current_sort
-    return params[:order] if sort_present?
-    Order::DEFAULT_SORT_KEY
+    return params[:order].to_s.humanize if sort_present?
+    I18n.t('books.catalog.all')
   end
 
   def sort_present?
-    (params.key? :order) && Order::ORDERING[params[:order].to_sym].present?
+    return unless params.key? :order
+    Order::MY_ORDERS_STATES.include? params[:order].to_sym
   end
 end

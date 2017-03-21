@@ -5,8 +5,8 @@ class OrdersController < ApplicationController
   helper_method :order_params
 
   def index
-    redirect_to :root, alert: 'No active orders' if @orders.after_cart.empty?
-    @orders = @orders.after_cart.order(ordering)
+    @orders = @orders.after_cart
+    @orders = @orders.send(order_params[:order].to_sym) if status_present?
   end
 
   def show
@@ -28,8 +28,8 @@ class OrdersController < ApplicationController
     params.permit(:token, :order)
   end
 
-  def ordering
-    order = (order_params.key? :order) ? order_params[:order].to_sym : nil
-    Order::ORDERING.key?(order) ? Order::ORDERING[order] : Order.default_sort
+  def status_present?
+    return unless order_params[:order]
+    Order::MY_ORDERS_STATES.include? order_params[:order].to_sym
   end
 end

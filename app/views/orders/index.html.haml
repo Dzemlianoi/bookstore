@@ -3,12 +3,14 @@
   %p.lead.small.mb-10.visible-xs= t('books.catalog.sort_by')
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      = t("orders.sorting.#{current_sort}")
+      = current_sort
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      - Order::ORDERING.each do |value, _|
+      %li
+        = link_to t('books.catalog.all'), order_params.merge(order: 'after_confirmation')
+      - Order::MY_ORDERS_STATES.each do |key|
         %li
-          = link_to t("orders.sorting.#{value}"), order_params.merge(order: value)
+          = link_to key.to_s.humanize, order_params.merge(order: key)
   .visible-xs
     - @orders.each do |order|
       = link_to order_path(order), class: 'no-link' do
