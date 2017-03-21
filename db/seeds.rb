@@ -1,11 +1,10 @@
 require 'ffaker'
 
-def generate_user(admin = nil)
+def generate_user
   user = User.new(
     email:                  FFaker::Internet.email,
     password:               FFaker::Internet.password,
   )
-  user[:role_name] = 'admin' if admin
   user.skip_confirmation!
   user.save!
 end
@@ -13,9 +12,9 @@ end
 def generate_admin
   user = User.new(
       email:                  'admin@admin.com',
-      password:               'addmin',
+      password:               'addmine',
   )
-  user[:role_name] = 'admin' if admin
+  user[:role_name] = 'admin'
   user.skip_confirmation!
   user.save!
 end
@@ -59,9 +58,9 @@ def generate_dimensions_for_books
   end
 end
 
-def generate_coupons
+def generate_coupons(custom_coupon = nil)
   Coupon.create!(
-    code: SecureRandom.hex(4).upcase,
+    code: custom_coupon ? custom_coupon : SecureRandom.hex(4).upcase,
     discount: rand(1...10)
   )
 end
@@ -77,12 +76,15 @@ def generate_delivery
 end
 
 5.times { generate_user }
-generate_user('admin')
 generate_categories
 generate_materials
-generate_admin
 15.times { generate_author }
 100.times { generate_book }
 generate_dimensions_for_books
-20.times { generate_coupons }
+10.times { generate_coupons }
 4.times { generate_delivery }
+
+generate_admin
+generate_coupons('00000')
+
+

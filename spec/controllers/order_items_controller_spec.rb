@@ -45,7 +45,7 @@ RSpec.describe OrderItemsController, type: :controller do
     it 'should delete order item' do
       allow(controller).to receive(:current_order) { my_order }
       item_id = my_order.order_items.first.id
-      expect{ delete :destroy, params:{ id: item_id }}.to change{ OrderItem.count }.by(1)
+      expect{ delete :destroy, params:{ id: item_id } }.to change{ OrderItem.count }.by(1)
     end
   end
 end
