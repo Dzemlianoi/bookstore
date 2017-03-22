@@ -18,8 +18,7 @@ class OrderStepsForm
           params[:shipping_address] = params[:billing_address]
           @order.update_attributes(use_billing: 1)
         end
-        create_addresses(params)
-        orders_saved?
+        !!create_addresses(params) & orders_saved?
       when :delivery then create_delivery(params[:delivery])
       when :payment then create_credit_card(params[:card])
       when :confirm then @order.in_confirmation! if params[:success] && !@order.in_confirmation?

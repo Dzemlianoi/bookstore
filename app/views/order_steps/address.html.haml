@@ -12,9 +12,6 @@
           %span.step-number= number + 1
           %span.step-text.hidden-xs= checkout_step.to_s.capitalize
         %li.step-divider
-  = render_error @form.billing_address if @form.billing_address
-  = render_error @form.shipping_address if @form.shipping_address
-  = render_error @updating_result if @updating_result
   = form_tag wizard_path, class: 'res-mb-100', method: :patch do
     .hidden-xs.hidden-sm
       .row
@@ -28,18 +25,18 @@
         .visible-xs.visible-sm
           %h3.general-subtitle= t('users.addresses.billing_address')
           %p.general-info-text= t('orders.fields_required')
-        = fields_for :billing_address, @form.form_billing_address do |f|
+        = simple_fields_for :billing_address, @form.form_billing_address do |f|
           = render 'forms/address_form', f: f, kind: :billing
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('users.addresses.shipping_address')
         - if @form.order.use_billing
           .shipping-fields{style: 'display: none'}
-            = fields_for :shipping_address, @form.form_shipping_address do |f|
+            = simple_fields_for :shipping_address, @form.form_shipping_address do |f|
               = render 'forms/address_form', f: f, kind: :shipping
         - else
           .shipping-fields
-            = fields_for :shipping_address, @form.form_shipping_address do |f|
+            = simple_fields_for :shipping_address, @form.form_shipping_address do |f|
               = render 'forms/address_form', f: f, kind: :shipping
         .form-group.checkbox
           %label.checkbox-label

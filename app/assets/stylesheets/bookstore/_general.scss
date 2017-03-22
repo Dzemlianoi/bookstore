@@ -258,6 +258,14 @@ img {
   color:black;
   cursor: pointer;
 }
+
+.simple_form  .field_with_errors {
+  color: red;
+    & div.input:focus {
+      border: 1px solid #ff0000; /* red */
+    }
+}
+
 .star-cb-group {
   font-size: 0;
   * {
