@@ -3,7 +3,7 @@ class CouponsController < ApplicationController
 
   def create
     @coupon = Coupon.find_by(code: coupon_params[:code], order: nil)
-    redirect_to root_path, alert: t('coupon.not_found') and return unless @coupon
+    redirect_to order_items_path, alert: t('coupon.not_found') and return unless @coupon
     if current_order.subtotal_more_than_discount? @coupon
       @coupon.update(order:current_order)
       flash.keep.notice = t('coupon.added')

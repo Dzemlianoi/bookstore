@@ -19,8 +19,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :images
   accepts_nested_attributes_for :book_dimension
 
-  paginates_per 12
-
+  DEFAULT_PER = 12
   DEFAULT_IMAGE_NAME = 'book_default.jpg'
   DEFAULT_SORT_KEY = :titleA
   ORDERING = {
