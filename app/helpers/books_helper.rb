@@ -1,10 +1,10 @@
 module BooksHelper
-  def sort_present?
+  def category_sort_present?
     params.key?(:order) && Book::ORDERING[params[:order].to_sym].present?
   end
 
-  def current_sort
-    return params[:order] if sort_present?
+  def current_sorting
+    return params[:order] if category_sort_present?
     Book::DEFAULT_SORT_KEY
   end
 
