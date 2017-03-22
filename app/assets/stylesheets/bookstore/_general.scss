@@ -259,10 +259,14 @@ img {
   cursor: pointer;
 }
 
-.simple_form  .field_with_errors {
-  color: red;
+.form-group {
+  min-height: 83px;
+}
+
+.field_with_errors {
+  color: red !important;
     & div.input:focus {
-      border: 1px solid #ff0000; /* red */
+      border: 1px solid #ff0000 !important;
     }
 }
 

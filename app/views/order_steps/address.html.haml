@@ -25,18 +25,18 @@
         .visible-xs.visible-sm
           %h3.general-subtitle= t('users.addresses.billing_address')
           %p.general-info-text= t('orders.fields_required')
-        = simple_fields_for :billing_address, @form.form_billing_address do |f|
+        = simple_fields_for :billing_address, @form.billing_address do |f|
           = render 'forms/address_form', f: f, kind: :billing
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('users.addresses.shipping_address')
         - if @form.order.use_billing
           .shipping-fields{style: 'display: none'}
-            = simple_fields_for :shipping_address, @form.form_shipping_address do |f|
+            = simple_fields_for :shipping_address, @form.shipping_address do |f|
               = render 'forms/address_form', f: f, kind: :shipping
         - else
           .shipping-fields
-            = simple_fields_for :shipping_address, @form.form_shipping_address do |f|
+            = simple_fields_for :shipping_address, @form.shipping_address do |f|
               = render 'forms/address_form', f: f, kind: :shipping
         .form-group.checkbox
           %label.checkbox-label

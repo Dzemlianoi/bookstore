@@ -15,7 +15,7 @@ class Ability
     elsif !user.is_guest?
       can [:create, :index], Review
       can [:read, :create, :update,], Address, addressable_type: 'User', addressable_id: user.id
-      can [:read, :create, :update, :update], Order, user: user
+      can [:read, :create, :update, :destroy], Order, user: user
     end
   end
 end

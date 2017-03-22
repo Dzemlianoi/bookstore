@@ -1,17 +1,17 @@
 = f.hidden_field :kind, value: kind
 .form-group
-  = f.input :first_name, label: "#{t('users.addresses.first_name.placeholder')}", input_html: { class: 'form-control'}
+  = f.input :first_name, plaсeholder: "#{I18n.t('users.addresses.first_name.placeholder')}", label: t('users.addresses.first_name.label'), input_html: { class: 'form-control' }
 .form-group
-  = f.input :last_name, label: "#{t('users.addresses.last_name.placeholder')}", input_html: { class: 'form-control'}
+  = f.input :last_name, plaсeholder: t('users.addresses.last_name.placeholder'), label: t('users.addresses.last_name.label'), input_html: { class: 'form-control' }
 .form-group
-  = f.input :address, label: "#{t('users.addresses.address.placeholder')}", input_html: { class: 'form-control'}
+  = f.input :address, plaseholder: t('users.addresses.address.placeholder'), label: t('users.addresses.address.label'), input_html: { class: 'form-control' }
 .form-group
-  = f.input :city, label: "#{t('users.addresses.city.placeholder')}", input_html: { class: 'form-control'}
+  = f.input :city, plaсeholder: t('users.addresses.city.placeholder'), label: t('users.addresses.city.label'), input_html: { class: 'form-control' }
 .form-group
-  = f.input :zip, label: "#{t('users.addresses.zip.placeholder')}", input_html: { class: 'form-control'}
+  = f.input :zip, plaсeholder: t('users.addresses.zip.placeholder'), label: t('users.addresses.zip.label'), input_html: { class: 'form-control' }
 .form-group
   = f.input :country, as: :country, priority_countries: ["UA", "RU", "AU", "US"],
     label: t('users.addresses.country.label'),
     prompt: "Select country", input_html: { class: 'form-control' }
 .form-group
-  = f.input :phone, label: "#{t('users.addresses.phone.label')}", input_html: { class: 'form-control'}
+  = f.input :phone, plaсeholder: t('users.addresses.phone.placeholder'), label: t('users.addresses.phone.label'), input_html: { class: 'form-control' }

@@ -44,14 +44,17 @@ class OrderStepsForm
   private
 
   def create_billing(params)
-    @billing_address.update(params) if @order.billing_address
+    return @billing_address.update(params) if @order.billing_address
     @billing_address = @order.addresses.billing.create(params)
+    @billing_address.persisted?
   end
 
   def create_shipping(params)
     params = params.merge(kind: :shipping)
-    @shipping_address.update(params) if @order.shipping_address
+    return @shipping_address.update(params) if @order.shipping_address
     @shipping_address = @order.addresses.shipping.create(params)
+    @billing_address.persisted?
+
   end
 
   def create_credit_card(credit_card)
