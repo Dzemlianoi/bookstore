@@ -23,7 +23,7 @@ gem 'kaminari'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 gem 'mini_magick'
 gem 'simple_form'
 
@@ -40,8 +40,7 @@ gem 'countries'
 gem 'country_select', '~> 2.1.0'
 gem 'aasm', '~> 4.11', '>= 4.11.1'
 gem 'rails_admin_aasm'
-
-
+gem 'carrierwave-dropbox'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
