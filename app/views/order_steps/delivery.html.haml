@@ -12,53 +12,8 @@
           %span.step-number= number + 1
           %span.step-text.hidden-xs= checkout_step.to_s.capitalize
         %li.step-divider
-  = render_error @form.billing_address if @form.billing_address
-  = render_error @form.shipping_address if @form.shipping_address
   = form_tag wizard_path, method: :patch do
     %h3.general-subtitle Payment
-    .visible-xs
-      .general-cart-item.divider-lg-bottom
-        %table.table
-          %tr
-            %td.col-half
-              %span.in-grey-600 Method
-            %td.col-half
-              .form-group.radio.mt-0.mb-0
-                %label.radio-label
-                  %input.radio-input{type: "radio", hidden: "true"}
-                  %span.radio-icon
-                  %span.radio-text Delivery Next Day!
-          %tr
-            %td
-              %span.in-grey-600 Days
-            %td
-              %span.font-16.fw-300 3 to 7 days
-          %tr
-            %td
-              %span.in-grey-600 Price
-            %td
-              %span.font-16.in-gold-500 €5.00
-      .general-cart-item.divider-lg-bottom.mb-30
-        %table.table
-          %tr
-            %td.col-half
-              %span.in-grey-600 Method
-            %td.col-half
-              .form-group.radio.mt-0.mb-0
-                %label.radio-label
-                  %input.radio-input{type: "radio", hidden: "true"}
-                  %span.radio-icon
-                  %span.radio-text Delivery Next Day!
-          %tr
-            %td
-              %span.in-grey-600 Days
-            %td
-              %span.font-16.fw-300 3 to 7 days
-          %tr
-            %td
-              %span.in-grey-600 Price
-            %td
-              %span.font-16.in-gold-500 €5.00
     .hidden-xs.mb-res-50
       %table.table.table-hover
         %thead

@@ -1,6 +1,6 @@
 module AddressesHelper
   def address_form(kind)
-    right_kind(kind) || current_user.addresses.find_by_kind(kind) || Address.new
+    right_kind(kind) || current_user.addresses.find_or_initialize_by(kind: kind)
   end
 
   def right_kind(kind)

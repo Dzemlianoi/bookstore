@@ -18,12 +18,6 @@ class User < ApplicationRecord
 
   scope  :without_provider, -> { where(provider: nil, uid: nil) }
 
-  def set_fake_password
-    generated_password = Devise.friendly_token[0, 20]
-    self.password = generated_password
-    skip_confirmation!
-  end
-
   def billing_address
     addresses.find_by(kind: :billing)
   end
@@ -32,36 +26,49 @@ class User < ApplicationRecord
     addresses.find_by(kind: :shipping)
   end
 
+  def self.from_omniauth(auth)
+    @auth = auth
+    case
+      when where(email: @auth.info.email).without_provider.present?
+        @user = where(email: @auth.info.email).without_provider.first.update_attributes(
+            provider: @auth.provider, uid: @auth.uid,
+            first_name: get_user_name[:first_name], last_name: get_user_name[:last_name]
+        )
+        save_avatar
+      when where(provider: @auth.provider, uid: @auth.uid).empty?
+        generated_password = Devise.friendly_token[0, 20]
+        @user = create(
+            provider: @auth.provider, uid: @auth.uid,
+            email: @auth.info.email, password: generated_password,
+            first_name: get_user_name[:first_name], last_name: get_user_name[:last_name]
+        )
+        save_avatar
+        UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
+    end
+    @user || find_by(uid: @auth.uid)
+  end
+
   def self.create_by_token
     token = Devise.friendly_token[0, 20]
     create(guest_token: token)
     token
   end
 
-  def self.from_omniauth(auth)
-    @auth = auth
-    case
-      when where(email: @auth.info.email).without_provider.present?
-        @user = where(email: @auth.info.email).without_provider.first
-        @user.update_attributes(provider: @auth.provider, uid: @auth.uid)
-        save_avatar
-      when where(provider: @auth.provider, uid: @auth.uid).empty?
-        generated_password = Devise.friendly_token[0, 20]
-        @user = create!(
-            provider: @auth.provider, uid: @auth.uid,
-            email: @auth.info.email, password: generated_password
-        )
-        save_avatar
-        UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
-    end
-    @user || find_by_uid(@auth.uid)
+  def self.save_avatar
+    return unless @auth.info.image
+    @user.build_image
+    @user.image.remote_attachment_url = @auth.info.image.gsub('http://','https://')
   end
 
-  def self.save_avatar
-    if @auth.info.image
-      @user.build_image
-      @user.image.remote_attachment_url = @auth.info.image.gsub('http://','https://')
-    end
+  def self.get_user_name
+    names = @auth.info.name.split(' ')
+    { first_name: names[0], last_name: names[1] }
+  end
+
+  def set_fake_password
+    generated_password = Devise.friendly_token[0, 20]
+    self.password = generated_password
+    skip_confirmation!
   end
 
   def email_required?
