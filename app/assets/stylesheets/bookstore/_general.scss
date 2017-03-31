@@ -270,6 +270,13 @@ img {
     }
 }
 
+.checkbox-label {
+  cursor: default !important;
+  & .checkbox-icon {
+    cursor:pointer;
+  }
+}
+
 .star-cb-group {
   font-size: 0;
   * {

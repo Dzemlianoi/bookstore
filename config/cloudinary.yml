@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: booksstore-rg
+  api_key: '291184752517422'
+  api_secret: hAIPdawG7mQBgaxibx_oi-HOtfI
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: booksstore-rg
+  api_key: '291184752517422'
+  api_secret: hAIPdawG7mQBgaxibx_oi-HOtfI
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: booksstore-rg
+  api_key: '291184752517422'
+  api_secret: hAIPdawG7mQBgaxibx_oi-HOtfI
+  enhance_image_tag: true
+  static_image_support: false
