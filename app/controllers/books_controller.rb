@@ -7,7 +7,8 @@ class BooksController < ApplicationController
   load_and_authorize_resource only: :index, if:  -> { @category.nil? }
 
   def index
-    @books = @books.order(ordering).page(1).per(number_of_books)
+    @paginator = PaginatorService.new(params, @category)
+    @books = @books.order(ordering).limit(@paginator.limiting)
   end
 
   def show
@@ -15,11 +16,6 @@ class BooksController < ApplicationController
   end
 
   private
-
-  def number_of_books
-    return Book::DEFAULT_PER unless book_params[:page]
-    book_params[:page].to_i * Book::DEFAULT_PER
-  end
 
   def ordering
     order = (book_params.key? :order) ? book_params[:order].to_sym : nil
