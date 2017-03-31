@@ -1,7 +1,6 @@
 module OrderHelper
   def current_sort
-    return params[:order].to_s.humanize if sort_present?
-    I18n.t('books.catalog.all')
+    sort_present? ? params[:order].to_s.humanize : I18n.t('books.catalog.all')
   end
 
   def sort_present?

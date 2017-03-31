@@ -7,8 +7,8 @@ RailsAdmin.config do |config|
   config.authorize_with :cancan
   config.excluded_models = %w(BookMaterial BookAuthor BookDimension OrderItem)
   config.actions do
-    dashboard                     # mandatory
-    index                         # mandatory
+    dashboard
+    index
     new
     export
     bulk_delete
