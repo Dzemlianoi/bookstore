@@ -8,7 +8,7 @@
         .mb-20
           %img.img-responsive.centered{src: @book.decorate.front_image, alt: 'design-book'}
         .images.clearfix
-          - @book.images.each do |image|
+          - @book.images.newest(3).each do |image|
             %a.img-link{href: '#'}
               %img{src: image.attachment.url}
     .col-sm-6
