@@ -1,6 +1,5 @@
 class OrderItemsController < ApplicationController
-  load_resource :order_item, only: [:destroy, :update]
-  authorize_resource
+  load_and_authorize_resource :order_item, only: [:destroy, :update]
 
   def index
     return redirect_to :root, alert: t('flashes.error.no_order') unless current_order_active?
@@ -34,8 +33,7 @@ class OrderItemsController < ApplicationController
   private
 
   def get_order
-    current_order || current_user_or_guest.orders
-      .create(track_number: "R-#{rand(99)}#{Date.today.to_time.to_i}")
+    current_order || current_user_or_guest.orders.create
   end
 
   def guest_create

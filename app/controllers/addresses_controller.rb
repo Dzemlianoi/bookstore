@@ -7,9 +7,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address ||= current_user.addresses
-                   .find_by_kind(address_params[:kind])
-                   .update(address_params)
+    @address ||= current_user.addresses.find_by(kind: address_params[:kind]).update(address_params)
     render 'devise/registrations/edit' and return unless @address
     redirect_to edit_user_registration_path
   end

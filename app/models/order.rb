@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :delivery
 
+  before_create :set_track_number
+
   validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
@@ -25,7 +27,7 @@ class Order < ApplicationRecord
     state :cart, initial: true
     state :filled
     state :in_confirmation, after_enter: :send_confirmation
-    state :in_processing, after_enter: :send_treating
+    state :in_processing, after_enter: :treat_proccessing
     state :in_delivery
     state :completed, after_enter: :send_success
     state :canceled
@@ -97,7 +99,8 @@ class Order < ApplicationRecord
     OrderMailer.confirmation_send(user, self).deliver_now
   end
 
-  def send_treating
+  def treat_proccessing
+    self.confirmation_token = nil
     OrderMailer.treating_send(user, self).deliver_now
   end
 
@@ -137,5 +140,13 @@ class Order < ApplicationRecord
 
   def checkout_state?
     cart? || filled?
+  end
+
+  def order_state?
+    checkout_state?  || in_confirmation?
+  end
+
+  def set_track_number
+    self.track_number = "R-#{rand(99)}#{Date.today.to_time.to_i}"
   end
 end

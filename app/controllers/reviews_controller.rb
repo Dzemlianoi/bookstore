@@ -6,8 +6,7 @@ class ReviewsController < ApplicationController
     @reviews = @book.reviews.approved.decorate
     @review.skip_field_error_wrapper = true
     render 'books/show' and return unless @review.update(review_params.merge(user: current_user))
-    flash.keep[:success] = t('flashes.success.review_success')
-    redirect_to @review.book
+    redirect_to @review.book, notice: t('flashes.success.review_success')
   end
 
   private

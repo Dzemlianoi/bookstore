@@ -29,16 +29,12 @@ class OrderStepsController < ApplicationController
   private
 
   def go_root_unless_order
-    unless last_active_order && (last_active_order(&:checkout_state?) || last_active_order(&:in_confirmation?))
-      redirect_to :root, alert: t('flashes.error.no_order')
-    end
+    return if last_active_order(&:order_state?)
+    redirect_to :root, alert: t('flashes.error.no_order')
   end
 
   def order_params
-    params.permit(
-      :use_billing,
-      :delivery,
-      :success,
+    params.permit(:use_billing, :delivery, :success,
       shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
       billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone],
       card:             [:card_number, :cvv, :expire_date, :name]

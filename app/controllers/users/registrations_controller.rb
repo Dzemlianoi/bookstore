@@ -1,5 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
   def create
     @user = build_resource(sign_up_params)
     @user.set_fake_password if current_guest && fast_sign?

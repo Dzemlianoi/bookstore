@@ -54,7 +54,6 @@ class OrderStepsForm
     return @shipping_address.update(params) if @order.shipping_address
     @shipping_address = @order.addresses.shipping.create(params)
     @billing_address.persisted?
-
   end
 
   def create_credit_card(credit_card)

@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
 
   def confirm
     if @order.confirmation_token == order_params[:token]
-      @order.update_attributes(confirmation_token: nil)
       @order.treat!
       flash.keep[:success] = I18n.t('orders.successfull')
     end
