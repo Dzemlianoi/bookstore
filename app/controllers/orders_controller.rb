@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   helper_method :order_params
 
   def index
-    @orders = @orders.after_cart
+    @orders = current_user.orders.after_cart
     @orders = @orders.send(order_params[:order].to_sym) if status_present?
   end
 
