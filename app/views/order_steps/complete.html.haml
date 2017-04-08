@@ -3,12 +3,12 @@
   %ul.steps.list-inline
     - (wizard_steps - [:fast_sign]).each_with_index  do |checkout_step, number|
       - if current_step? checkout_step
-        = link_to wizard_path(checkout_step), class: 'step active' do
+        %a.step.active
           %span.step-number= number + 1
           %span.step-text.hidden-xs= checkout_step.capitalize
         %li.step-divider
       - else
-        = link_to wizard_path(checkout_step), class: 'step' do
+        %a.step
           %span.step-number= number + 1
           %span.step-text.hidden-xs= checkout_step.to_s.capitalize
         %li.step-divider
