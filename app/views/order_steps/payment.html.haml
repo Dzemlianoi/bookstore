@@ -8,7 +8,7 @@
           %span.step-text.hidden-xs= checkout_step.capitalize
         %li.step-divider
       - else
-        = link_to wizard_path(checkout_step), class: 'step' do
+        = link_to wizard_path(checkout_step, editing: true), class: 'step' do
           %span.step-number= number + 1
           %span.step-text.hidden-xs= checkout_step.to_s.capitalize
         %li.step-divider

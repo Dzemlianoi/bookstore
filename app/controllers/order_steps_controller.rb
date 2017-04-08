@@ -12,6 +12,7 @@ class OrderStepsController < ApplicationController
       when :address, :delivery, :payment
         step_to :fast_sign and return unless current_user
         step_to :complete and return if last_active_order.in_confirmation?
+        step_to :confirm and return if last_active_order.filled? && !order_params[:editing].present?
       when :confirm then return check_info_steps
       when :complete
         step_to :fast_sign and return unless current_user
@@ -34,7 +35,7 @@ class OrderStepsController < ApplicationController
   end
 
   def order_params
-    params.permit(:use_billing, :delivery, :success,
+    params.permit(:use_billing, :delivery, :success, :editing,
       shipping_address: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
       billing_address:  [:first_name, :last_name, :address, :city, :zip, :country, :phone],
       card:             [:card_number, :cvv, :expire_date, :name]
