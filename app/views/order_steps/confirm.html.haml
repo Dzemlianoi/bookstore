@@ -17,7 +17,7 @@
       %h3.general-subtitle= t('users.addresses.shipping_address')
       %p.general-address
         #{last_active_order.shipping_address.first_name} #{last_active_order.shipping_address.last_name}
-        = link_to t('general.edit'), wizard_path(:address), class:'general-edit'
+        = link_to t('general.edit'), wizard_path(:address, editing: true), class:'general-edit'
         %br
         = last_active_order.shipping_address.address
         %br
@@ -30,7 +30,7 @@
       %h3.general-subtitle= t('users.addresses.billing_address')
       %p.general-address
         #{last_active_order.billing_address.first_name} #{last_active_order.billing_address.last_name}
-        = link_to t('general.edit'), wizard_path(:address), class:'general-edit'
+        = link_to t('general.edit'), wizard_path(:address, editing: true), class:'general-edit'
         %br
         = last_active_order.billing_address.address
         %br
@@ -43,14 +43,14 @@
       %h3.general-subtitle= t('orders.shipments')
       %p.general-address
         = last_active_order.delivery.title
-        = link_to t('general.edit'), wizard_path(:delivery), class:'general-edit'
+        = link_to t('general.edit'), wizard_path(:delivery, editing: true), class:'general-edit'
         %br
         €#{last_active_order.delivery.price}
     .col-sm-3
       %h3.general-subtitle= t('orders.payment_info')
       %p.general-address
         = last_active_order.card.decorate.private_show
-        = link_to t('general.edit'), wizard_path(:payment), class:'general-edit'
+        = link_to t('general.edit'), wizard_path(:payment, editing: true), class:'general-edit'
         %br
         = last_active_order.card.expire_date
   .visible-xs

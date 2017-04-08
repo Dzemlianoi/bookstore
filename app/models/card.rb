@@ -1,5 +1,7 @@
 class Card < ApplicationRecord
   has_one :order
+  before_validation :trim_card_number, if: :card_number_present?
+  delegate :present?, to: :card_number, prefix: true
 
   validates_presence_of :cvv, :expire_date, :card_number, :name
   validates_length_of :cvv, minimum: 3
@@ -10,6 +12,10 @@ class Card < ApplicationRecord
   validate :correct_expiration_date
 
   private
+
+  def trim_card_number
+    card_number.delete!(' ')
+  end
 
   def correct_expiration_date
     return unless expire_date
