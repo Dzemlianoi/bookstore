@@ -7,16 +7,12 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email, unless: :is_guest?
 
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :trackable,
-         :validatable,
-         :confirmable,
-         :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :trackable, :validatable, :confirmable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   scope  :without_provider, -> { where(provider: nil, uid: nil) }
+  scope  :user_without_facebook, ->(email) { where(email: email).without_provider}
 
   def billing_address
     addresses.find_by(kind: :billing)
@@ -29,21 +25,20 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     @auth = auth
     case
-      when where(email: @auth.info.email).without_provider.present?
-        @user = where(email: @auth.info.email).without_provider.first.update_attributes(
-            provider: @auth.provider, uid: @auth.uid,
-            first_name: get_user_name[:first_name], last_name: get_user_name[:last_name]
-        )
-        save_avatar
-      when where(provider: @auth.provider, uid: @auth.uid).empty?
-        generated_password = Devise.friendly_token[0, 20]
-        @user = create(
-            provider: @auth.provider, uid: @auth.uid,
-            email: @auth.info.email, password: generated_password,
-            first_name: get_user_name[:first_name], last_name: get_user_name[:last_name]
-        )
-        save_avatar
-        UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
+    when user_without_facebook(@auth.info.email).present?
+      @user = user_without_facebook(@auth.info.email).first.update_attributes(
+        uid: @auth.uid, first_name: get_user_name[:first_name],
+        last_name: get_user_name[:last_name], provider: @auth.provider
+      )
+      save_avatar
+    when where(provider: @auth.provider, uid: @auth.uid).empty?
+      generated_password = Devise.friendly_token[0, 20]
+      @user = create(
+        provider: @auth.provider, uid: @auth.uid, email: @auth.info.email,
+        password: generated_password, first_name: get_user_name[:first_name], last_name: get_user_name[:last_name]
+      )
+      save_avatar
+      UserMailer.facebook_reg(@user, generated_password).deliver_later if @user.email
     end
     @user || find_by(uid: @auth.uid)
   end
@@ -71,18 +66,6 @@ class User < ApplicationRecord
     skip_confirmation!
   end
 
-  def email_required?
-    super && provider.blank? && guest_token.blank?
-  end
-
-  def password_required?
-    super && provider.blank? && guest_token.blank?
-  end
-
-  def confirmation_required?
-    super && provider.blank? && guest_token.blank?
-  end
-
   def is_admin?
     role_name.eql? 'admin'
   end
@@ -93,5 +76,11 @@ class User < ApplicationRecord
 
   def verified?
     orders.after_confirmation.present?
+  end
+
+  %w(email password confirmation).each do |method_part|
+    define_method "#{method_part}_required?" do
+      super && provider.blank? && guest_token.blank?
+    end
   end
 end
