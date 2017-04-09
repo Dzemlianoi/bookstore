@@ -74,6 +74,7 @@ class OrderStepsForm
   end
 
   def both_addresses_present?
-    @order.addresses.shipping.present? && @order.addresses.billing.present?
+    addresses = @order.addresses
+    addresses.shipping.any? & addresses.billing.present?
   end
 end

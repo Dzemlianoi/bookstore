@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     update_guest if current_guest
-    redirect_to order_step_path(id: :address) and return if params[:user][:checkout]
+    redirect_to order_step_path(id: :address) && return if params[:user][:checkout]
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
   end
