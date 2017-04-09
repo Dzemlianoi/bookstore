@@ -18,7 +18,7 @@ class OrderStepsForm
           params[:shipping_address] = params[:billing_address]
           @order.update_attribute(:use_billing, 1)
         end
-        !!create_addresses(params) & orders_saved?
+        addresses_saved?
       when :delivery then create_delivery(params[:delivery])
       when :payment then create_credit_card(params[:card])
       when :confirm then @order.in_confirmation! if params[:success] && !@order.in_confirmation?
@@ -53,7 +53,11 @@ class OrderStepsForm
     params = params.merge(kind: :shipping)
     return @shipping_address.update(params) if @order.shipping_address
     @shipping_address = @order.addresses.shipping.create(params)
-    @billing_address.persisted?
+    @shipping_address.persisted?
+  end
+
+  def addresses_saved?
+    create_addresses(params) & both_addresses_present?
   end
 
   def create_credit_card(credit_card)
@@ -69,7 +73,7 @@ class OrderStepsForm
     create_billing(params[:billing_address]) && create_shipping(params[:shipping_address])
   end
 
-  def orders_saved?
+  def both_addresses_present?
     @order.addresses.shipping.present? && @order.addresses.billing.present?
   end
 end
