@@ -10,14 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         update_guest if current_guest
         respond_with resource, location: success_redirect_location
       else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        super
       end
     else
-      clean_up_passwords resource
-      set_minimum_password_length
-      respond_with resource
+      super
     end
   end
 end
