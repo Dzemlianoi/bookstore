@@ -32,7 +32,6 @@ RSpec.describe OrderItemsController, type: :controller do
 
     it 'should create guest' do
       allow(controller).to receive(:current_user_or_guest) { false }
-      allow(controller).to receive(:get_order) { my_order }
       allow_any_instance_of(Order).to receive(:book_in_order?) { true }
       post :create, params: { order_item: { quantity: order_item.quantity, book_id: order_item.book_id  } }
       expect(controller).to receive(:guest_create)

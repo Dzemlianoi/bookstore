@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   load_resource :book
   load_and_authorize_resource through: :book, only: :create

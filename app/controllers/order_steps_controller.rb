@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderStepsController < ApplicationController
   include Wicked::Wizard
 
@@ -48,7 +50,7 @@ class OrderStepsController < ApplicationController
     @form ||= OrderStepsForm.new last_active_order
   end
 
-  def step_to step
+  def step_to(step)
     redirect_to wizard_path(step)
   end
 

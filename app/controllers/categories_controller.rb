@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   load_and_authorize_resource :category, only: :show
   load_and_authorize_resource :books, through: :category, only: :show

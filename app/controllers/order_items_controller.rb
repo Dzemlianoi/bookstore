@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderItemsController < ApplicationController
   load_and_authorize_resource :order_item, only: %i(destroy update)
 
@@ -8,7 +10,7 @@ class OrderItemsController < ApplicationController
 
   def create
     guest_create unless current_user_or_guest
-    @order = get_order
+    @order = current_order || current_user_or_guest.orders.create
     if @order.book_in_order? order_item_params[:book_id]
       flash.keep[:danger] = t('flashes.error.already_persist')
     else
@@ -31,10 +33,6 @@ class OrderItemsController < ApplicationController
   end
 
   private
-
-  def get_order
-    current_order || current_user_or_guest.orders.create
-  end
 
   def guest_create
     cookies[:guest_token] = User.create_by_token
