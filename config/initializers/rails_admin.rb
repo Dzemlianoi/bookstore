@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RailsAdmin.config do |config|
   config.authenticate_with do
     warden.authenticate! scope: :user

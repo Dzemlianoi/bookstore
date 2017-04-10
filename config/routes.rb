@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'categories#default'
   resources :categories do
@@ -13,12 +15,12 @@ Rails.application.routes.draw do
   resources :orders do
     get 'confirm', on: :member
   end
-  resources :order_steps, only: [:show, :update]
+  resources :order_steps, only: %i(show update)
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      sessions: 'users/sessions',
-      registrations: 'users/registrations'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 end

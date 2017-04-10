@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module ActiveModel::Conversion
   attr_accessor :skip_field_error_wrapper
 end
 
-ActionView::Base.field_error_proc = Proc.new {|html_tag, instance|
+ActionView::Base.field_error_proc = proc { |html_tag, instance|
   if instance.object && instance.object.skip_field_error_wrapper
     html_tag.html_safe
   else

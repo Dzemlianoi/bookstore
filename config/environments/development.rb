@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.cache_classes = false
   config.eager_load = false
@@ -16,19 +18,18 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.assets.raise_runtime_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-      address:              'smtp.gmail.com',
-      port:                 587,
-      domain:               'mail.google.com',
-      user_name:            ENV['email_account'],
-      password:             ENV['email_account_password'],
-      authentication:       :plain,
-      enable_starttls_auto: true
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'mail.google.com',
+    user_name:            ENV['email_account'],
+    password:             ENV['email_account_password'],
+    authentication:       :plain,
+    enable_starttls_auto: true
   }
 
   config.active_support.deprecation = :log

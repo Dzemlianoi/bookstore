@@ -1,5 +1,6 @@
-Rails.application.configure do
+# frozen_string_literal: true
 
+Rails.application.configure do
   config.cache_classes = true
   config.eager_load = false
   config.public_file_server.enabled = true
@@ -15,5 +16,4 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :stderr
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
 end
