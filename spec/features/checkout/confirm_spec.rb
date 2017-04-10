@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 feature 'My account confirm', type: :feature, js: true do
   let(:user) { create :user }
-  let(:category) { create :category, name: 'Mobile Development'}
-  let(:book) { create :book, category: category}
+  let(:category) { create :category, name: 'Mobile Development' }
+  let(:book) { create :book, category: category }
   let!(:order) { create :order, :with_items, user: user }
   let!(:delivery) { create :delivery }
   let(:card_attributes) { attributes_for(:card) }

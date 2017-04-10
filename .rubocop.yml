@@ -12,3 +12,5 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 Style/AndOr:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false

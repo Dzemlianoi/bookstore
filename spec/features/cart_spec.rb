@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 feature 'Cart', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
-  let(:mobile_book) { create(:book, category: mobile)  }
+  let(:mobile_book) { create(:book, category: mobile) }
   let(:user) { create :user }
   let(:coupon) { create :coupon }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Catalog', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let!(:design) { create :category, name: 'Design' }
@@ -15,7 +17,7 @@ feature 'Catalog', type: :feature, js: true do
     scenario 'main elements' do
       expect(page).to have_content(I18n.t('books.catalog.catalog'))
       expect(page).to have_content(I18n.t('books.catalog.view_more'))
-      expect(page).to have_selector('.filter-link',  text: mobile.name)
+      expect(page).to have_selector('.filter-link', text: mobile.name)
     end
 
     scenario 'pagination' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Show books', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
   let!(:design) { create :category, name: 'Web Design' }
@@ -26,7 +28,7 @@ feature 'Show books', type: :feature, js: true do
     end
 
     scenario 'users' do
-      sign_in(create :user)
+      sign_in create(:user)
       expect(page).to have_content(I18n.t('layout.links.profile'))
     end
   end

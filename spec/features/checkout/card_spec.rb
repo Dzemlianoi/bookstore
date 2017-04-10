@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'My account card', type: :feature, js: true do
   let(:user) { create :user }
   let!(:category) { create :category, name: 'Mobile Development' }
@@ -29,8 +31,5 @@ feature 'My account card', type: :feature, js: true do
       fill_card_checkout(card_attributes)
       expect(page).to have_content(I18n.t('users.addresses.billing_address'))
     end
-
-
   end
 end
-

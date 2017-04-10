@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 feature 'Book', type: :feature, js: true do
   let!(:mobile) { create :category, name: 'Mobile Development' }
-  let!(:mobile_book) { create(:book, :long_description)  }
+  let!(:mobile_book) { create(:book, :long_description) }
   let!(:user) { create :user }
   let!(:review) { create :review, user: user, book: mobile_book }
 

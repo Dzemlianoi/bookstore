@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'My account addresses', type: :feature, js: true do
   let(:user) { create :user }
   let!(:category) { create :category, name: 'Mobile Development' }

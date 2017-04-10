@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Sign up', type: :feature, js: true do
   let!(:category) { create :category, name: 'Mobile Development' }
 
