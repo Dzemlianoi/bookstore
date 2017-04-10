@@ -22,7 +22,6 @@ feature 'My account addresses', type: :feature, js: true do
 
     scenario 'main blocks' do
       expect(page).to have_selector('#address')
-      expect(page).to have_selector('#privacy')
     end
   end
 
@@ -36,7 +35,7 @@ feature 'My account addresses', type: :feature, js: true do
 
     scenario 'User fill invalid data' do
       fill_address('shipping', wrong_attributes)
-      expect(page).to have_content('Phone is invalid')
+      expect(page).to have_content('Phoneis invalid')
     end
   end
 end

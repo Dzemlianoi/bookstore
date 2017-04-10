@@ -38,7 +38,7 @@ feature 'My account addresses', type: :feature, js: true do
       fill_address_checkout('shipping_address', wrong_attributes)
       fill_address_checkout('billing_address', wrong_attributes)
       first('input[type=submit]').click
-      expect(page).to have_content('Phone is invalid')
+      expect(page).to have_content('Phoneis invalid')
     end
 
     scenario 'click use billing' do
