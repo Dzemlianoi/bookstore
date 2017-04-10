@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PaginatorService
   def initialize(params, category)
-    @page = params.has_key?(:page) ? params[:page].to_i : 1
+    @page = params.key?(:page) ? params[:page].to_i : 1
     @category = category
   end
 
