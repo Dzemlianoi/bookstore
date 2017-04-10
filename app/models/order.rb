@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include AASM
 
   has_many   :addresses, as: :addressable, dependent: :destroy
-  has_many   :order_items, dependent: :destroy,
-               after_add: :recalculate_total,
-               after_remove: :recalculate_total
+  has_many   :order_items, dependent: :destroy, after_add: :recalculate_total, after_remove: :recalculate_total
   has_many   :books, through: :order_items
   has_one    :coupon, dependent: :destroy
   belongs_to :card, dependent: :destroy
@@ -16,9 +16,9 @@ class Order < ApplicationRecord
   validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
-  MY_ORDERS_STATES = [:in_confirmation, :in_processing, :in_delivery, :completed]
+  MY_ORDERS_STATES = %i(in_confirmation in_processing in_delivery completed).freeze
 
-  scope :in_carting, -> { where(aasm_state: [:cart, :filled]) }
+  scope :in_carting, -> { where(aasm_state: %i(cart filled)) }
   scope :after_cart, -> { where(aasm_state: MY_ORDERS_STATES) }
   scope :newest, -> { order('created_at DESC') }
   scope :active, -> { where.not(aasm_state: :canceled) }
@@ -53,7 +53,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:cart, :filled, :in_confirmation, :in_delivery, :in_processing, :completed], to: :canceled
+      transitions from: %i(cart filled in_confirmation in_delivery in_processing completed), to: :canceled
     end
   end
 
@@ -70,7 +70,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def has_valid_addresses?
+  def valid_addresses?
     shipping_address && billing_address
   end
 
@@ -105,15 +105,15 @@ class Order < ApplicationRecord
   end
 
   def send_success
-    OrderMailer.success_letter(user,self).deliver_later
+    OrderMailer.success_letter(user, self).deliver_later
   end
 
-  def recalculate_total(*record)
+  def recalculate_total(_)
     update_attributes(total_price: total_price)
   end
 
   def subtotal_price
-    order_items.map{ |item| item.book[:price] * item.quantity }.inject(&:+)
+    order_items.map { |item| item.book[:price] * item.quantity }.inject(&:+)
   end
 
   def total_price
@@ -135,7 +135,7 @@ class Order < ApplicationRecord
   end
 
   def proved?
-    card && delivery && has_valid_addresses?
+    card && delivery && valid_addresses?
   end
 
   def checkout_state?
@@ -143,7 +143,7 @@ class Order < ApplicationRecord
   end
 
   def order_state?
-    checkout_state?  || in_confirmation?
+    checkout_state? || in_confirmation?
   end
 
   def set_track_number

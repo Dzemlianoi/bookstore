@@ -54,7 +54,7 @@ class OrderStepsController < ApplicationController
 
   def check_info_steps
     step_to :fast_sign and return unless current_user
-    step_to :address and return unless last_active_order.has_valid_addresses?
+    step_to :address and return unless last_active_order.valid_addresses?
     step_to :delivery and return unless last_active_order.delivery
     step_to :payment and return unless last_active_order.card
     last_active_order.filled! unless last_active_order.filled? || last_active_order.in_confirmation?

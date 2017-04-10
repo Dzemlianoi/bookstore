@@ -29,7 +29,7 @@ RSpec.describe Order, type: :model do
     it '.has_valid addresses' do
       allow(subject).to receive(:shipping_address) { true }
       allow(subject).to receive(:billing_address) { true }
-      expect(subject.has_valid_addresses?).to be_truthy
+      expect(subject.valid_addresses?).to be_truthy
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe Order, type: :model do
     it 'should return true if all present' do
       allow(subject).to receive(:card) { true }
       allow(subject).to receive(:delivery) { true }
-      allow(subject).to receive(:has_valid_addresses?) { true }
+      allow(subject).to receive(:valid_addresses?) { true }
       expect(subject.proved?).to be_truthy
     end
   end
