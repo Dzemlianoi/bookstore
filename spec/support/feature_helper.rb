@@ -24,12 +24,11 @@ module FeatureHelper
 
   def fill_address(type, options)
     within ".#{type}_form" do
-      fill_in I18n.t('users.addresses.first_name.placeholder'), with: options[:first_name]
-      fill_in I18n.t('users.addresses.last_name.placeholder'), with: options[:last_name]
-      fill_in I18n.t('users.addresses.address.placeholder'), with: options[:address]
-      fill_in I18n.t('users.addresses.city.placeholder'), with: options[:city]
-      fill_in I18n.t('users.addresses.zip.placeholder'), with: options[:zip]
-      fill_in I18n.t('users.addresses.phone.placeholder'), with: options[:phone]
+      fill_in 'address_first_name', with: options[:first_name]
+      fill_in 'address_last_name', with: options[:last_name]
+      fill_in 'address_address', with: options[:address]
+      fill_in 'address_zip', with: options[:zip]
+      fill_in 'address_phone', with: options[:phone]
       first('input[type=submit]').click
     end
   end
@@ -41,6 +40,7 @@ module FeatureHelper
     find("##{type}_city").set options[:city]
     find("##{type}_zip").set options[:zip]
     find("##{type}_phone").set options[:phone]
+    all("##{type}_country option")[2].select_option
   end
 
   def fill_card_checkout(options)
