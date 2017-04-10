@@ -2,7 +2,9 @@ AllCops:
   Rails: true
   Exclude:
     - db/schema.rb
-    - bin
+    - bin/*
+    - config.ru
+    - Rakefile
 Metrics/LineLength:
   Max: 120
 Metrics/MethodLength:
