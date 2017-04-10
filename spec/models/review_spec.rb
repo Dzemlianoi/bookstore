@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Review, type: :model do
   context 'fields' do
     it { is_expected.to belong_to :book }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Book, type: :model do
   context 'fields' do
     it { is_expected.to validate_presence_of :name }
@@ -16,7 +18,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe 'book counting' do
-    let(:category) { create(:category)}
+    let(:category) { create(:category) }
     let!(:book) { create(:book, category: category) }
     let!(:book1) { create(:book, category: category) }
 

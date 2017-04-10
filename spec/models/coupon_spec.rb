@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Coupon, type: :model do
   context 'fields' do
     it { is_expected.to belong_to :order }
@@ -9,4 +11,3 @@ RSpec.describe Coupon, type: :model do
     it { is_expected.to validate_numericality_of(:discount).is_greater_than 0 }
   end
 end
-

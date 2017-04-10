@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Order, type: :model do
   context 'fields' do
     it { is_expected.to have_many :addresses }

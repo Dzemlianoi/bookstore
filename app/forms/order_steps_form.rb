@@ -46,6 +46,7 @@ class OrderStepsForm
   private
 
   def create_address(type, params)
+    params = params.merge(kind: :shipping) if type.eql? 'shipping'
     return instance_variable_get("@#{type}_address").update(params) if @order.send("#{type}_address")
     instance_variable_set("@#{type}_address", @order.addresses.send(type).create(params))
     instance_variable_get("@#{type}_address").persisted?

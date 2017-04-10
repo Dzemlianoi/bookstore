@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Card, type: :model do
   context 'fields' do
     it { is_expected.to have_one :order }
