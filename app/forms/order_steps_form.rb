@@ -12,16 +12,16 @@ class OrderStepsForm
 
   def update(step, params)
     case step
-      when :address
-        @order.update_attributes(use_billing: 0) unless params.has_key? :use_billing
-        if params.has_key? :use_billing
-          params[:shipping_address] = params[:billing_address]
-          @order.update_attribute(:use_billing, 1)
-        end
-        addresses_saved?
-      when :delivery then create_delivery(params[:delivery])
-      when :payment then create_credit_card(params[:card])
-      when :confirm then @order.in_confirmation! if params[:success] && !@order.in_confirmation?
+    when :address
+      @order.update_attributes(use_billing: 0) unless params.has_key? :use_billing
+      if params.has_key? :use_billing
+        params[:shipping_address] = params[:billing_address]
+        @order.update_attribute(:use_billing, 1)
+      end
+      addresses_saved?(params)
+    when :delivery then create_delivery(params[:delivery])
+    when :payment then create_credit_card(params[:card])
+    when :confirm then @order.in_confirmation! if params[:success] && !@order.in_confirmation?
     end
   end
 
@@ -56,7 +56,7 @@ class OrderStepsForm
     @shipping_address.persisted?
   end
 
-  def addresses_saved?
+  def addresses_saved?(params)
     create_addresses(params) & both_addresses_present?
   end
 
