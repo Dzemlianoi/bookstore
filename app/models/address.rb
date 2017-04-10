@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Address < ApplicationRecord
   after_initialize :add_username, if: :new_record?
 

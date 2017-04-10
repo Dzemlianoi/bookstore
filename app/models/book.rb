@@ -1,10 +1,13 @@
-class Book < ApplicationRecord
+# frozen_string_literal: true
 
-  scope :newest,      -> (num) { order('created_at DESC').limit(num) }
-  scope :bestsellers, -> (num) { joins('LEFT JOIN order_items ON order_items.book_id = books.id')
-                                     .group('books.id')
-                                     .order('count(order_items.book_id) DESC, books.created_at DESC')
-                                     .limit(num)}
+class Book < ApplicationRecord
+  scope :newest,      ->(num) { order('created_at DESC').limit(num) }
+  scope :bestsellers, lambda do |num|
+    joins('LEFT JOIN order_items ON order_items.book_id = books.id')
+      .group('books.id')
+      .order('count(order_items.book_id) DESC, books.created_at DESC')
+      .limit(num)
+  end
 
   belongs_to :category
   has_one    :book_dimension, dependent: :destroy
@@ -28,7 +31,7 @@ class Book < ApplicationRecord
     new:    'created_at DESC',
     titleA: 'name ASC',
     titleD: 'name DESC'
-  }
+  }.freeze
 
   validates_presence_of :name, :price, :publication_year
   validates_numericality_of :publication_year, only_integer: true, greater_than: 0
@@ -39,6 +42,10 @@ class Book < ApplicationRecord
 
   after_save :increment_books_count
   after_destroy :decrement_books_count
+
+  def self.default_sort
+    ORDERING[DEFAULT_SORT_KEY]
+  end
 
   private
 
@@ -53,9 +60,5 @@ class Book < ApplicationRecord
 
   def decrement_books_count
     category.decrement!(:count_books)
-  end
-
-  def self.default_sort
-    ORDERING[DEFAULT_SORT_KEY]
   end
 end

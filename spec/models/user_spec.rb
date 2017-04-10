@@ -9,28 +9,28 @@ RSpec.describe User, type: :model do
   context 'roles' do
     it 'admin' do
       user = create(:user, :admin)
-      expect(user.is_admin?).to be_truthy
+      expect(user.admin?).to be_truthy
     end
 
     it 'not admin' do
-      expect(subject.is_admin?).to be_falsey
+      expect(subject.admin?).to be_falsey
     end
 
     it 'guest' do
       allow(subject).to receive(:guest_token) { true }
-      expect(subject.is_guest?).to be_truthy
+      expect(subject.guest?).to be_truthy
     end
 
     it 'not guest' do
-      expect(subject.is_guest?).to be_falsey
+      expect(subject.guest?).to be_falsey
     end
 
     it 'create by token increases User' do
-      expect{User.create_by_token}.to change {User.count}.by(1)
+      expect { User.create_by_token }.to change { User.count }.by(1)
     end
 
     it 'set fake password changes password' do
-      expect{subject.set_fake_password}.to change { subject.password }
+      expect { subject.set_fake_password }.to change { subject.password }
     end
   end
 end

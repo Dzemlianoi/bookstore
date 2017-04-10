@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   include AASM
 
@@ -7,7 +9,7 @@ class Review < ApplicationRecord
   validates_presence_of :name, :rating, :comment_text, :book, :user
   validates_length_of :comment_text, maximum: 500
   validates_length_of :name, maximum: 80
-  validates_format_of :comment_text, :with => /\A[-0-9A-z!#$%&_?+{|^} ]+\z/i
+  validates_format_of :comment_text, with: /\A[-0-9A-z!#$%&_?+{|^} ]+\z/i
   validates :rating, inclusion: { in: 1..5 }
 
   aasm column: 'state' do
@@ -16,11 +18,11 @@ class Review < ApplicationRecord
     state :rejected
 
     event :approve do
-      transitions from: [:new, :rejected], to: :approved
+      transitions from: %i(new rejected), to: :approved
     end
 
     event :reject do
-      transitions from: [:new, :approved], to: :rejected
+      transitions from: %i(new approved), to: :rejected
     end
   end
 
