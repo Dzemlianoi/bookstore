@@ -80,7 +80,7 @@ class User < ApplicationRecord
 
   %w(email password confirmation).each do |method_part|
     define_method "#{method_part}_required?" do
-      super && provider.blank? && guest_token.blank?
+      provider.blank? && guest_token.blank?
     end
   end
 end

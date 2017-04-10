@@ -26,7 +26,7 @@ class Address < ApplicationRecord
   end
 
   def add_username
-    address_obj = addressable.instance_of? User ? addressable : addressable.user
+    address_obj = addressable.instance_of?(User) ? addressable : addressable.user
     self.first_name = address_obj.first_name if first_name.nil?
     self.last_name = address_obj.last_name if last_name.nil?
   end
