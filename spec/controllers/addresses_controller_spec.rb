@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AddressesController, type: :controller do
   let(:user) { create :user }
   let(:address_params) { attributes_for(:users_address).merge(kind: 'billing') }
@@ -26,7 +28,7 @@ RSpec.describe AddressesController, type: :controller do
 
   context 'PUT #update' do
     before do
-      patch :update,  kind: 'billing'
+      patch :update, kind: 'billing'
     end
 
     it 'renders :index template' do

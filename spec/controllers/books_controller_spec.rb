@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe BooksController, type: :controller do
   let(:book) { create(:book) }
 

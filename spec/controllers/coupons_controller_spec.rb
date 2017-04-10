@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CouponsController, type: :controller do
   let!(:category) { create(:category) }
   let(:book) { create(:book) }

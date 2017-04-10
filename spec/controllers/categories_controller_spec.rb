@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 RSpec.describe CategoriesController, type: :controller do
   let!(:category) { create(:category) }
   let!(:book) { create(:book) }
 
   before do
-    create_list(:book, 4, { category: category })
+    create_list(:book, 4, category: category)
   end
 
   context 'GET #show' do

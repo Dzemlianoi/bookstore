@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe OrderItemsController, type: :controller do
   let!(:category) { create(:category) }
   let(:book) { create(:book, category: category) }
@@ -6,7 +8,6 @@ RSpec.describe OrderItemsController, type: :controller do
   let(:my_order) { create(:order, :with_items) }
 
   context 'GET #index' do
-
     it 'redirect unless current_order_active?' do
       allow(controller).to receive(:current_order_active?) { false }
       get :index
@@ -27,13 +28,13 @@ RSpec.describe OrderItemsController, type: :controller do
     end
 
     it 'should change quantity of guests' do
-      expect{controller.send(:guest_create)}.to change{ User.count }.by(1)
+      expect { controller.send(:guest_create) }.to change { User.count }.by(1)
     end
 
     it 'should create guest' do
       allow(controller).to receive(:current_user_or_guest) { false }
       allow_any_instance_of(Order).to receive(:book_in_order?) { true }
-      post :create, params: { order_item: { quantity: order_item.quantity, book_id: order_item.book_id  } }
+      post :create, params: { order_item: { quantity: order_item.quantity, book_id: order_item.book_id } }
       expect(controller).to receive(:guest_create)
       expect(flash[:danger]).to be_present
       expect(response).to redirect_to('where_i_came_from')
@@ -44,7 +45,7 @@ RSpec.describe OrderItemsController, type: :controller do
     it 'should delete order item' do
       allow(controller).to receive(:current_order) { my_order }
       item_id = my_order.order_items.first.id
-      expect{ delete :destroy, params:{ id: item_id } }.to change{ OrderItem.count }.by(1)
+      expect { delete :destroy, params: { id: item_id } }.to change { OrderItem.count }.by(1)
     end
   end
 end
