@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 if Rails.env.production?
@@ -11,7 +13,6 @@ require 'rspec/rails'
 require 'aasm/rspec'
 require 'omniauth'
 require 'carrierwave/test/matchers'
-
 
 ActiveRecord::Migration.maintain_test_schema!
 OmniAuth.config.test_mode = true
