@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderMailer < ApplicationMailer
   def confirmation_send(user, order)
     @order = order
@@ -8,7 +10,7 @@ class OrderMailer < ApplicationMailer
          template_name: 'confirm')
   end
 
-  def treating_send(user,order)
+  def treating_send(user, order)
     @order = order
     @user = user
     mail(to: @user.email,
