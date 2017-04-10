@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderStepsForm
   include ActiveModel::Model
 
@@ -13,8 +15,8 @@ class OrderStepsForm
   def update(step, params)
     case step
     when :address
-      @order.update_attributes(use_billing: 0) unless params.has_key? :use_billing
-      if params.has_key? :use_billing
+      @order.update_attribute(use_billing: 0) unless params.key? :use_billing
+      if params.key? :use_billing
         params[:shipping_address] = params[:billing_address]
         @order.update_attribute(:use_billing, 1)
       end
@@ -68,6 +70,6 @@ class OrderStepsForm
 
   def both_addresses_present?
     addresses = @order.addresses
-    addresses.shipping.any? & addresses.billing.present?
+    addresses.shipping.present? & addresses.billing.present?
   end
 end
