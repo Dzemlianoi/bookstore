@@ -2,7 +2,7 @@
 
 class Book < ApplicationRecord
   scope :newest,      ->(num) { order('created_at DESC').limit(num) }
-  scope :bestsellers, lambda do |num|
+  scope :bestsellers, ->(num) do
     joins('LEFT JOIN order_items ON order_items.book_id = books.id')
       .group('books.id')
       .order('count(order_items.book_id) DESC, books.created_at DESC')

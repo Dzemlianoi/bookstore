@@ -17,7 +17,7 @@ class Address < ApplicationRecord
   validates_format_of :first_name, :last_name, :city, with: /\A[а-яa-z]+\z/i
   validates_format_of :first_name, :last_name, :city, with: /\A[а-яa-z]+\z/i
   validates_format_of :zip, with: /\A[-0-9]+\z/
-  validates_format_of :address, with: /\A[а-я-a-z0-9, ]+\z/i
+  validates_format_of :address, with: /\A[а-яa-z0-9,]+\z/i
   validates_format_of :phone, with: /\A[+]{1}[0-9]{8,14}\z/
   validates_inclusion_of :kind, in: kinds.keys
   validates_uniqueness_of :kind, scope: %i(addressable_id addressable_type)

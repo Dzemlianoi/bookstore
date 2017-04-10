@@ -4,5 +4,8 @@ require_relative 'boot'
 require 'rails/all'
 Bundler.require(*Rails.groups)
 
-class Bookstore::Application < Rails::Application
+module Bookstore
+  class Application < Rails::Application
+
+  end
 end

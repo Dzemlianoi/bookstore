@@ -17,7 +17,7 @@ RSpec.describe Order, type: :model do
     it 'should raise state on event' do
       order = Order.new
       allow(order).to receive(:send_confirmation)
-      allow(order).to receive(:send_treating)
+      allow(order).to receive(:treat_proccessing)
       allow(order).to receive(:send_success)
       expect(order).to transition_from(:cart).to(:filled).on_event(:filled)
       expect(order).to transition_from(:filled).to(:in_confirmation).on_event(:in_confirmation)
