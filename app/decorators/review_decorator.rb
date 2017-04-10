@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewDecorator < Draper::Decorator
   delegate_all
 
@@ -7,6 +9,7 @@ class ReviewDecorator < Draper::Decorator
   end
 
   def verified?
-    !!object.user(&:verified?)
+    return unless object.user
+    object.user.verified?
   end
 end
