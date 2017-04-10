@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :address do
     first_name FFaker::Name.first_name
     last_name FFaker::Name.last_name
     address 'Test 12'
     city 'Dnipro'
-    zip 49000
+    zip 490_00
     phone '+380967777777'
     country 'AF'
   end

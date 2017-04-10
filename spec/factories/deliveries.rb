@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :delivery do
     title { "#{FFaker::Lorem.word} delivery" }

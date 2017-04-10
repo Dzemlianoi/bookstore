@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :book do
     name { FFaker::Book.title }
@@ -6,7 +8,7 @@ FactoryGirl.define do
     category
     publication_year 1300
     authors { create_list :author, 2 }
-    book_dimension {create :book_dimension}
+    book_dimension { create :book_dimension }
 
     trait :invalid do
       name nil

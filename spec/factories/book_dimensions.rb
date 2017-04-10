@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :book_dimension do
     height { rand(0.50...20.00) }
