@@ -22,12 +22,9 @@ feature 'Catalog', type: :feature, js: true do
 
     scenario 'pagination' do
       expect(page).to have_selector('.general-thumb-wrap', count: 12)
-      first('[rel = next]').click
-      expect(page).to have_selector('.general-thumb-wrap', count: 3)
+      first('.btn-primary').click
+      expect(page).to have_selector('.general-thumb-wrap', count: 15)
       expect(page).not_to have_content(I18n.t('books.catalog.view_more'))
-      expect(page).to have_content(I18n.t('books.catalog.prev'))
-      first('[rel = previous]').click
-      expect(page).to have_content(I18n.t('books.catalog.view_more'))
     end
   end
 
