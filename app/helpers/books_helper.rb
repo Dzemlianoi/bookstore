@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BooksHelper
   def category_sort_present?
     params.key?(:order) && Book::ORDERING[params[:order].to_sym].present?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AddressesHelper
   def address_form(kind)
     right_kind(kind) || current_user.addresses.find_or_initialize_by(kind: kind)
@@ -8,4 +10,3 @@ module AddressesHelper
     @address.kind.eql?(kind) ? @address : nil
   end
 end
-

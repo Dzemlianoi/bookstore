@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrderHelper
   def current_sort
     sort_present? ? params[:order].to_s.humanize : I18n.t('books.catalog.all')
