@@ -13,7 +13,6 @@ class Order < ApplicationRecord
 
   before_create :set_track_number
 
-  validates_uniqueness_of :track_number
   validates_length_of :track_number, maximum: 25
 
   MY_ORDERS_STATES = %i(in_confirmation in_processing in_delivery completed).freeze
@@ -108,7 +107,7 @@ class Order < ApplicationRecord
     OrderMailer.success_letter(user, self).deliver_later
   end
 
-  def recalculate_total(_)
+  def recalculate_total(*)
     update_attributes(total_price: total_price)
   end
 

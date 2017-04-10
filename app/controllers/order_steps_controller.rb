@@ -41,8 +41,8 @@ class OrderStepsController < ApplicationController
                   :delivery,
                   :success,
                   :editing,
-                  shipping_address: %i(first_name last_name address city zip country phone),
-                  billing_address:  %i(first_name last_name address city zip country phone),
+                  shipping_address: %i(first_name last_name address city zip country phone kind),
+                  billing_address:  %i(first_name last_name address city zip country phone kind),
                   card:             %i(card_number cvv expire_date name))
   end
 

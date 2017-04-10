@@ -46,7 +46,6 @@ feature 'My account addresses', type: :feature, js: true do
       first('.checkbox-icon').click
       first('input[type=submit]').click
       expect(page).to have_selector('.shipping-fields', visible: false)
-      first('input[type=submit]').click
     end
 
     scenario 'not to have confirm' do

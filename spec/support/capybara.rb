@@ -7,5 +7,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 end
 
+Capybara.ignore_hidden_elements = false
 Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist

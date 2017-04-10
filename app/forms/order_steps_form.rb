@@ -15,9 +15,9 @@ class OrderStepsForm
   def update(step, params)
     case step
     when :address
-      @order.update_attribute(use_billing: 0) unless params.key? :use_billing
+      @order.update_attribute(:use_billing, 0) unless params.key? :use_billing
       if params.key? :use_billing
-        params[:shipping_address] = params[:billing_address]
+        params[:shipping_address] = params[:billing_address].merge(kind: :shipping)
         @order.update_attribute(:use_billing, 1)
       end
       addresses_saved?(params)
@@ -46,14 +46,15 @@ class OrderStepsForm
   private
 
   def create_address(type, params)
-    params = params.merge(kind: :shipping) if type.eql? 'shipping'
     return instance_variable_get("@#{type}_address").update(params) if @order.send("#{type}_address")
     instance_variable_set("@#{type}_address", @order.addresses.send(type).create(params))
     instance_variable_get("@#{type}_address").persisted?
   end
 
   def addresses_saved?(params)
-    create_addresses(params) & both_addresses_present?
+    create_address('billing', params[:billing_address])
+    create_address('shipping', params[:shipping_address])
+    both_addresses_present?
   end
 
   def create_credit_card(credit_card)
@@ -62,11 +63,7 @@ class OrderStepsForm
 
   def create_delivery(delivery_id)
     return unless Delivery.find_by(id: delivery_id)
-    @order.update(delivery_id: delivery_id)
-  end
-
-  def create_addresses(params)
-    create_address('shipping', params[:billing_address]) && create_address('billing', params[:shipping_address])
+    @order.update_attribute(:delivery_id, delivery_id)
   end
 
   def both_addresses_present?
