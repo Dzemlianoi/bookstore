@@ -7,5 +7,5 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 end
 
-Capybara.javascript_driver = :selenium
-Capybara.default_driver = :selenium
+Capybara.javascript_driver = :poltergeist
+Capybara.default_driver = :poltergeist
