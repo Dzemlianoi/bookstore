@@ -43,17 +43,10 @@ class OrderStepsForm
 
   private
 
-  def create_billing(params)
-    return @billing_address.update(params) if @order.billing_address
-    @billing_address = @order.addresses.billing.create(params)
-    @billing_address.persisted?
-  end
-
-  def create_shipping(params)
-    params = params.merge(kind: :shipping)
-    return @shipping_address.update(params) if @order.shipping_address
-    @shipping_address = @order.addresses.shipping.create(params)
-    @shipping_address.persisted?
+  def create_address(type, params)
+    return instance_variable_get("@#{type}_address").update(params) if @order.send("#{type}_address")
+    instance_variable_set("@#{type}_address", @order.addresses.send(type).create(params))
+    instance_variable_get("@#{type}_address").persisted?
   end
 
   def addresses_saved?(params)
@@ -65,12 +58,12 @@ class OrderStepsForm
   end
 
   def create_delivery(delivery_id)
-    return unless Delivery.find_by_id(delivery_id)
+    return unless Delivery.find_by(id: delivery_id)
     @order.update(delivery_id: delivery_id)
   end
 
   def create_addresses(params)
-    create_billing(params[:billing_address]) && create_shipping(params[:shipping_address])
+    create_address('shipping', params[:billing_address]) && create_address('billing', params[:shipping_address])
   end
 
   def both_addresses_present?
