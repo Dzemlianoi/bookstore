@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe AttachmentsUploader do
   let(:file) { fixture_file_upload("#{fixture_path}/books/test_book.jpg") }
   let(:picture) { create :image }
