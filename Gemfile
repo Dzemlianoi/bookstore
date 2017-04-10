@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -5,42 +7,38 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.1'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'ffaker', '~> 2.4.0'
-gem 'wicked'
-
-gem 'devise', '~> 4.2.0'
-gem 'omniauth', '~> 1.3.1'
-gem 'omniauth-facebook'
-gem 'cancancan'
-gem 'figaro'
-gem 'kaminari'
-
-gem 'jquery-rails'
-gem 'jbuilder', '~> 2.5'
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'simple_form'
-
-gem 'haml'
-gem 'html2haml'
-gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'font-awesome-rails'
+gem 'aasm', '~> 4.11', '>= 4.11.1'
 gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
-gem 'draper', '3.0.0.pre1'
-
-gem 'rails_admin', '~> 1.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'cancancan'
+gem 'carrierwave'
+gem 'cloudinary'
+gem 'coffee-rails', '~> 4.2'
 gem 'countries'
 gem 'country_select', '~> 2.1.0'
-gem 'aasm', '~> 4.11', '>= 4.11.1'
+gem 'devise', '~> 4.2.0'
+gem 'draper', '3.0.0.pre1'
+gem 'ffaker', '~> 2.4.0'
+gem 'figaro'
+gem 'font-awesome-rails'
+gem 'haml'
+gem 'html2haml'
+gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
+gem 'kaminari'
+gem 'mini_magick'
+gem 'omniauth', '~> 1.3.1'
+gem 'omniauth-facebook'
+gem 'pg', '~> 0.18'
+gem 'puma', '~> 3.0'
+gem 'rails', '~> 5.0.1'
+gem 'rails_admin', '~> 1.0'
 gem 'rails_admin_aasm'
-gem 'cloudinary'
+gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
+gem 'tzinfo-data', platforms: %i(mingw mswin x64_mingw jruby)
+gem 'uglifier', '>= 1.3.0'
+gem 'wicked'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
@@ -48,17 +46,17 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'capybara-screenshot'
-  gem 'rails-controller-testing'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
   gem 'capybara-email'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'letter_opener_web'
+  gem 'poltergeist'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
 
 group :development do
