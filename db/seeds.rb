@@ -1,19 +1,15 @@
+# frozen_string_literal: true
+
 require 'ffaker'
 
 def generate_user
-  user = User.new(
-    email:                  FFaker::Internet.email,
-    password:               FFaker::Internet.password,
-  )
+  user = User.new(email: FFaker::Internet.email, password: FFaker::Internet.password)
   user.skip_confirmation!
   user.save!
 end
 
 def generate_admin
-  user = User.new(
-      email:                  'admin@admin.com',
-      password:               'addmine',
-  )
+  user = User.new(email: 'admin@admin.com', password: 'addmine')
   user[:role_name] = 'admin'
   user.skip_confirmation!
   user.save!
@@ -65,7 +61,6 @@ def generate_coupons(custom_coupon = nil)
   )
 end
 
-
 def generate_delivery
   Delivery.create!(
     price: rand(1...15),
@@ -86,5 +81,3 @@ generate_dimensions_for_books
 
 generate_admin
 generate_coupons('00000')
-
-
