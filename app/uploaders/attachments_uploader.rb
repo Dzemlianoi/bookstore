@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttachmentsUploader < CarrierWave::Uploader::Base
   include Cloudinary::CarrierWave
   include CarrierWave::MiniMagick
