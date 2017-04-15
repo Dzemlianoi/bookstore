@@ -107,7 +107,7 @@ class Order < ApplicationRecord
     OrderMailer.success_letter(user, self).deliver_later
   end
 
-  def recalculate_total(*)
+  def recalculate_total(_)
     update_attributes(total_price: total_price)
   end
 
