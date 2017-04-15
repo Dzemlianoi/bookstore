@@ -77,12 +77,10 @@ class Order < ApplicationRecord
     ORDERING[DEFAULT_SORT_KEY]
   end
 
-  def billing_address
-    addresses.find_by(kind: 'billing')
-  end
-
-  def shipping_address
-    addresses.find_by(kind: 'shipping')
+  %w(billing shipping).each do |type|
+    define_method "#{type}_address" do
+      addresses.find_by(kind: type)
+    end
   end
 
   def book_in_order?(book_id)
