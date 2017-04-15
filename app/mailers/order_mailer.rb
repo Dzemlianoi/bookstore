@@ -1,30 +1,15 @@
 # frozen_string_literal: true
 
 class OrderMailer < ApplicationMailer
-  def confirmation_send(user, order)
-    @order = order
-    @user = user
-    mail(to: @user.email,
-         subject: 'Confirm your purchase',
-         template_path: 'orders/mailers',
-         template_name: 'confirm')
-  end
 
-  def treating_send(user, order)
-    @order = order
-    @user = user
-    mail(to: @user.email,
-         subject: 'Successfull purchase!',
-         template_path: 'orders/mailers',
-         template_name: 'treat')
-  end
-
-  def success_letter(user, order)
-    @order = order
-    @user = user
-    mail(to: @user.email,
-         subject: 'You order is in proccessing!',
-         template_path: 'orders/mailers',
-         template_name: 'success')
+  %w[confirmation treating success].each do |type|
+    define_method "#{type}_send" do |user, order|
+      @order = order
+      @user = user
+      mail(to: @user.email,
+           subject: I18n.t("mailers.title.#{type}"),
+           template_path: 'orders/mailers',
+           template_name: type)
+    end
   end
 end

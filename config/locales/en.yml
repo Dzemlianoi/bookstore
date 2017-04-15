@@ -130,6 +130,10 @@ en:
     not_your_request: 'If you didnt request this, please ignore this email.'
     access_link: 'Your password will nott change until you access the link above and create a new one.'
     change_password: 'Change password'
+    titles:
+      success: 'Successfull purchase!'
+      confirmation: 'Confirm your purchase'
+      treating: 'You order is in proccessing now!'
   flashes:
     error:
       already_persist: 'Book is already in cart'

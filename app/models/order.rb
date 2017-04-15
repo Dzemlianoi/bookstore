@@ -69,18 +69,18 @@ class Order < ApplicationRecord
     end
   end
 
-  def valid_addresses?
-    shipping_address && billing_address
-  end
-
   def self.default_sort
     ORDERING[DEFAULT_SORT_KEY]
   end
 
-  %w(billing shipping).each do |type|
+  %w[billing shipping].each do |type|
     define_method "#{type}_address" do
       addresses.find_by(kind: type)
     end
+  end
+
+  def valid_addresses?
+    shipping_address && billing_address
   end
 
   def book_in_order?(book_id)
@@ -102,7 +102,7 @@ class Order < ApplicationRecord
   end
 
   def send_success
-    OrderMailer.success_letter(user, self).deliver_later
+    OrderMailer.success_send(user, self).deliver_later
   end
 
   def recalculate_total(_)
@@ -110,25 +110,23 @@ class Order < ApplicationRecord
   end
 
   def subtotal_price
-    order_items.map { |item| item.book[:price] * item.quantity }.inject(&:+)
-  end
-
-  def total_price
-    return 0.00 if order_items.empty?
-    price = subtotal_price + delivery_price - discount
-    price.positive? ? price : 0.00
+    PricableService.subtotal_price(order_items)
   end
 
   def discount
-    coupon.nil? ? 0 : coupon.discount
+    PricableService.discount(coupon)
   end
 
   def delivery_price
-    delivery.nil? ? 0 : delivery.price
+    PricableService.delivery_price(delivery)
+  end
+
+  def total_price
+    PricableService.total_price(order_items, coupon, delivery)
   end
 
   def active?
-    checkout_state? && !order_items.empty?
+    checkout_state? && order_items.present?
   end
 
   def proved?
