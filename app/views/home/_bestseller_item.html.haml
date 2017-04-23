@@ -1,0 +1,9 @@
+.col-sm-6.col-md-3
+  = render 'books/tile/buy_or_look', book: book
+  .mb-35
+    .clearfix
+      %p.pull-right.font-16.in-gold-500
+        €#{book.price}
+      %p.title.mr-55= book.name
+    %span.divider-sm
+    %p.lead.small= book.all_authors

@@ -1,0 +1,21 @@
+%tr.purchase
+  %input.purchase-id{type: 'hidden', value: purchase.id}
+  %td
+    .general-img-wrap-table
+      %img.cart-img-shadow.pull-left{src: purchase.book.front_image, alt: 'design-book'}
+  %td
+    %p.title= purchase.book.name
+  %td
+    %span.font-16.in-gold-500 €#{purchase.book.price}
+  %td
+    .input-group
+      %a.input-link
+        %i.fa.switchers.fa-minus.line-height-40
+      %input.form-control.quantity-input{type: 'text', value: purchase.quantity.to_i, readonly: true}
+      %a.input-link
+        %i.fa.switchers.fa-plus.line-height-40
+  %td
+    %span.position-price.font-16.in-gold-500 €#{purchase.price_with_quantity}
+  %td
+    = link_to order_item_path(purchase), method: :delete, class: 'close general-cart-close' do
+      %span{'aria-hidden': 'true'} &times;

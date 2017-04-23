@@ -1,0 +1,42 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbar'}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand= t('general.project_name')
+      = link_to(order_items_path, class: 'shop-link pull-right visible-xs') do
+        %span.shop-icon
+          - unless empty_cart?
+            %span.shop-quantity= purchases_count
+    = link_to(order_items_path, class: 'shop-link pull-right hidden-xs') do
+      %span.shop-icon
+        - unless empty_cart?
+          %span.shop-quantity= purchases_count
+    #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': 'false'}
+      .visible-xs
+        %button.close{type: 'button', 'aria-label': 'Close'}
+          %span{'aria-hidden': 'true'} &times;
+        %ul.nav.navbar-nav
+          %li
+            %a{type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu'}= t('layout.links.home')
+            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': 'false'}
+              - active_categories.each do |category|
+                %li
+                  = link_to "#{category.name}", category_path(category), class: 'collapse-link'
+          %li
+            = link_to t('layout.links.home'), root_path
+          = render 'layouts/headers/header_part'
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li.dropdown.home
+            %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}= t('layout.links.home')
+            %ul.dropdown-menu
+              - active_categories.each do |category|
+                %li
+                  = link_to "#{category.name}", category_path(category)
+            %li
+              = link_to t('layout.links.shop'), books_path
+            = render 'layouts/headers/header_part'

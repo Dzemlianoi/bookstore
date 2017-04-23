@@ -1,0 +1,8 @@
+.col-sm-5
+  %p.in-gold-500.font-18.mb-25t= t('general.email')
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form-md', method: :patch }) do |f|
+    .form-group.mb-35
+      = f.label :email, html: {class: 'control-label input-label', 'data-bar' => t('users.privacy.enter_email')}
+      = f.email_field :email, class: 'form-control', placeholder: t('users.privacy.enter_email')
+    .general-text-align
+      = f.submit t('users.addresses.save'), class: 'btn btn-default mb-35'

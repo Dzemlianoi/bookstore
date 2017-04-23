@@ -1,0 +1,21 @@
+AllCops:
+  Rails: true
+  Exclude:
+    - db/schema.rb
+    - bin/*
+    - config.ru
+    - Rakefile
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 25
+Metrics/ClassLength:
+  Max: 120
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/AndOr:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false

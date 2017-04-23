@@ -1,0 +1,12 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title= t('users.privacy.set_new_password')
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: {class: 'general-form', method: :put }) do |f|
+    = f.hidden_field :reset_password_token
+    .form-group.mb-30
+      = f.label :password, t('users.privacy.type_new') , class: 'control-label input-label'
+      = f.password_field :password, autofocus: true, class:' form-control', autocomplete: 'off', placeholder: t('users.privacy.type_new')
+    .form-group.mb-40
+      = f.label :password_confirmation, t('users.privacy.confirm_password'), class: 'control-label input-label'
+      = f.password_field :password_confirmation, class:' form-control', autocomplete: 'off', placeholder: t('users.privacy.confirm_password')
+    = f.submit t('general.change'), class: 'btn btn-default center-block mb-20'

@@ -1,0 +1,10 @@
+.dropdown
+  %a.dropdown-toggle.lead.small{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+    = current_catalog_name
+    %i.fa.fa-angle-down.dropdown-icon.pull-right
+  %ul.dropdown-menu
+    %li
+      = link_to t('books.catalog.all'), books_path
+    - active_categories.each do |category|
+      %li
+        = link_to category.name, category_books_path(category)

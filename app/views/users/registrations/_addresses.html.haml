@@ -1,0 +1,15 @@
+#address.tab-pane.fade.in.active.general-main-wrap
+  .hidden-xs.hidden-sm
+    .row
+      - Address.kinds.each_key do |kind|
+        .col-md-5
+          %h3.general-subtitle.mt-0= t("users.addresses.#{kind}_address")
+  .row
+    - Address.kinds.each_key do |kind|
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0= t("users.addresses.#{kind}_address")
+        = simple_form_for address_form(kind), html: { class: "#{kind}_form" } do |f|
+          = render 'forms/address_form', f: f, kind: kind
+          .text-center.general-text-align
+            = f.submit t('users.addresses.save'), class: "#{kind}-save btn btn-default"

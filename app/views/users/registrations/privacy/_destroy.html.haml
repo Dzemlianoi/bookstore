@@ -1,0 +1,10 @@
+.col-sm-12
+  %p.in-gold-500.font-18.mb-25= t('users.privacy.remove_btn')
+  .general-settings-btn
+    = link_to t('users.privacy.remove_link'), registration_path(current_user), class: 'btn btn-default remove-btn disabled mb-20', method: :delete
+  .form-group.checkbox.general-settings-checkbox
+    %label.checkbox-label
+      %input.checkbox-input#accept-delete{type: 'checkbox', hidden: 'true'}
+      %span.checkbox-icon
+        %i.fa.fa-check
+      %span.checkbox-text= t('users.privacy.remove_checkbox')

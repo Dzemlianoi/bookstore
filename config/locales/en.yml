@@ -1,23 +1,196 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  general:
+    book: 'Book'
+    phone: 'Phone'
+    welcome: 'Welcome'
+    hello: 'Hello'
+    project_name: 'Bookstore'
+    buy_now: 'Buy now'
+    password: 'Password'
+    email: 'Email'
+    settings: 'Settings'
+    or: 'or'
+    edit: 'edit'
+    change: 'Change'
+    cancel: 'Cancel'
+    cart: 'Cart'
+    admin_panel: 'Admin panel'
+  layout:
+    links:
+      home: 'Home'
+      shop: 'Shop'
+      orders: 'Orders'
+      order: 'Order'
+      settings: 'Settings'
+      login: 'Log in'
+      signup: 'Sign up'
+      logout: 'Logout'
+      profile: 'My account'
+  categories:
+    previous: 'Previous'
+    next: 'Next'
+    greetings: 'Welcome to our amazing Bookstore!'
+    our_work: 'We pore through hundreds of new books each month and select the five best we can find to share with our members.'
+    get_started: 'Get Started'
+    best: 'Best Sellers'
+  users:
+    returning_customer: 'Returning customers'
+    new_customer: 'New customer'
+    mailers:
+      facebook:
+        thanks: 'Thank you for registration via Facebook!'
+        can_log: 'Next time you can log in via Facebook or via your email and password.'
+        want_changes: 'If you want to change your password immediately go'
+        here: 'here'
+        bye: 'Have a nice day!'
+    addresses:
+      link: 'Addresses'
+      billing_address: 'Billing Address'
+      shipping_address: 'Shipping Address'
+      first_name:
+        label: 'First Name'
+        placeholder: 'First Name'
+        help-block: 'Please enter your first name'
+      last_name:
+        label: 'Last Name'
+        placeholder: 'Last Name'
+      address:
+        label: 'Address'
+        placeholder: 'Address'
+      city:
+        label: 'City'
+        placeholder: 'city'
+      zip:
+        label: 'Zip'
+        placeholder: 'Zip'
+      country:
+        label: 'Country'
+        placeholder: 'Select a country'
+      phone:
+        label: 'Phone'
+        placeholder: 'Example +355 66 123 4567'
+      save: 'Save'
+    privacy:
+      link: 'Privacy'
+      remove_btn: 'Remove Account'
+      remove_link: 'Please Remove My Account'
+      remove_checkbox: 'I understand that all data will be lost'
+      old_password: 'Old password'
+      new_password: 'New password'
+      confirm_password: 'Confirm password'
+      enter_email: 'Enter your email'
+      enter_password: 'Enter your password'
+      have_account: 'Have an account?'
+      dont_have_account: 'Have an account?'
+      set_new_password: 'Set new password'
+      type_new: 'Type a new Password'
+      forgot_password: 'Forgot your password?'
+      email_instructions: 'Email Instructions'
+      reset_email_instructions: 'We will email you instructions on how to reset it'
+      remember_me: 'Remember me'
+  books:
+    catalog:
+      catalog: 'Catalog'
+      all: 'All'
+      view_more: 'View More'
+      prev:   'Previous '
+      filter: 'Filter by category'
+      sort_by: 'Sort_by'
+      back_to_store: 'Back to store'
+    sorting:
+      priceA: 'Price: low to high'
+      priceD: 'Price: high to low'
+      new: 'Newest first'
+      titleA: 'Title: A - Z'
+      titleD: 'Title: Z - A'
+      popular: 'Popular first'
+    show:
+      back: 'Back to results'
+      cart_add: 'Add to Cart'
+      description: 'Description'
+      read_more: 'Read More'
+      publication_year: 'Year of publication'
+      dimensions: 'Dimensions'
+      materials: 'Materials'
+    reviews:
+      title: 'Reviews'
+      verified: 'Verified Reviewer'
+      write: 'Write a review'
+      score: 'Score'
+      name_label: 'Enter your name'
+      comment_label: 'Enter text of your review'
+      name_placeholder: 'John Doe'
+      comment_placeholder: 'Everything is awesome'
+      post: 'Post'
+  mailers:
+    can_confirm: 'You can confirm your account email through the link below'
+    confirm_account: 'Confirm my account'
+    contact_to_notify: 'We are contacting you to notify you that your password has been changed.'
+    request_pass_change: 'Someone has requested a link to change your password. You can do this through the link below.'
+    not_your_request: 'If you didnt request this, please ignore this email.'
+    access_link: 'Your password will nott change until you access the link above and create a new one.'
+    change_password: 'Change password'
+    titles:
+      success: 'Successfull purchase!'
+      confirmation: 'Confirm your purchase'
+      treating: 'You order is in proccessing now!'
+  flashes:
+    error:
+      already_persist: 'Book is already in cart'
+      wrong_title_delivery: 'Title of delivery should contains letter, numbers, spaces or "-", ","'
+      wrong_days_delivery: 'Pesimistic number of days delivery should be greater then optimistic'
+      wrong_year: 'Year should not be greater than current year'
+      review_fails: 'Please, check all fields!'
+      no_order: 'You have no active order!'
+      expire_slash: 'Expire date should contatin /'
+      expire_month: 'Month should be beetween 01-12'
+      expire_year: 'Year should be not less than this year'
+    success:
+      book_added: 'Book is added to cart!'
+      review_success: 'Thanks for Review. It will be published as soon as Admin will approve it'
+  cart:
+    empty_cart: 'Cart is empty now'
+    was_deleted: 'Book was successfully deleted'
+  orders:
+    successfull: 'Your order is successfull! One more usefull letter was sent to your email'
+    sorting:
+      priceA: 'Total Price: low to high'
+      priceD: 'Total Price: high to low'
+      new: 'Newest first'
+      old: 'Latest first'
+    my_orders: 'My orders'
+    place: 'Place Order'
+    number: 'Number'
+    completed_at: 'Completed at'
+    status: 'Status'
+    price: 'Price'
+    quantity: 'Quantity'
+    delivery: 'Delivery'
+    total_price: 'Total price'
+    subtotal: 'Subtotal'
+    order_total: 'Order total'
+    items_total: 'Items total'
+    checkout: 'Checkout'
+    product: 'Product'
+    order_summary: 'Order summary'
+    save_and_continue: 'Save and continue'
+    fields_required: 'all fields are required'
+    use_billing: 'Use Billing Adress'
+    shipments: 'Shipments'
+    payment_info: 'Payment Information'
+    thank_you: 'Thank You for your Order!'
+    confirmation_send: 'An order confirmation has been has been sent to '
+    card:
+      credit: 'Credit card'
+      number: 'Card Number'
+      help: 'Please enter a valid credit card number'
+      name: 'Name on Card'
+      mmyy: 'MM/YY'
+      CVV: 'CVV'
+  coupon:
+    title: 'Coupon'
+    not_found: 'There is no coupon with such code'
+    added: 'Coupon was successfully added'
+    enter_coupon: 'Enter Your Coupon Code'
+    update_cart: 'Update cart'
+    subtotal_greater: 'The coupon is more expensive than subtotal'

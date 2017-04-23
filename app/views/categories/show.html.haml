@@ -1,0 +1,13 @@
+%main.container
+  = render 'home/slider'
+.container
+  .jumbotron.text-center.mb-0
+    %h2.h1= t('categories.greetings')
+    .mb-res-501
+      %p= t('categories.our_work')
+    = link_to t('categories.get_started'), category_books_path(@category), class: 'btn btn-default'
+  .mb-35
+    %h3= t('categories.best')
+    .row
+      - @bestsellers_books.each do |book|
+        = render 'home/bestseller_item', book: book

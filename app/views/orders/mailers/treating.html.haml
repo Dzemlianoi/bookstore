@@ -1,0 +1,7 @@
+%center Your order is successfull, #{@order.user.email}
+%p Our managers will contact you soon!
+%p You can follow your orders and manage it #{link_to(I18n.t('users.mailers.facebook.here'), orders_url)}}.
+%br/
+%center= t('users.mailers.facebook.bye')
+
+

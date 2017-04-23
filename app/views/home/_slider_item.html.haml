@@ -1,0 +1,13 @@
+.row
+  .col-sm-5
+    .general-img-wrap
+      %img.img-shadow.general-thumbnail-img{src: book.front_image}
+  .col-sm-7
+    .mb-60
+      %h1= book.name
+      %p.lead= book.first_sentence_description
+      %p.lead.small= book.all_authors
+      .general-align
+        = form_for :order_item, url: order_items_path, html: { method: :post} do |f|
+          = f.hidden_field :book_id, value: book.id
+          = f.submit t('general.buy_now'), class: 'btn btn-primary'

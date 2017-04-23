@@ -1,0 +1,10 @@
+email_account: 'boookstoring@gmail.com'
+email_account_password: 'bookstore911'
+
+#Carrierwave dropbox
+
+app_key: 'qc9avova3nbumyn'
+app_secret: 'k8jkcshijcumj7n'
+access_token: 'u0cbqvxoz9yhuon4'
+access_token_secret: '7o9m24ef9mdh5iu'
+user_id: '162020170'

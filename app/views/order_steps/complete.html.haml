@@ -1,0 +1,99 @@
+%main.container
+  %h1.general-title-margin= t('orders.checkout')
+  %ul.steps.list-inline
+    - (wizard_steps - [:fast_sign]).each_with_index  do |checkout_step, number|
+      - if current_step? checkout_step
+        %a.step.active
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.capitalize
+        %li.step-divider
+      - else
+        %a.step
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.to_s.capitalize
+        %li.step-divider
+  .text-center.mb-40
+    %h3.general-subtitle= t('orders.thank_you')
+    %p.fw-300
+      #{t('orders.confirmation_send')} #{current_user.email}
+  .row.mb-20
+    .col-sm-6
+      .visible-xs
+        %p.general-order-number.mb-0
+          #{t('layout.links.order')} #{last_order.track_number}
+        %p.general-address.mb-30 October 29, 2016
+      %p.general-address
+        #{last_order.shipping_address.first_name}
+        %br
+        #{last_order.shipping_address.address}
+        %br
+        #{last_order.shipping_address.city} #{last_order.shipping_address.zip}
+        %br
+        #{last_order.shipping_address.country_name}
+        %br
+        Phone #{last_order.shipping_address.phone}
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0
+        #{t('layout.links.order')} #{last_order.track_number}
+      %p.general-address.mb-30 October 29, 2016
+  .visible-xs
+    - last_order.order_items.each do |item|
+      .general-cart-item.divider-lg
+        .general-img-wrap-table
+          %img.cart-img-shadow{src: item.book.decorate.front_image, alt: "design-book"}
+        %p.title= item.book.name
+        %P.in-grey-600.fw-300= item.book.decorate.first_sentence_description
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600= t('orders.price')
+            %td
+              %span.font-16.in-gold-500
+                €#{item.book.price}
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600= t('orders.subtotal')
+            %td
+              %span= item.quantity
+          %tr
+            %td
+              %span.in-grey-600= t('orders.subtotal')
+            %td
+              %span.font-16.in-gold-500
+                €#{item.price_with_quantity}
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600= t('general.book')
+          %th.col-method
+          %th
+            %span.in-grey-600= t('orders.price')
+          %th
+            %span.in-grey-600= t('orders.quantity')
+          %th
+            %span.in-grey-600= t('orders.subtotal')
+      %tbody
+        - last_order.order_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                %img.cart-img-shadow.pull-left{src: item.book.decorate.front_image, alt: "design-book"}
+            %td
+              %p.title= item.book.name
+              %p.in-grey-600.fw-300= item.book.decorate.first_sentence_description
+            %td
+              %span.font-16.in-gold-500
+                €#{item.book.price}
+            %td
+              %span.ml-30= item.quantity
+            %td
+              %span.font-16.in-gold-500
+                €#{item.price_with_quantity}
+  .text-center.general-text-right
+    %p.in-gold-500.font-18=t('orders.order_summary')
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render 'order_steps/price'
+  .text-center
+    = link_to t('books.catalog.back_to_store'), root_path, class: 'btn btn-default mb-20'

@@ -1,0 +1,8 @@
+%center Hey! You have just made an orders!
+%br/
+%p If you want to confirm this orders tap
+#{link_to(I18n.t('users.mailers.facebook.here'), confirm_order_url(@order, token: @order.confirmation_token))}.
+%br/
+%center= t('users.mailers.facebook.bye')
+
+

@@ -1,0 +1,19 @@
+- if user_signed_in?
+  %li.dropdown
+    %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}= t('layout.links.profile')
+    %ul.dropdown-menu
+      %li
+        = link_to(t('layout.links.settings'), edit_user_registration_path)
+      %li
+        = link_to(t('orders.my_orders'), orders_path)
+      - if current_user.admin?
+        %li
+          = link_to(t('general.admin_panel'), rails_admin.dashboard_path)
+      %li.divider{role: 'separator'}
+      %li
+        = link_to(t('layout.links.logout'), destroy_user_session_path, :method => :delete)
+- else
+  %li
+    = link_to(t('layout.links.login'), new_user_session_path)
+  %li
+    = link_to(t('layout.links.signup'), new_user_registration_path)

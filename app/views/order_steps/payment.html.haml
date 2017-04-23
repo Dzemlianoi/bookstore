@@ -1,0 +1,34 @@
+%main.container
+  %h1.general-title-margin= t('orders.checkout')
+  %ul.steps.list-inline
+    - (wizard_steps - [:fast_sign]).each_with_index  do |checkout_step, number|
+      - if current_step? checkout_step
+        = link_to wizard_path(checkout_step), class: 'step active' do
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.capitalize
+        %li.step-divider
+      - else
+        = link_to wizard_path(checkout_step, editing: true), class: 'step' do
+          %span.step-number= number + 1
+          %span.step-text.hidden-xs= checkout_step.to_s.capitalize
+        %li.step-divider
+  %h3.general-subtitle= t('orders.card.credit')
+  = simple_form_for @form.card, url: wizard_path, method: :patch, html: { class: 'max-600 mb-80' } do |f|
+    .form-group
+      = f.input :card_number, label: I18n.t('orders.card.number'), input_html: { class: 'form-control'}
+    .row
+      .col-sm-6
+        .form-group
+          = f.input :name, label: t('orders.card.name'), input_html: { class: 'form-control'}
+      .col-sm-3
+        .form-group
+          = f.input :expire_date, label: t('orders.card.mmyy'), input_html: { class: 'form-control'}
+      .col-sm-3
+        .form-group.relative
+          = f.input :cvv, label: t('orders.card.CVV'), input_html: { class: 'form-control'}
+    .general-text-align
+      %p.in-gold-500.font-18= t('orders.order_summary')
+      %table.general-summary-table
+        = render 'order_steps/price'
+    .text-center
+      = submit_tag t('orders.save_and_continue'), class:'btn btn-default mb-80'

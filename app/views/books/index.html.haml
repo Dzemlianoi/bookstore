@@ -1,0 +1,21 @@
+%main.container
+  %h1.general-title-margin= t('books.catalog.catalog')
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        = render 'books/catalog/sorting'
+    = render 'books/catalog/by_categories_desktop'
+  .dropdowns.mb-25.visible-xs
+    %p.lead.small.mb-10= t('books.catalog.sort_by')
+    .dropdown
+      = render 'books/catalog/sorting'
+    %p.lead.small.mb-10= t('books.catalog.filter')
+    = render 'books/catalog/by_categories_mobile'
+  .mb-120
+    - @books.in_groups_of(4, false).each_with_index  do |group, _|
+      .row
+        - group.each do |book|
+          = render 'books/tile/book_tile', book: book
+    - unless @paginator.last_page?
+      .text-center
+        = link_to 'View More', book_params.merge(page: @paginator.next_page), class: 'btn btn-primary'

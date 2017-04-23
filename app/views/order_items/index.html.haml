@@ -1,0 +1,37 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin= t('general.cart')
+  .visible-xs
+    - @purchases.each do |purchase|
+      = render 'order_items/tile/mobile', purchase: purchase
+  .hidden-xs
+    %table.table.table-hover
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600= t('orders.product')
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600= t('orders.price')
+        %th.col-quantity
+          %span.in-grey-600= t('orders.quantity')
+        %th.col-total
+          %span.in-grey-600= t('orders.subtotal')
+        %th.col-close
+      - @purchases.each do |purchase|
+        = render 'order_items/tile/desktop', purchase: purchase
+  .general-order-wrap
+    .row
+      .col-sm-4
+        - if current_order.coupon.nil?
+          = form_for :coupon, url: coupons_path do |f|
+            .input-group.general-input-group
+              = f.label :code, t('coupon.enter_coupon') , class: 'input-label'
+              = f.text_field :code, class:'form-control mb-30', placeholder: t('coupon.enter_coupon')
+              %div
+                = f.submit t('coupon.update_cart'), class: 'btn btn-primary mb-15 res-block'
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18= t('orders.order_summary')
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            = render 'order_steps/price'
+          = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default mb-20 visible-xs-inline-block'
+  = link_to t('orders.checkout'), order_step_path(id: :address), method: :get, class:'btn btn-default w-20 mb-20 hidden-xs center-block'

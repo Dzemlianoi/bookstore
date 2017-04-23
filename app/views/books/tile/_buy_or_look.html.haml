@@ -1,0 +1,11 @@
+.general-thumb-wrap
+  .thumbnail.general-thumbnail
+    %img.img-shadow.general-thumbnail-img{src: book.decorate.front_image , alt: 'design-book'}
+    .thumb-hover
+      .general-thumb-link-wrap
+        = link_to(book_path(book), class: 'thumb-hover-link') do
+          %i.fa.fa-eye.thumb-icon{'aria-hidden': 'true'}
+        = form_for :order_item, url: order_items_path, html: {class: 'inline-block',  method: :post} do |f|
+          = f.hidden_field :book_id, value: book.id
+          = button_tag(type: 'submit', class: 'transparent thumb-hover-link') do
+            %i.fa.fa-shopping-cart.thumb-icon

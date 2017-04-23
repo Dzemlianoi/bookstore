@@ -1,0 +1,57 @@
+%main.container
+  = link_to category_books_path(@book.category), class: 'general-back-link' do
+    %i.fa.fa-long-arrow-left.mr-15
+    = t('books.show.back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          %img.img-responsive.centered{src: @book.decorate.front_image, alt: 'design-book'}
+        .images.clearfix
+          - @book.images.newest(3).each do |image|
+            %a.img-link{href: '#'}
+              %img{src: image.attachment.url}
+    .col-sm-6
+      %h1.mt-res-0= @book.name
+      %p.lead.small= @book.decorate.all_authors
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = "€#{@book.price}"
+        = form_for :order_item, url: order_items_path, html: { method: :post} do |f|
+          = f.hidden_field :book_id, value: @book.id
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              %a.input-link.minus-link
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, class: 'form-control quantity-input', value: 1, pattern: '[0-9]*'
+              %a.input-link.plus-link
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.submit t('books.show.cart_add'), class: 'btn btn-default pull-right general-position'
+      .general-info-wrap.divider-lg
+        %p= t('books.show.description')
+        %p.lead.small.line-height-2
+          - if @book.description.length >= 250
+            = truncate(@book.description, length: 250)
+            = link_to t('books.show.read_more'), '', class: 'in-gold-500 ml-10 read-more'
+            :javascript
+              $('.read-more').on('click', function(e) {
+                e.preventDefault();
+                $(this).parent().html("#{@book.description}")
+              })
+          - else
+            = @book.description
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('books.show.publication_year')
+          %p.lead.small.pull-right= @book.publication_year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('books.show.dimensions')
+          %p.lead.small.pull-right= @book.decorate.total_dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('books.show.materials')
+          %p.lead.small.pull-right= @book.decorate.all_materials
+  = render 'books/reviews'

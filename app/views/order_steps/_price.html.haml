@@ -1,0 +1,22 @@
+%tr.items-total
+  %td
+    %p.font-16= t('orders.items_total')
+  %td
+    %p.pricable.font-16 €#{last_active_order.subtotal_price}
+- if last_active_order.coupon
+  %tr.coupon-price
+    %td
+      %p.font-16= t('coupon.title')
+    %td
+      %p.pricable.font-16 €#{last_active_order.discount}
+- if last_active_order.delivery
+  %tr.delivery-price
+    %td
+      %p.font-16= t('orders.delivery')
+    %td
+      %p.pricable.font-16 €#{last_active_order.delivery_price}
+%tr.total-price
+  %td
+    %p.font-16= t('orders.order_total')
+  %td
+    %p.pricable.font-16 €#{last_active_order.total_price}
